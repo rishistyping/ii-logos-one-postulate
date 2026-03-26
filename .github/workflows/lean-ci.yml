@@ -18,6 +18,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Reject placeholders in OnePostulate
+        run: |
+          if grep -RInE 'sorry|admit' OnePostulate --include='*.lean'; then
+            echo "Found sorry/admit in OnePostulate/*.lean"
+            exit 1
+          fi
+
       - name: Build Lean project
         uses: leanprover/lean-action@v1
         with:
