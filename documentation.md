@@ -73,6 +73,25 @@ Paper and blueprint artifacts:
 - rendered artifact: `paper/one-postulate.pdf`
 - theorem ledger: `blueprint/src/content.tex`
 
+## OnePostulate Phase-1 Theorem Map
+
+- Bracket table: `OnePostulate.kinematic_bracket_table`
+  Maps the paper's homogeneous commutator table for `J_i` and `K_i`.
+- Jacobi: `OnePostulate.kinematic_bracket_jacobi`
+  Packages the Jacobi identity for the six-dimensional phase-1 kinematic algebra.
+- Killing form: `OnePostulate.killing_form_diag`, `OnePostulate.boost_killing_form_eq`, `OnePostulate.boost_killing_nondegenerate_iff_kappa_ne_zero`
+  Covers the explicit diagonal Killing-form computation and the boost-sector nondegeneracy split by `κ`.
+- Zero-branch conformal-only surface: `OnePostulate.boost_invariant_form_scalar`, `OnePostulate.killing_restricts_to_metric`, `OnePostulate.velocityMetricMatrix_at_zero`
+  This is the current phase-1 Lean surface for the paper's conformal-only claim at `κ = 0`; it is represented by this combination of lemmas rather than a stronger dedicated theorem.
+- Spacetime metric invariance: `OnePostulate.spacetime_metric_invariant`
+  Formalizes invariance of the explicit spacetime metric under the matrix generators.
+- Positive-branch Lorentz congruence: `OnePostulate.spacetime_metric_congruent_stdLorentz_of_kappa_pos`
+  Gives the explicit congruence to standard Lorentz signature when `κ > 0`.
+- Zero-branch reducibility: `OnePostulate.reducible_of_kappa_zero`, `OnePostulate.spacetime_metric_degenerate_of_kappa_zero`
+  Captures the invariant time line and metric degeneracy at `κ = 0`.
+- Final `κ < 0 / κ = 0 / κ > 0` trichotomy: `OnePostulate.phase1_selection_summary`
+  Packages the phase-1 branch consequences for the Euclidean, Galilean, and Lorentzian cases.
+
 ## Build and Validation
 
 Run from the repository root:
