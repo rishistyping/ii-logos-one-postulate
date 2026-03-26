@@ -14,7 +14,7 @@ namespace OnePostulate
 
 def classificationInputReady (κ : ℝ) : Prop :=
   velocityMetricMatrix κ = Matrix.diagonal ![4 * κ, 4 * κ, 4 * κ] ∧
-    spacetime_metric κ = Matrix.diagonal ![κ, -1, -1, -1]
+    spacetime_metric κ = Matrix.diagonal ![1, -κ, -κ, -κ]
 
 theorem classification_input_ready (κ : ℝ) :
     classificationInputReady κ := by
@@ -31,15 +31,13 @@ def classificationZeroBranch : Prop :=
   preferredBranch 0 = Branch.galilean ∧
     ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) ∧
     ¬ Matrix.Nondegenerate (spacetime_metric 0) ∧
+    boostKillingBlock 0 = 0 ∧
     absoluteTimeCovector ∈ timeLineSubmodule ∧
     (∀ i : SpatialIndex,
-      Matrix.mulVec (rotMatrix i) absoluteTimeCovector = 0 ∧
-        Matrix.mulVec (boostMatrix 0 i) absoluteTimeCovector = 0) ∧
+      ⁅rotationGenerator 0 i, absoluteTimeCovector⁆ = 0 ∧
+        ⁅boostGenerator 0 i, absoluteTimeCovector⁆ = 0) ∧
     timeLineSubmodule ≠ ⊥ ∧
-    timeLineSubmodule ≠ ⊤ ∧
-    (∀ i : SpatialIndex, ∀ v : SpacetimeIndex → ℝ, v ∈ timeLineSubmodule →
-      Matrix.mulVec (rotMatrix i) v ∈ timeLineSubmodule ∧
-        Matrix.mulVec (boostMatrix 0 i) v ∈ timeLineSubmodule)
+    timeLineSubmodule ≠ ⊤
 
 def classificationPositiveBranch (κ : ℝ) : Prop :=
   preferredBranch κ = Branch.lorentz ∧
@@ -47,7 +45,10 @@ def classificationPositiveBranch (κ : ℝ) : Prop :=
     Matrix.transpose (lorentzCongruenceMatrix κ) * spacetime_metric κ *
         lorentzCongruenceMatrix κ = Matrix.diagonal ![1, -1, -1, -1] ∧
     0 < invariantSpeedSquared κ ∧
-    ∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ
+    (∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ) ∧
+    (∀ v : SpacetimeIndex → ℝ, (∀ i : SpatialIndex, ⁅boostGenerator κ i, v⁆ = 0) → v = 0) ∧
+    (∃ i : SpatialIndex, ⁅boostGenerator κ i, absoluteTimeCovector⁆ ∉
+      (absoluteTimeLine : Set (SpacetimeIndex → ℝ)))
 
 theorem classification_negative_branch (κ : ℝ) (hκ : κ < 0) :
     classificationNegativeBranch κ := by

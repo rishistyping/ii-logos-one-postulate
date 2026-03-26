@@ -35,18 +35,18 @@ def rotMatrix : SpatialIndex → RealSquareMatrix SpacetimeDim
             0, 0, 0, 0]
 
 def boostMatrix (κ : ℝ) : SpatialIndex → RealSquareMatrix SpacetimeDim
-  | 0 => !![0, 1, 0, 0;
-            κ, 0, 0, 0;
+  | 0 => !![0, κ, 0, 0;
+            1, 0, 0, 0;
             0, 0, 0, 0;
             0, 0, 0, 0]
-  | 1 => !![0, 0, 1, 0;
+  | 1 => !![0, 0, κ, 0;
             0, 0, 0, 0;
-            κ, 0, 0, 0;
+            1, 0, 0, 0;
             0, 0, 0, 0]
-  | _ => !![0, 0, 0, 1;
+  | _ => !![0, 0, 0, κ;
             0, 0, 0, 0;
             0, 0, 0, 0;
-            κ, 0, 0, 0]
+            1, 0, 0, 0]
 
 theorem spacetimeMetricMatrix_isSymm (κ : ℝ) :
     Matrix.IsSymm (spacetimeMetricMatrix κ) := by

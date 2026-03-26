@@ -8,6 +8,7 @@ diagonal form. This keeps a later comparison to Mathlib's abstract
 `killingForm` straightforward.
 -/
 import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.Lie.Killing
 import Mathlib.Data.Fin.VecNotation
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
@@ -122,5 +123,11 @@ theorem killingFormMatrix_has_expected_diagonal_shape (κ : ℝ) :
 theorem killingFormMatrix_matches_adjoint_trace_model (κ : ℝ) :
     killingFormMatrix κ = adjointTraceModel κ := by
   simpa [adjointTraceModel] using killing_form_diag κ
+
+theorem mathlib_killingForm_eq_explicit_on_basis (κ : ℝ) (a b : AdjointIndex) :
+    killingForm ℝ (KinematicAlgebra κ)
+        (basisCoordinate (κ := κ) a) (basisCoordinate (κ := κ) b) =
+      killingFormMatrix κ a b := by
+  sorry
 
 end OnePostulate

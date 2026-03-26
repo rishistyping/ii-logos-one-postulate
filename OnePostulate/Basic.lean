@@ -7,6 +7,7 @@ shared scalar utilities used by later modules.
 -/
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Matrix.Basic
+import Mathlib.Tactic
 
 namespace OnePostulate
 
@@ -73,6 +74,56 @@ inductive BasisTag where
 
 notation "J[" i "]" => BasisTag.rotation i
 notation "K[" i "]" => BasisTag.boost i
+
+def rotationIndex (i : SpatialIndex) : AdjointIndex :=
+  ⟨i.1, Nat.lt_trans i.2 (by decide)⟩
+
+def boostIndex (i : SpatialIndex) : AdjointIndex :=
+  ⟨i.1 + 3, by
+    have h : i.1 + 3 < 3 + 3 := Nat.add_lt_add_right i.2 3
+    simpa [AdjointDim] using h⟩
+
+@[simp] theorem rotationIndex_ix : rotationIndex ix = 0 := rfl
+@[simp] theorem rotationIndex_iy : rotationIndex iy = 1 := rfl
+@[simp] theorem rotationIndex_iz : rotationIndex iz = 2 := rfl
+
+@[simp] theorem boostIndex_ix : boostIndex ix = 3 := rfl
+@[simp] theorem boostIndex_iy : boostIndex iy = 4 := rfl
+@[simp] theorem boostIndex_iz : boostIndex iz = 5 := rfl
+
+def basisTagOfIndex : AdjointIndex → BasisTag
+  | 0 => J[ix]
+  | 1 => J[iy]
+  | 2 => J[iz]
+  | 3 => K[ix]
+  | 4 => K[iy]
+  | _ => K[iz]
+
+def indexOfBasisTag : BasisTag → AdjointIndex
+  | J[i] => rotationIndex i
+  | K[i] => boostIndex i
+
+@[simp] theorem basisTagOfIndex_rotationIndex (i : SpatialIndex) :
+    basisTagOfIndex (rotationIndex i) = J[i] := by
+  fin_cases i <;> rfl
+
+@[simp] theorem basisTagOfIndex_boostIndex (i : SpatialIndex) :
+    basisTagOfIndex (boostIndex i) = K[i] := by
+  fin_cases i <;> rfl
+
+@[simp] theorem indexOfBasisTag_rotation (i : SpatialIndex) :
+    indexOfBasisTag (J[i]) = rotationIndex i := rfl
+
+@[simp] theorem indexOfBasisTag_boost (i : SpatialIndex) :
+    indexOfBasisTag (K[i]) = boostIndex i := rfl
+
+@[simp] theorem indexOfBasisTag_basisTagOfIndex (a : AdjointIndex) :
+    indexOfBasisTag (basisTagOfIndex a) = a := by
+  fin_cases a <;> rfl
+
+@[simp] theorem basisTagOfIndex_indexOfBasisTag (a : BasisTag) :
+    basisTagOfIndex (indexOfBasisTag a) = a := by
+  cases a <;> simp
 
 inductive Branch where
   | lorentz

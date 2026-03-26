@@ -48,30 +48,31 @@ theorem negative_kappa_no_nonzero_null_vectors (κ : ℝ) (hκ : κ < 0) :
     · exact Or.inl h0
   have hform :
       dotProduct v (Matrix.mulVec (spacetime_metric κ) v) =
-        κ * (v 0)^2 - (v 1)^2 - (v 2)^2 - (v 3)^2 := by
-    simp [spacetime_metric, Matrix.mulVec, dotProduct, Fin.sum_univ_four]
-    ring
+        (v 0)^2 - κ * ((v 1)^2 + (v 2)^2 + (v 3)^2) := by
+    simp [spacetime_metric, spacetimeMetricMatrix, Matrix.mulVec, dotProduct, Fin.sum_univ_four]
+    ring_nf
+  have hkpos : 0 < -κ := by linarith
   rcases hcoords with h0 | h1 | h2 | h3
   · have hs : 0 < (v 0)^2 := sq_pos_of_ne_zero h0
-    have hneg :
-        κ * (v 0)^2 - (v 1)^2 - (v 2)^2 - (v 3)^2 < 0 := by
-      nlinarith [hκ, hs, sq_nonneg (v 1), sq_nonneg (v 2), sq_nonneg (v 3)]
-    simpa [hform] using ne_of_lt hneg
+    have hpos :
+        0 < (v 0)^2 - κ * ((v 1)^2 + (v 2)^2 + (v 3)^2) := by
+      nlinarith [hs, hkpos, sq_nonneg (v 1), sq_nonneg (v 2), sq_nonneg (v 3)]
+    exact ne_of_gt (by simpa [hform] using hpos)
   · have hs : 0 < (v 1)^2 := sq_pos_of_ne_zero h1
-    have hneg :
-        κ * (v 0)^2 - (v 1)^2 - (v 2)^2 - (v 3)^2 < 0 := by
-      nlinarith [hκ, sq_nonneg (v 0), hs, sq_nonneg (v 2), sq_nonneg (v 3)]
-    simpa [hform] using ne_of_lt hneg
+    have hpos :
+        0 < (v 0)^2 - κ * ((v 1)^2 + (v 2)^2 + (v 3)^2) := by
+      nlinarith [sq_nonneg (v 0), hs, hkpos, sq_nonneg (v 2), sq_nonneg (v 3)]
+    exact ne_of_gt (by simpa [hform] using hpos)
   · have hs : 0 < (v 2)^2 := sq_pos_of_ne_zero h2
-    have hneg :
-        κ * (v 0)^2 - (v 1)^2 - (v 2)^2 - (v 3)^2 < 0 := by
-      nlinarith [hκ, sq_nonneg (v 0), sq_nonneg (v 1), hs, sq_nonneg (v 3)]
-    simpa [hform] using ne_of_lt hneg
+    have hpos :
+        0 < (v 0)^2 - κ * ((v 1)^2 + (v 2)^2 + (v 3)^2) := by
+      nlinarith [sq_nonneg (v 0), sq_nonneg (v 1), hs, hkpos, sq_nonneg (v 3)]
+    exact ne_of_gt (by simpa [hform] using hpos)
   · have hs : 0 < (v 3)^2 := sq_pos_of_ne_zero h3
-    have hneg :
-        κ * (v 0)^2 - (v 1)^2 - (v 2)^2 - (v 3)^2 < 0 := by
-      nlinarith [hκ, sq_nonneg (v 0), sq_nonneg (v 1), sq_nonneg (v 2), hs]
-    simpa [hform] using ne_of_lt hneg
+    have hpos :
+        0 < (v 0)^2 - κ * ((v 1)^2 + (v 2)^2 + (v 3)^2) := by
+      nlinarith [sq_nonneg (v 0), sq_nonneg (v 1), sq_nonneg (v 2), hs, hkpos]
+    exact ne_of_gt (by simpa [hform] using hpos)
 
 theorem positive_kappa_gives_finite_real_invariant_speed (κ : ℝ) (hκ : 0 < κ) :
     0 < invariantSpeedSquared κ ∧
@@ -89,21 +90,26 @@ theorem selection_of_positive_kappa (κ : ℝ) (hκ : 0 < κ) :
       Matrix.transpose (lorentzCongruenceMatrix κ) * spacetime_metric κ *
           lorentzCongruenceMatrix κ = Matrix.diagonal ![1, -1, -1, -1] ∧
       0 < invariantSpeedSquared κ ∧
-      ∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ := by
-  refine ⟨positive_kappa_selects_lorentz κ hκ, ?_, ?_, ?_⟩
+      (∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ) ∧
+      (∀ v : SpacetimeIndex → ℝ, (∀ i : SpatialIndex, ⁅boostGenerator κ i, v⁆ = 0) → v = 0) ∧
+      (∃ i : SpatialIndex, ⁅boostGenerator κ i, absoluteTimeCovector⁆ ∉
+        (absoluteTimeLine : Set (SpacetimeIndex → ℝ))) := by
+  rcases positive_kappa_gives_finite_real_invariant_speed κ hκ with ⟨hspeed, hspeedWitness⟩
+  refine ⟨positive_kappa_selects_lorentz κ hκ, ?_, ?_, hspeed, hspeedWitness, ?_, ?_⟩
   · have hdet : (velocityMetricMatrix κ).det ≠ 0 := by
       rw [killing_restricts_to_metric, Matrix.det_diagonal, Fin.prod_univ_three]
       have hk : (4 * κ : ℝ) ≠ 0 := mul_ne_zero (by norm_num) (ne_of_gt hκ)
       exact mul_ne_zero (mul_ne_zero hk hk) hk
     exact Matrix.nondegenerate_of_det_ne_zero hdet
   · exact spacetime_metric_congruent_stdLorentz_of_kappa_pos κ hκ
-  · exact positive_kappa_gives_finite_real_invariant_speed κ hκ
+  · exact no_nonzero_invariant_covector_of_kappa_pos κ hκ
+  · exact absolute_time_line_not_invariant_of_kappa_pos κ hκ
 
 theorem zero_kappa_has_concrete_invariant_time_line :
     absoluteTimeCovector ∈ timeLineSubmodule ∧
       (∀ i : SpatialIndex,
-        Matrix.mulVec (rotMatrix i) absoluteTimeCovector = 0 ∧
-          Matrix.mulVec (boostMatrix 0 i) absoluteTimeCovector = 0) := by
+        ⁅rotationGenerator 0 i, absoluteTimeCovector⁆ = 0 ∧
+          ⁅boostGenerator 0 i, absoluteTimeCovector⁆ = 0) := by
   refine ⟨absoluteTimeCovector_mem_timeLineSubmodule, ?_⟩
   intro i
   exact absoluteTimeCovector_invariant_at_kappa_zero i
@@ -117,22 +123,23 @@ theorem phase1_selection_summary (κ : ℝ) :
       preferredBranch κ = Branch.galilean ∧
         ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) ∧
         ¬ Matrix.Nondegenerate (spacetime_metric 0) ∧
+        boostKillingBlock 0 = 0 ∧
         absoluteTimeCovector ∈ timeLineSubmodule ∧
         (∀ i : SpatialIndex,
-          Matrix.mulVec (rotMatrix i) absoluteTimeCovector = 0 ∧
-            Matrix.mulVec (boostMatrix 0 i) absoluteTimeCovector = 0) ∧
+          ⁅rotationGenerator 0 i, absoluteTimeCovector⁆ = 0 ∧
+            ⁅boostGenerator 0 i, absoluteTimeCovector⁆ = 0) ∧
         timeLineSubmodule ≠ ⊥ ∧
-        timeLineSubmodule ≠ ⊤ ∧
-        (∀ i : SpatialIndex, ∀ v : SpacetimeIndex → ℝ, v ∈ timeLineSubmodule →
-          Matrix.mulVec (rotMatrix i) v ∈ timeLineSubmodule ∧
-            Matrix.mulVec (boostMatrix 0 i) v ∈ timeLineSubmodule)) ∧
+        timeLineSubmodule ≠ ⊤) ∧
     (0 < κ →
       preferredBranch κ = Branch.lorentz ∧
         Matrix.Nondegenerate (velocityMetricMatrix κ) ∧
         Matrix.transpose (lorentzCongruenceMatrix κ) * spacetime_metric κ *
             lorentzCongruenceMatrix κ = Matrix.diagonal ![1, -1, -1, -1] ∧
         0 < invariantSpeedSquared κ ∧
-        ∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ) := by
+        (∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ) ∧
+        (∀ v : SpacetimeIndex → ℝ, (∀ i : SpatialIndex, ⁅boostGenerator κ i, v⁆ = 0) → v = 0) ∧
+        (∃ i : SpatialIndex, ⁅boostGenerator κ i, absoluteTimeCovector⁆ ∉
+          (absoluteTimeLine : Set (SpacetimeIndex → ℝ)))) := by
   constructor
   · intro hneg
     exact ⟨negative_kappa_selects_euclidean κ hneg,
@@ -141,7 +148,7 @@ theorem phase1_selection_summary (κ : ℝ) :
   · intro hzero
     subst hzero
     obtain ⟨htimeMem, htimeInvariant⟩ := zero_kappa_has_concrete_invariant_time_line
-    obtain ⟨hneqBot, hneqTop, hInvariant⟩ := reducible_of_kappa_zero
+    obtain ⟨hneqBot, hneqTop⟩ := reducible_of_kappa_zero
     have hboostDegenerate : ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) := by
       intro hnondeg
       have hone : (![1, 0, 0] : SpatialIndex → ℝ) ≠ 0 := by
@@ -155,8 +162,8 @@ theorem phase1_selection_summary (κ : ℝ) :
         simp [Matrix.mulVec, dotProduct]
       exact hw horth
     exact ⟨zero_kappa_selects_galilean, hboostDegenerate,
-      spacetime_metric_degenerate_of_kappa_zero, htimeMem, htimeInvariant,
-      hneqBot, hneqTop, hInvariant⟩
+      spacetime_metric_degenerate_of_kappa_zero, boost_killing_form_vanishes_at_zero,
+      htimeMem, htimeInvariant, hneqBot, hneqTop⟩
   · intro hpos
     exact selection_of_positive_kappa κ hpos
 

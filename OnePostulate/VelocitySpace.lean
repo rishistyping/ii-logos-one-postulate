@@ -110,6 +110,27 @@ theorem velocityMetricMatrix_at_zero :
   ext i j
   fin_cases i <;> fin_cases j <;> simp
 
+theorem boost_killing_form_vanishes_at_zero :
+    boostKillingBlock 0 = 0 := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [boost_killing_form_eq]
+
+theorem zero_kappa_invariant_symmetric_boost_form_is_scalar
+    (G : RealSquareMatrix SpatialDim)
+    (hSymm : Matrix.IsSymm G)
+    (hComm : ∀ i : SpatialIndex, boostRotationAction i * G = G * boostRotationAction i) :
+    ∃ c : ℝ, G = Matrix.diagonal ![c, c, c] := by
+  exact boost_invariant_form_scalar G hSymm hComm
+
+theorem zero_kappa_velocity_metric_only_conformal
+    (G : RealSquareMatrix SpatialDim)
+    (hSymm : Matrix.IsSymm G)
+    (hComm : ∀ i : SpatialIndex, boostRotationAction i * G = G * boostRotationAction i) :
+    boostKillingBlock 0 = 0 ∧ ∃ c : ℝ, G = Matrix.diagonal ![c, c, c] := by
+  refine ⟨boost_killing_form_vanishes_at_zero, ?_⟩
+  exact zero_kappa_invariant_symmetric_boost_form_is_scalar G hSymm hComm
+
 theorem invariantSpeedSquared_formula (κ : ℝ) :
     invariantSpeedSquared κ = κ⁻¹ := by
   rfl

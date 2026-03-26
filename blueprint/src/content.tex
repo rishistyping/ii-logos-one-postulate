@@ -31,7 +31,7 @@
 \end{lemma}
 
 \begin{definition}\label{OnePostulate.KinematicAlgebra}
-\texttt{OnePostulate.KinematicAlgebra}. Depends on: \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}.
+\texttt{OnePostulate.KinematicAlgebra}. Depends on: \texttt{OnePostulate.leviCivita}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}.
 \end{definition}
 
 \begin{lemma}\label{OnePostulate.kinematic_bracket_table}
@@ -70,6 +70,10 @@
 \texttt{OnePostulate.boost\_killing\_nondegenerate\_iff\_kappa\_ne\_zero}. Depends on: \texttt{OnePostulate.boost\_killing\_form\_eq}.
 \end{lemma}
 
+\begin{lemma}\label{OnePostulate.mathlib_killingForm_eq_explicit_on_basis}
+\texttt{OnePostulate.mathlib\_killingForm\_eq\_explicit\_on\_basis}. Depends on: \texttt{OnePostulate.KinematicAlgebra}, \texttt{OnePostulate.killingFormMatrix}.
+\end{lemma}
+
 \begin{definition}\label{OnePostulate.boostRotationAction}
 \texttt{OnePostulate.boostRotationAction}. Depends on: \texttt{OnePostulate.rotMatrix}.
 \end{definition}
@@ -90,8 +94,20 @@
 \texttt{OnePostulate.boost\_metric\_fixed\_by\_killing\_if\_kappa\_ne\_zero}. Depends on: \texttt{OnePostulate.boost\_invariant\_form\_scalar}, \texttt{OnePostulate.killing\_restricts\_to\_metric}, \texttt{OnePostulate.boost\_killing\_nondegenerate\_iff\_kappa\_ne\_zero}.
 \end{lemma}
 
+\begin{lemma}\label{OnePostulate.boost_killing_form_vanishes_at_zero}
+\texttt{OnePostulate.boost\_killing\_form\_vanishes\_at\_zero}. Depends on: \texttt{OnePostulate.boostKillingBlock}, \texttt{OnePostulate.boost\_killing\_form\_eq}.
+\end{lemma}
+
+\begin{lemma}\label{OnePostulate.zero_kappa_invariant_symmetric_boost_form_is_scalar}
+\texttt{OnePostulate.zero\_kappa\_invariant\_symmetric\_boost\_form\_is\_scalar}. Depends on: \texttt{OnePostulate.boost\_invariant\_form\_scalar}.
+\end{lemma}
+
+\begin{lemma}\label{OnePostulate.zero_kappa_velocity_metric_only_conformal}
+\texttt{OnePostulate.zero\_kappa\_velocity\_metric\_only\_conformal}. Depends on: \texttt{OnePostulate.boost\_killing\_form\_vanishes\_at\_zero}, \texttt{OnePostulate.zero\_kappa\_invariant\_symmetric\_boost\_form\_is\_scalar}.
+\end{lemma}
+
 \begin{definition}\label{OnePostulate.spacetime_metric}
-\texttt{OnePostulate.spacetime\_metric}. Depends on: none.
+\texttt{OnePostulate.spacetime\_metric}. Depends on: \texttt{OnePostulate.boostMatrix}.
 \end{definition}
 
 \begin{definition}\label{OnePostulate.absoluteTimeCovector}
@@ -99,7 +115,7 @@
 \end{definition}
 
 \begin{definition}\label{OnePostulate.timeLineSubmodule}
-\texttt{OnePostulate.timeLineSubmodule}. Depends on: \texttt{OnePostulate.absoluteTimeCovector}.
+\texttt{OnePostulate.timeLineSubmodule}. Depends on: \texttt{OnePostulate.KinematicAlgebra}, \texttt{OnePostulate.absoluteTimeCovector}.
 \end{definition}
 
 \begin{definition}\label{OnePostulate.lorentzCongruenceMatrix}
@@ -115,15 +131,31 @@
 \end{lemma}
 
 \begin{lemma}\label{OnePostulate.reducible_of_kappa_zero}
-\texttt{OnePostulate.reducible\_of\_kappa\_zero}. Depends on: \texttt{OnePostulate.timeLineSubmodule}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}.
+\texttt{OnePostulate.reducible\_of\_kappa\_zero}. Depends on: \texttt{OnePostulate.timeLineSubmodule}, \texttt{OnePostulate.absoluteTimeCovector}.
 \end{lemma}
 
 \begin{lemma}\label{OnePostulate.spacetime_metric_degenerate_of_kappa_zero}
-\texttt{OnePostulate.spacetime\_metric\_degenerate\_of\_kappa\_zero}. Depends on: \texttt{OnePostulate.spacetime\_metric}, \texttt{OnePostulate.absoluteTimeCovector}.
+\texttt{OnePostulate.spacetime\_metric\_degenerate\_of\_kappa\_zero}. Depends on: \texttt{OnePostulate.spacetime\_metric}.
 \end{lemma}
 
 \begin{lemma}\label{OnePostulate.spacetime_metric_congruent_stdLorentz_of_kappa_pos}
 \texttt{OnePostulate.spacetime\_metric\_congruent\_stdLorentz\_of\_kappa\_pos}. Depends on: \texttt{OnePostulate.spacetime\_metric}, \texttt{OnePostulate.lorentzCongruenceMatrix}.
+\end{lemma}
+
+\begin{lemma}\label{OnePostulate.absoluteTimeCovector_mem_timeLineSubmodule}
+\texttt{OnePostulate.absoluteTimeCovector\_mem\_timeLineSubmodule}. Depends on: \texttt{OnePostulate.absoluteTimeCovector}, \texttt{OnePostulate.timeLineSubmodule}.
+\end{lemma}
+
+\begin{lemma}\label{OnePostulate.absoluteTimeCovector_invariant_at_kappa_zero}
+\texttt{OnePostulate.absoluteTimeCovector\_invariant\_at\_kappa\_zero}. Depends on: \texttt{OnePostulate.KinematicAlgebra}, \texttt{OnePostulate.absoluteTimeCovector}.
+\end{lemma}
+
+\begin{lemma}\label{OnePostulate.no_nonzero_invariant_covector_of_kappa_pos}
+\texttt{OnePostulate.no\_nonzero\_invariant\_covector\_of\_kappa\_pos}. Depends on: \texttt{OnePostulate.KinematicAlgebra}, \texttt{OnePostulate.boostMatrix}.
+\end{lemma}
+
+\begin{lemma}\label{OnePostulate.absolute_time_line_not_invariant_of_kappa_pos}
+\texttt{OnePostulate.absolute\_time\_line\_not\_invariant\_of\_kappa\_pos}. Depends on: \texttt{OnePostulate.absoluteTimeCovector}, \texttt{OnePostulate.absoluteTimeLine}, \texttt{OnePostulate.boostMatrix}.
 \end{lemma}
 
 \begin{definition}\label{OnePostulate.preferredBranch}
@@ -151,15 +183,15 @@
 \end{lemma}
 
 \begin{lemma}\label{OnePostulate.selection_of_positive_kappa}
-\texttt{OnePostulate.selection\_of\_positive\_kappa}. Depends on: \texttt{OnePostulate.positive\_kappa\_selects\_lorentz}, \texttt{OnePostulate.killing\_restricts\_to\_metric}, \texttt{OnePostulate.spacetime\_metric\_congruent\_stdLorentz\_of\_kappa\_pos}, \texttt{OnePostulate.positive\_kappa\_gives\_finite\_real\_invariant\_speed}.
+\texttt{OnePostulate.selection\_of\_positive\_kappa}. Depends on: \texttt{OnePostulate.positive\_kappa\_selects\_lorentz}, \texttt{OnePostulate.killing\_restricts\_to\_metric}, \texttt{OnePostulate.spacetime\_metric\_congruent\_stdLorentz\_of\_kappa\_pos}, \texttt{OnePostulate.positive\_kappa\_gives\_finite\_real\_invariant\_speed}, \texttt{OnePostulate.no\_nonzero\_invariant\_covector\_of\_kappa\_pos}, \texttt{OnePostulate.absolute\_time\_line\_not\_invariant\_of\_kappa\_pos}.
 \end{lemma}
 
 \begin{lemma}\label{OnePostulate.zero_kappa_has_concrete_invariant_time_line}
-\texttt{OnePostulate.zero\_kappa\_has\_concrete\_invariant\_time\_line}. Depends on: \texttt{OnePostulate.absoluteTimeCovector}, \texttt{OnePostulate.timeLineSubmodule}, \texttt{OnePostulate.rotMatrix}, \texttt{OnePostulate.boostMatrix}.
+\texttt{OnePostulate.zero\_kappa\_has\_concrete\_invariant\_time\_line}. Depends on: \texttt{OnePostulate.absoluteTimeCovector\_mem\_timeLineSubmodule}, \texttt{OnePostulate.absoluteTimeCovector\_invariant\_at\_kappa\_zero}.
 \end{lemma}
 
 \begin{lemma}\label{OnePostulate.phase1_selection_summary}
-\texttt{OnePostulate.phase1\_selection\_summary}. Depends on: \texttt{OnePostulate.negative\_kappa\_no\_nonzero\_null\_vectors}, \texttt{OnePostulate.reducible\_of\_kappa\_zero}, \texttt{OnePostulate.spacetime\_metric\_degenerate\_of\_kappa\_zero}, \texttt{OnePostulate.zero\_kappa\_has\_concrete\_invariant\_time\_line}, \texttt{OnePostulate.selection\_of\_positive\_kappa}.
+\texttt{OnePostulate.phase1\_selection\_summary}. Depends on: \texttt{OnePostulate.negative\_kappa\_no\_nonzero\_null\_vectors}, \texttt{OnePostulate.reducible\_of\_kappa\_zero}, \texttt{OnePostulate.spacetime\_metric\_degenerate\_of\_kappa\_zero}, \texttt{OnePostulate.boost\_killing\_form\_vanishes\_at\_zero}, \texttt{OnePostulate.zero\_kappa\_has\_concrete\_invariant\_time\_line}, \texttt{OnePostulate.selection\_of\_positive\_kappa}.
 \end{lemma}
 
 \begin{definition}\label{OnePostulate.classificationInputReady}
@@ -175,11 +207,11 @@
 \end{definition}
 
 \begin{definition}\label{OnePostulate.classificationZeroBranch}
-\texttt{OnePostulate.classificationZeroBranch}. Depends on: \texttt{OnePostulate.preferredBranch}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.spacetime\_metric}, \texttt{OnePostulate.absoluteTimeCovector}, \texttt{OnePostulate.timeLineSubmodule}.
+\texttt{OnePostulate.classificationZeroBranch}. Depends on: \texttt{OnePostulate.preferredBranch}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.spacetime\_metric}, \texttt{OnePostulate.boostKillingBlock}, \texttt{OnePostulate.absoluteTimeCovector}, \texttt{OnePostulate.timeLineSubmodule}.
 \end{definition}
 
 \begin{definition}\label{OnePostulate.classificationPositiveBranch}
-\texttt{OnePostulate.classificationPositiveBranch}. Depends on: \texttt{OnePostulate.preferredBranch}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.spacetime\_metric}, \texttt{OnePostulate.lorentzCongruenceMatrix}, \texttt{OnePostulate.invariantSpeedSquared}.
+\texttt{OnePostulate.classificationPositiveBranch}. Depends on: \texttt{OnePostulate.preferredBranch}, \texttt{OnePostulate.velocityMetricMatrix}, \texttt{OnePostulate.spacetime\_metric}, \texttt{OnePostulate.lorentzCongruenceMatrix}, \texttt{OnePostulate.invariantSpeedSquared}, \texttt{OnePostulate.no\_nonzero\_invariant\_covector\_of\_kappa\_pos}, \texttt{OnePostulate.absolute\_time\_line\_not\_invariant\_of\_kappa\_pos}.
 \end{definition}
 
 \begin{lemma}\label{OnePostulate.classification_negative_branch}
