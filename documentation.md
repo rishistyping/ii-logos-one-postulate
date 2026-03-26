@@ -1,0 +1,153 @@
+# one-postulate-lean Repository Documentation
+
+This file is a retrieval-oriented context pack for developers and ML systems
+working on `one-postulate-lean`.
+
+Treat source files as the final authority. Use this document as the quick map.
+
+## Identity
+
+- Repository name: `one-postulate-lean`
+- Lean package name: `gauss-proof-sandbox`
+- Lean libraries:
+  - `GaussProofSandbox`
+  - `OnePostulate`
+- Executable target: `gauss-proof-sandbox`
+- Primary purpose: Lean 4 + Mathlib formalization of the One Postulate project
+- External workflow tool: global `gauss` installation using `.gauss/project.yaml`
+
+## Repository Baseline
+
+This repository baseline includes:
+
+- the Lean formalization under `OnePostulate/`
+- the preserved smoke-test scaffold under `GaussProofSandbox/`
+- the paper source in `paper/one-postulate.tex`
+- the blueprint theorem ledger in `blueprint/src/content.tex`
+- the Gauss project manifest in `.gauss/project.yaml`
+
+This repository does **not** contain the OpenGauss Python runtime or gateway
+code. It is meant to be operated as a Lean repository that can be targeted by
+an external/global `gauss` installation.
+
+## Main Lean Surface
+
+Top-level project files:
+
+- `lakefile.toml`
+- `lake-manifest.json`
+- `lean-toolchain`
+- `Main.lean`
+- `OnePostulate.lean`
+- `GaussProofSandbox.lean`
+
+Primary formalization modules:
+
+- `OnePostulate/Basic.lean`
+- `OnePostulate/SpacetimeMatrices.lean`
+- `OnePostulate/KinematicAlgebra.lean`
+- `OnePostulate/KillingForm.lean`
+- `OnePostulate/VelocitySpace.lean`
+- `OnePostulate/SpacetimeRepresentation.lean`
+- `OnePostulate/Selection.lean`
+- `OnePostulate/ClassificationDerivation.lean`
+
+Important invariant:
+
+- `OnePostulate/ClassificationDerivation.lean` exists but remains unimported in `OnePostulate.lean`
+
+## Mathematical Baseline
+
+The current phase-1 development is matrix-first:
+
+- explicit `4 x 4` spacetime generators
+- explicit `6 x 6` adjoint matrices and trace-based Killing-form calculations
+- explicit `3 x 3` boost-space commutant calculations
+- explicit `κ = 0` invariant time-line structure
+- explicit Lorentz congruence for `κ > 0`
+- explicit phase-1 selection split in `OnePostulate/Selection.lean`
+
+Paper and blueprint artifacts:
+
+- editable source: `paper/one-postulate.tex`
+- rendered artifact: `paper/one-postulate.pdf`
+- theorem ledger: `blueprint/src/content.tex`
+
+## Build and Validation
+
+Run from the repository root:
+
+```bash
+lake update
+lake exe cache get
+lake build
+```
+
+Optional targeted validation:
+
+```bash
+lake build OnePostulate
+lake env lean OnePostulate/ClassificationDerivation.lean
+```
+
+## Using External OpenGauss
+
+This repository is configured for project-scoped OpenGauss use via:
+
+- `.gauss/project.yaml`
+
+Expected external workflow:
+
+```bash
+gauss
+```
+
+Then:
+
+```text
+/project status
+/autoformalize-backend codex
+```
+
+If ambient detection is not already active:
+
+```text
+/project use .
+```
+
+Expected project facts in the Gauss TUI:
+
+- project label: `one-postulate-lean`
+- blueprint markers: `lean-toolchain`, `lakefile.toml`
+- root and lean root both resolve to this repository root
+
+## Recommended Navigation
+
+If the task is about:
+
+- algebraic foundations -> `OnePostulate/Basic.lean`
+- explicit spacetime generators -> `OnePostulate/SpacetimeMatrices.lean`
+- Lie algebra surface -> `OnePostulate/KinematicAlgebra.lean`
+- Killing-form computation -> `OnePostulate/KillingForm.lean`
+- boost-space metric arguments -> `OnePostulate/VelocitySpace.lean`
+- spacetime metric and reducibility -> `OnePostulate/SpacetimeRepresentation.lean`
+- branch selection theorems -> `OnePostulate/Selection.lean`
+- deferred derivation layer -> `OnePostulate/ClassificationDerivation.lean`
+- paper text -> `paper/one-postulate.tex`
+- theorem dependency ledger -> `blueprint/src/content.tex`
+
+## Retrieval Keywords
+
+- one-postulate-lean
+- OnePostulate
+- GaussProofSandbox
+- gauss-proof-sandbox
+- Lean 4
+- Mathlib
+- Killing form
+- kinematic algebra
+- Lorentz branch
+- Galilean branch
+- Euclidean branch
+- invariant speed
+- matrix-first formalization
