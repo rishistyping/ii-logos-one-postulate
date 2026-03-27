@@ -93,6 +93,7 @@ Aristotle should complement those checks, not replace them.
 - [CLI workflows](CLI_WORKFLOWS.md)
 - [Python API workflows](PYTHON_API_WORKFLOWS.md)
 - [Lean validation workflow](LEAN_VALIDATION_WORKFLOW.md)
+- [Repository verification runbook](REPO_VERIFICATION_RUNBOOK.md)
 - [Prompt templates](PROMPT_TEMPLATES.md)
 - [Counterexamples and debugging](COUNTEREXAMPLES_AND_DEBUGGING.md)
 - [CI and review flow](CI_AND_REVIEW.md)
@@ -102,12 +103,12 @@ Aristotle should complement those checks, not replace them.
 
 1. [Installation and secrets](INSTALLATION.md)
 2. [Lean and Mathlib compatibility](LEAN_COMPATIBILITY.md)
-3. [Lean validation workflow](LEAN_VALIDATION_WORKFLOW.md)
-4. [CLI workflows](CLI_WORKFLOWS.md) or [Python API workflows](PYTHON_API_WORKFLOWS.md)
-5. [Counterexamples and debugging](COUNTEREXAMPLES_AND_DEBUGGING.md)
+3. [Repository verification runbook](REPO_VERIFICATION_RUNBOOK.md)
+4. [Lean validation workflow](LEAN_VALIDATION_WORKFLOW.md)
+5. [CLI workflows](CLI_WORKFLOWS.md) or [Python API workflows](PYTHON_API_WORKFLOWS.md)
+6. [Counterexamples and debugging](COUNTEREXAMPLES_AND_DEBUGGING.md)
 
 ## See Also
 
 - [Lean validation workflow](LEAN_VALIDATION_WORKFLOW.md)
 - [CI and review flow](CI_AND_REVIEW.md)
-
