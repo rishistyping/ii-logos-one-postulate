@@ -14,7 +14,8 @@ workflow is:
 ## Repository Contents
 
 - `OnePostulate/` — main formalization modules
-- `OnePostulate.lean` — root import surface for phase 1
+- `OnePostulate.lean` — phase-1 root import surface
+- `OnePostulateFull.lean` — full-paper mathematical root import surface
 - `GaussProofSandbox/` — preserved smoke-test scaffold
 - `GaussProofSandbox.lean` — preserved smoke-test root module
 - `Main.lean` — preserved executable entry
@@ -66,6 +67,11 @@ lake build OnePostulate
 lake build gauss-proof-sandbox
 ```
 
+Root surfaces:
+
+- `OnePostulate.lean` is the phase-1 root and must remain free of `OnePostulate.ClassificationDerivation`.
+- `OnePostulateFull.lean` is the full-paper mathematical root and imports the phase-1 surface plus `OnePostulate.ClassificationDerivation`.
+
 ## Lean Test and Validation
 
 Primary validation:
@@ -79,11 +85,13 @@ Optional targeted checks:
 ```bash
 lake build OnePostulate
 lake env lean OnePostulate/ClassificationDerivation.lean
+lake env lean OnePostulateFull.lean
 ```
 
 Expected result:
 
 - `lake build` completes successfully
+- `OnePostulateFull.lean` typechecks as the full-paper entrypoint
 - `OnePostulate/ClassificationDerivation.lean` typechecks while remaining unimported
 
 ## Using OpenGauss With This Repository

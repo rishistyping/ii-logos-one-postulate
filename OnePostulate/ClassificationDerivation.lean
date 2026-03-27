@@ -62,6 +62,34 @@ theorem classification_positive_branch (κ : ℝ) (hκ : 0 < κ) :
     classificationPositiveBranch κ := by
   exact (phase1_selection_summary κ).2.2 hκ
 
+def classificationZeroBranchFull : Prop :=
+  classificationZeroBranch ∧
+    ∀ G : RealSquareMatrix SpacetimeDim,
+      isInvariantSymmetricSpacetimeForm 0 G →
+        ∃ c : ℝ, G = c • Matrix.diagonal ![1, 0, 0, 0]
+
+def classificationPositiveBranchFull (κ : ℝ) : Prop :=
+  classificationPositiveBranch κ ∧
+    ∀ G : RealSquareMatrix SpacetimeDim,
+      isInvariantSymmetricSpacetimeForm κ G →
+        ∃ c : ℝ, G = c • spacetime_metric κ
+
+theorem classification_zero_branch_full :
+    classificationZeroBranchFull := by
+  obtain ⟨hbranch, hboostDegenerate, hspacetimeDegenerate, hboostZero,
+    htimeMem, htimeInvariant, hneqBot, hneqTop, hforms⟩ :=
+      (full_paper_selection_summary 0).2.1 rfl
+  refine ⟨?_, hforms⟩
+  exact ⟨hbranch, hboostDegenerate, hspacetimeDegenerate, hboostZero,
+    htimeMem, htimeInvariant, hneqBot, hneqTop⟩
+
+theorem classification_positive_branch_full (κ : ℝ) (hκ : 0 < κ) :
+    classificationPositiveBranchFull κ := by
+  obtain ⟨hbranch, hnondeg, hlorentz, hspeed, hspeedWitness, hcovector,
+    htimeLine, hforms⟩ := (full_paper_selection_summary κ).2.2 hκ
+  refine ⟨?_, hforms⟩
+  exact ⟨hbranch, hnondeg, hlorentz, hspeed, hspeedWitness, hcovector, htimeLine⟩
+
 /- Reduction stage: explicit invariant forms and representation data. -/
 
 def classificationReducesToInvariantForms (κ : ℝ) : Prop :=
@@ -81,6 +109,23 @@ theorem classification_reduces_to_invariant_forms (κ : ℝ) :
   · intro hκ
     exact classification_positive_branch κ hκ
 
+def classificationReducesToInvariantFormsFull (κ : ℝ) : Prop :=
+  classificationInputReady κ ∧
+    (κ < 0 → classificationNegativeBranch κ) ∧
+    (κ = 0 → classificationZeroBranchFull) ∧
+    (0 < κ → classificationPositiveBranchFull κ)
+
+theorem classification_reduces_to_invariant_forms_full (κ : ℝ) :
+    classificationReducesToInvariantFormsFull κ := by
+  refine ⟨classification_input_ready κ, ?_, ?_, ?_⟩
+  · intro hκ
+    exact classification_negative_branch κ hκ
+  · intro hκ
+    subst hκ
+    exact classification_zero_branch_full
+  · intro hκ
+    exact classification_positive_branch_full κ hκ
+
 /- Final phase-1 classification output. -/
 
 def classificationDerivationComplete (κ : ℝ) : Prop :=
@@ -96,6 +141,20 @@ theorem classification_derivation_complete (κ : ℝ) :
       subst hzero
       exact ⟨rfl, classification_zero_branch⟩
   · exact Or.inr <| Or.inr ⟨hpos, classification_positive_branch κ hpos⟩
+
+def classificationDerivationCompleteFull (κ : ℝ) : Prop :=
+  (κ < 0 ∧ classificationNegativeBranch κ) ∨
+    (κ = 0 ∧ classificationZeroBranchFull) ∨
+    (0 < κ ∧ classificationPositiveBranchFull κ)
+
+theorem classification_derivation_complete_full (κ : ℝ) :
+    classificationDerivationCompleteFull κ := by
+  rcases lt_trichotomy κ 0 with hneg | hzero | hpos
+  · exact Or.inl ⟨hneg, classification_negative_branch κ hneg⟩
+  · exact Or.inr <| Or.inl <| by
+      subst hzero
+      exact ⟨rfl, classification_zero_branch_full⟩
+  · exact Or.inr <| Or.inr ⟨hpos, classification_positive_branch_full κ hpos⟩
 
 /- Full topological derivation remains deferred. This file only records the
 first algebraic bridge from the explicit matrix development to the classical

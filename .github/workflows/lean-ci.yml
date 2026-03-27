@@ -20,7 +20,7 @@ jobs:
 
       - name: Guard phase-1 OnePostulate surface
         run: |
-          if grep -nE 'sorry|admit' OnePostulate.lean OnePostulate/*.lean; then
+          if grep -nE 'sorry|admit' OnePostulateFull.lean OnePostulate.lean OnePostulate/*.lean; then
             echo 'Found sorry/admit in phase-1 OnePostulate files'
             exit 1
           fi
@@ -37,3 +37,6 @@ jobs:
 
       - name: Check deferred classification module
         run: lake env lean OnePostulate/ClassificationDerivation.lean
+
+      - name: Check full-paper root
+        run: lake env lean OnePostulateFull.lean

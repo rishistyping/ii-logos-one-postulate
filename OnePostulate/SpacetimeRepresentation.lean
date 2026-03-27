@@ -21,6 +21,13 @@ def spacetime_metric (κ : ℝ) : RealSquareMatrix SpacetimeDim :=
 def representationMetricMatrix (κ : ℝ) : RealSquareMatrix SpacetimeDim :=
   spacetime_metric κ
 
+def isInvariantSymmetricSpacetimeForm (κ : ℝ) (G : RealSquareMatrix SpacetimeDim) : Prop :=
+  Matrix.IsSymm G ∧
+    (∀ i : SpatialIndex,
+      Matrix.transpose (rotMatrix i) * G + G * rotMatrix i = 0) ∧
+    (∀ i : SpatialIndex,
+      Matrix.transpose (boostMatrix κ i) * G + G * boostMatrix κ i = 0)
+
 def absoluteTimeCovector : SpacetimeIndex → ℝ :=
   ![1, 0, 0, 0]
 
@@ -170,6 +177,130 @@ theorem spacetime_metric_invariant (κ : ℝ) :
         simp [spacetime_metric, spacetimeMetricMatrix, boostMatrix, Matrix.mul_apply, Fin.sum_univ_four,
           Matrix.diagonal] <;>
         ring_nf
+
+theorem spacetime_metric_isInvariantSymmetricSpacetimeForm (κ : ℝ) :
+    isInvariantSymmetricSpacetimeForm κ (spacetime_metric κ) := by
+  refine ⟨?_, ?_, ?_⟩
+  · simpa [spacetime_metric] using spacetimeMetricMatrix_isSymm κ
+  · exact (spacetime_metric_invariant κ).1
+  · exact (spacetime_metric_invariant κ).2
+
+theorem rotation_invariant_symmetric_forms_shape (G : RealSquareMatrix SpacetimeDim)
+    (hSymm : Matrix.IsSymm G)
+    (hRot : ∀ i : SpatialIndex,
+      Matrix.transpose (rotMatrix i) * G + G * rotMatrix i = 0) :
+    ∃ a b : ℝ, G = Matrix.diagonal ![a, b, b, b] := by
+  have hs10 : G 1 0 = G 0 1 := by
+    simpa using (Matrix.IsSymm.apply hSymm 0 1)
+  have hs20 : G 2 0 = G 0 2 := by
+    simpa using (Matrix.IsSymm.apply hSymm 0 2)
+  have hs30 : G 3 0 = G 0 3 := by
+    simpa using (Matrix.IsSymm.apply hSymm 0 3)
+  have hs21 : G 2 1 = G 1 2 := by
+    simpa using (Matrix.IsSymm.apply hSymm 1 2)
+  have hs31 : G 3 1 = G 1 3 := by
+    simpa using (Matrix.IsSymm.apply hSymm 1 3)
+  have hs32 : G 3 2 = G 2 3 := by
+    simpa using (Matrix.IsSymm.apply hSymm 2 3)
+  have h01 : G 0 1 = 0 := by
+    have h := congrArg (fun M => M 0 3) (hRot 1)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four] at h
+    linarith
+  have h02 : G 0 2 = 0 := by
+    have h := congrArg (fun M => M 0 3) (hRot 0)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four] at h
+    linarith
+  have h03 : G 0 3 = 0 := by
+    have h := congrArg (fun M => M 0 2) (hRot 0)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four] at h
+    linarith
+  have h10 : G 1 0 = 0 := by
+    rw [hs10, h01]
+  have h20 : G 2 0 = 0 := by
+    rw [hs20, h02]
+  have h30 : G 3 0 = 0 := by
+    rw [hs30, h03]
+  have h12 : G 1 2 = 0 := by
+    have h := congrArg (fun M => M 1 1) (hRot 2)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four, hs21] at h
+    linarith
+  have h13 : G 1 3 = 0 := by
+    have h := congrArg (fun M => M 1 1) (hRot 1)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four, hs31] at h
+    linarith
+  have h23 : G 2 3 = 0 := by
+    have h := congrArg (fun M => M 2 2) (hRot 0)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four, hs32] at h
+    linarith
+  have h21 : G 2 1 = 0 := by
+    rw [hs21, h12]
+  have h31 : G 3 1 = 0 := by
+    rw [hs31, h13]
+  have h32 : G 3 2 = 0 := by
+    rw [hs32, h23]
+  have h22_eq_h11 : G 2 2 = G 1 1 := by
+    have h := congrArg (fun M => M 1 2) (hRot 2)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four] at h
+    linarith
+  have h33_eq_h11 : G 3 3 = G 1 1 := by
+    have h := congrArg (fun M => M 1 3) (hRot 1)
+    simp [rotMatrix, Matrix.mul_apply, Fin.sum_univ_four] at h
+    linarith
+  refine ⟨G 0 0, G 1 1, ?_⟩
+  ext a b
+  fin_cases a <;> fin_cases b <;> simp [Matrix.diagonal]
+  all_goals
+    first
+      | exact h01
+      | exact h02
+      | exact h03
+      | exact h10
+      | exact h12
+      | exact h13
+      | exact h20
+      | exact h21
+      | exact h22_eq_h11
+      | exact h23
+      | exact h30
+      | exact h31
+      | exact h32
+      | exact h33_eq_h11
+
+theorem spacetime_invariant_symmetric_form_scalar_of_kappa_ne_zero (κ : ℝ) (_hκ : κ ≠ 0)
+    {G : RealSquareMatrix SpacetimeDim}
+    (hG : isInvariantSymmetricSpacetimeForm κ G) :
+    ∃ c : ℝ, G = c • spacetime_metric κ := by
+  rcases hG with ⟨hSymm, hRot, hBoost⟩
+  rcases rotation_invariant_symmetric_forms_shape G hSymm hRot with ⟨a, b, hdiag⟩
+  have hrel : b = -κ * a := by
+    have h := congrArg (fun M => M 0 1) (hBoost 0)
+    simp [hdiag, boostMatrix, Matrix.mul_apply, Fin.sum_univ_four, Matrix.diagonal] at h
+    linarith
+  refine ⟨a, ?_⟩
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [hdiag, spacetime_metric_eq_diagonal, Matrix.diagonal, hrel, mul_comm]
+
+theorem spacetime_invariant_symmetric_form_scalar_of_kappa_pos (κ : ℝ) (hκ : 0 < κ)
+    {G : RealSquareMatrix SpacetimeDim}
+    (hG : isInvariantSymmetricSpacetimeForm κ G) :
+    ∃ c : ℝ, G = c • spacetime_metric κ := by
+  exact spacetime_invariant_symmetric_form_scalar_of_kappa_ne_zero κ hκ.ne' hG
+
+theorem galilean_invariant_symmetric_form_eq_dt2_scalar
+    {G : RealSquareMatrix SpacetimeDim}
+    (hG : isInvariantSymmetricSpacetimeForm 0 G) :
+    ∃ c : ℝ, G = c • Matrix.diagonal ![1, 0, 0, 0] := by
+  rcases hG with ⟨hSymm, hRot, hBoost⟩
+  rcases rotation_invariant_symmetric_forms_shape G hSymm hRot with ⟨a, b, hdiag⟩
+  have hb : b = 0 := by
+    have h := congrArg (fun M => M 0 1) (hBoost 0)
+    simp [hdiag, boostMatrix, Matrix.mul_apply, Fin.sum_univ_four, Matrix.diagonal] at h
+    linarith
+  refine ⟨a, ?_⟩
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [hdiag, Matrix.diagonal, hb]
 
 theorem reducible_of_kappa_zero :
     timeLineSubmodule ≠ ⊥ ∧ timeLineSubmodule ≠ ⊤ := by

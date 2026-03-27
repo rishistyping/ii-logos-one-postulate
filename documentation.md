@@ -39,6 +39,7 @@ Top-level project files:
 - `lean-toolchain`
 - `Main.lean`
 - `OnePostulate.lean`
+- `OnePostulateFull.lean`
 - `GaussProofSandbox.lean`
 
 Primary formalization modules:
@@ -55,6 +56,7 @@ Primary formalization modules:
 Important invariant:
 
 - `OnePostulate/ClassificationDerivation.lean` exists but remains unimported in `OnePostulate.lean`
+- `OnePostulateFull.lean` is the separate full-paper root that imports `OnePostulate` and `OnePostulate.ClassificationDerivation`
 
 ## Mathematical Baseline
 
@@ -91,6 +93,8 @@ Paper and blueprint artifacts:
   Captures the invariant time line and metric degeneracy at `κ = 0`.
 - Final `κ < 0 / κ = 0 / κ > 0` trichotomy: `OnePostulate.phase1_selection_summary`
   Packages the phase-1 branch consequences for the Euclidean, Galilean, and Lorentzian cases.
+- Full-paper entrypoint: `OnePostulateFull.lean`
+  Imports the phase-1 root plus the classification bridge for the stronger paper-complete surface.
 
 ## Build and Validation
 
@@ -107,6 +111,7 @@ Optional targeted validation:
 ```bash
 lake build OnePostulate
 lake env lean OnePostulate/ClassificationDerivation.lean
+lake env lean OnePostulateFull.lean
 ```
 
 ## Using External OpenGauss

@@ -167,6 +167,57 @@ theorem phase1_selection_summary (κ : ℝ) :
   · intro hpos
     exact selection_of_positive_kappa κ hpos
 
+theorem full_paper_selection_summary (κ : ℝ) :
+    (κ < 0 →
+      preferredBranch κ = Branch.euclidean ∧
+        ∀ v : SpacetimeIndex → ℝ,
+          v ≠ 0 → dotProduct v (Matrix.mulVec (spacetime_metric κ) v) ≠ 0) ∧
+    (κ = 0 →
+      preferredBranch κ = Branch.galilean ∧
+        ¬ Matrix.Nondegenerate (velocityMetricMatrix 0) ∧
+        ¬ Matrix.Nondegenerate (spacetime_metric 0) ∧
+        boostKillingBlock 0 = 0 ∧
+        absoluteTimeCovector ∈ timeLineSubmodule ∧
+        (∀ i : SpatialIndex,
+          ⁅rotationGenerator 0 i, absoluteTimeCovector⁆ = 0 ∧
+            ⁅boostGenerator 0 i, absoluteTimeCovector⁆ = 0) ∧
+        timeLineSubmodule ≠ ⊥ ∧
+        timeLineSubmodule ≠ ⊤ ∧
+        ∀ G : RealSquareMatrix SpacetimeDim,
+          isInvariantSymmetricSpacetimeForm 0 G →
+            ∃ c : ℝ, G = c • Matrix.diagonal ![1, 0, 0, 0]) ∧
+    (0 < κ →
+      preferredBranch κ = Branch.lorentz ∧
+        Matrix.Nondegenerate (velocityMetricMatrix κ) ∧
+        Matrix.transpose (lorentzCongruenceMatrix κ) * spacetime_metric κ *
+            lorentzCongruenceMatrix κ = Matrix.diagonal ![1, -1, -1, -1] ∧
+        0 < invariantSpeedSquared κ ∧
+        (∃ c : ℝ, 0 < c ∧ c^2 = invariantSpeedSquared κ) ∧
+        (∀ v : SpacetimeIndex → ℝ, (∀ i : SpatialIndex, ⁅boostGenerator κ i, v⁆ = 0) → v = 0) ∧
+        (∃ i : SpatialIndex, ⁅boostGenerator κ i, absoluteTimeCovector⁆ ∉
+          (absoluteTimeLine : Set (SpacetimeIndex → ℝ))) ∧
+        ∀ G : RealSquareMatrix SpacetimeDim,
+          isInvariantSymmetricSpacetimeForm κ G →
+            ∃ c : ℝ, G = c • spacetime_metric κ) := by
+  constructor
+  · intro hneg
+    exact (phase1_selection_summary κ).1 hneg
+  constructor
+  · intro hzero
+    obtain ⟨hbranch, hboostDegenerate, hspacetimeDegenerate, hboostZero,
+      htimeMem, htimeInvariant, hneqBot, hneqTop⟩ := (phase1_selection_summary κ).2.1 hzero
+    subst hzero
+    refine ⟨hbranch, hboostDegenerate, hspacetimeDegenerate, hboostZero,
+      htimeMem, htimeInvariant, hneqBot, hneqTop, ?_⟩
+    intro G hG
+    exact galilean_invariant_symmetric_form_eq_dt2_scalar hG
+  · intro hpos
+    obtain ⟨hbranch, hnondeg, hlorentz, hspeed, hspeedWitness, hcovector, htimeLine⟩ :=
+      (phase1_selection_summary κ).2.2 hpos
+    refine ⟨hbranch, hnondeg, hlorentz, hspeed, hspeedWitness, hcovector, htimeLine, ?_⟩
+    intro G hG
+    exact spacetime_invariant_symmetric_form_scalar_of_kappa_pos κ hpos hG
+
 theorem positive_branch_is_phase1_target (κ : ℝ) (hκ : 0 < κ) :
     preferredBranch κ = Branch.lorentz := by
   exact positive_kappa_selects_lorentz κ hκ

@@ -1,6 +1,6 @@
 name = "gauss-proof-sandbox"
 version = "0.1.0"
-defaultTargets = ["gauss-proof-sandbox", "OnePostulate"]
+defaultTargets = ["gauss-proof-sandbox", "OnePostulate", "OnePostulateFull"]
 
 [[require]]
 name = "mathlib"
@@ -12,6 +12,9 @@ name = "GaussProofSandbox"
 
 [[lean_lib]]
 name = "OnePostulate"
+
+[[lean_lib]]
+name = "OnePostulateFull"
 
 [[lean_exe]]
 name = "gauss-proof-sandbox"
