@@ -108,6 +108,12 @@ Aristotle should complement those checks, not replace them.
 5. [CLI workflows](CLI_WORKFLOWS.md) or [Python API workflows](PYTHON_API_WORKFLOWS.md)
 6. [Counterexamples and debugging](COUNTEREXAMPLES_AND_DEBUGGING.md)
 
+## Archived validation runs
+
+- Full-paper run [eaa48588-a529-405f-a871-13665c6b85c5](runs/eaa48588-a529-405f-a871-13665c6b85c5/README.md)
+- [Aristotle summary](runs/eaa48588-a529-405f-a871-13665c6b85c5/ARISTOTLE_SUMMARY_eaa48588-a529-405f-a871-13665c6b85c5.md)
+- [Validation report](runs/eaa48588-a529-405f-a871-13665c6b85c5/VALIDATION_REPORT.md)
+
 ## See Also
 
 - [Lean validation workflow](LEAN_VALIDATION_WORKFLOW.md)

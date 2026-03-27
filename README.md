@@ -87,6 +87,11 @@ The current repository outputs are:
 - a separately typechecked supplemental classification bridge at
   `OnePostulate/ClassificationDerivation.lean`
 - a separately typechecked full-paper root at `OnePostulateFull.lean`
+- an archived Aristotle full-paper validation run
+  [`eaa48588-a529-405f-a871-13665c6b85c5`](docs/aristotle/runs/eaa48588-a529-405f-a871-13665c6b85c5/README.md)
+  for `OnePostulateFull.lean` and `OnePostulate/ClassificationDerivation.lean`
+  that reported a full match with the paper across `κ < 0`, `κ = 0`, and
+  `κ > 0`, required no fixes, and left only cosmetic warnings
 - CI guards that reject `sorry|admit` in the guarded OnePostulate surface
 - CI guards that reject importing `OnePostulate.ClassificationDerivation` into
   `OnePostulate.lean`
@@ -204,8 +209,23 @@ Repo-specific Aristotle documentation lives under `docs/aristotle/`.
 
 ## Using OpenGauss with this repository
 
-The supported setup is an external/global OpenGauss installation pointed at
-this repo.
+OpenGauss is the project-scoped Lean workflow orchestrator used with this
+repository. In practice, it gives `gauss` a managed frontend for proving and
+formalization workflows such as:
+
+- `/prove`
+- `/draft`
+- `/autoprove`
+- `/formalize`
+- `/autoformalize`
+
+Those workflows run against the active project root, so the intended setup here
+is an external/global OpenGauss installation pointed at this repository.
+
+If `gauss` is not installed yet, use the richer installer and platform guidance
+in the upstream [math-inc/OpenGauss README](https://github.com/math-inc/OpenGauss).
+
+### Quick start in this repository
 
 From the repository root:
 
@@ -226,6 +246,32 @@ If ambient project detection is not already active, run:
 /project use .
 ```
 
+### Core loop
+
+The normal OpenGauss loop in this repository is:
+
+1. Start `gauss` from the repository root.
+2. Confirm that this repository is the active project with `/project status` or
+   `/project use .`.
+3. Launch a managed workflow such as `/prove`, `/draft`, `/formalize`, or
+   `/autoformalize`.
+4. Let OpenGauss spawn the backend child session inside this repository root.
+5. Use `/swarm` to inspect or reattach to running workflow agents when needed.
+
+For an already existing Lean project like this one, the important step is
+project selection, not project creation.
+
+### What OpenGauss should manage here
+
+For this repository, OpenGauss should operate as a project-scoped workflow
+layer over the existing Lean codebase. It should:
+
+- detect this repository as the active Lean workspace
+- keep workflow execution inside this repository root
+- preserve the existing root split between `OnePostulate.lean` and
+  `OnePostulateFull.lean`
+- complement local Lake validation rather than replace it
+
 ### Example `/draft`
 
 ```text
@@ -240,6 +286,13 @@ In ClassificationDerivation.lean, replace the deferred placeholder with the next
 In Selection.lean, strengthen the final positive/zero/negative branch summary using the current explicit matrix statements only, and keep unrelated declarations unchanged.
 ```
 
+### Example `/formalize`
+
+```text
+/formalize
+Use paper/one-postulate.tex as the source text, keep the result aligned with the current matrix-first Lean development, and do not widen the import surface rooted at OnePostulate.lean.
+```
+
 ## Expected OpenGauss checks
 
 When `gauss` is started from this repository root, the following should hold:
@@ -251,12 +304,18 @@ When `gauss` is started from this repository root, the following should hold:
   - manifest = `.gauss/project.yaml`
   - source mode = `init`
 - `/autoformalize-backend codex` is accepted
+- managed workflow agents stay attached to this repository as the active
+  project
+- `/swarm` shows the running workflow sessions when a proof or formalization
+  job is active
 
 ## Workflow note
 
 This repository is a Lean/formalization workspace. It is not the OpenGauss
 runtime repository. Build and test the Lean project locally with Lake, and use
-an external/global `gauss` installation for managed workflow commands.
+an external/global `gauss` installation for managed workflow commands. The
+upstream OpenGauss repository owns installer, platform, and runtime details; this
+repository owns the Lean code, paper source, and project-scoped workflow usage.
 
 ## Clone
 
