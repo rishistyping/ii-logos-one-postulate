@@ -16,6 +16,7 @@ workflow is:
 - `OnePostulate/` — main formalization modules
 - `OnePostulate.lean` — phase-1 root import surface
 - `OnePostulateFull.lean` — full-paper mathematical root import surface
+- `docs/aristotle/` — repo-specific Aristotle validation, repair, and review docs
 - `GaussProofSandbox/` — preserved smoke-test scaffold
 - `GaussProofSandbox.lean` — preserved smoke-test root module
 - `Main.lean` — preserved executable entry
@@ -93,6 +94,16 @@ Expected result:
 - `lake build` completes successfully
 - `OnePostulateFull.lean` typechecks as the full-paper entrypoint
 - `OnePostulate/ClassificationDerivation.lean` typechecks while remaining unimported
+
+## Aristotle Docs
+
+Repo-specific Aristotle documentation lives under `docs/aristotle/`.
+
+- Start with [docs/aristotle/README.md](docs/aristotle/README.md).
+- Use those docs for Aristotle-based validation, repair, hardening, and
+  paper-to-Lean checking in this repository.
+- The Aristotle docs also explain how to use Aristotle without widening the
+  phase-1 proof surface rooted at `OnePostulate.lean`.
 
 ## Using OpenGauss With This Repository
 

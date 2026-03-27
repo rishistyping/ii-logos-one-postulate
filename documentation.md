@@ -21,6 +21,7 @@ Treat source files as the final authority. Use this document as the quick map.
 This repository baseline includes:
 
 - the Lean formalization under `OnePostulate/`
+- the Aristotle docs under `docs/aristotle/`
 - the preserved smoke-test scaffold under `GaussProofSandbox/`
 - the paper source in `paper/one-postulate.tex`
 - the blueprint theorem ledger in `blueprint/src/content.tex`
@@ -41,6 +42,7 @@ Top-level project files:
 - `OnePostulate.lean`
 - `OnePostulateFull.lean`
 - `GaussProofSandbox.lean`
+- `docs/aristotle/README.md`
 
 Primary formalization modules:
 
@@ -57,6 +59,9 @@ Important invariant:
 
 - `OnePostulate/ClassificationDerivation.lean` exists but remains unimported in `OnePostulate.lean`
 - `OnePostulateFull.lean` is the separate full-paper root that imports `OnePostulate` and `OnePostulate.ClassificationDerivation`
+- `docs/aristotle/README.md` explains how to use Aristotle for validation,
+  repair, hardening, and paper alignment without widening the phase-1 proof
+  surface
 
 ## Mathematical Baseline
 
@@ -157,8 +162,17 @@ If the task is about:
 - spacetime metric and reducibility -> `OnePostulate/SpacetimeRepresentation.lean`
 - branch selection theorems -> `OnePostulate/Selection.lean`
 - deferred derivation layer -> `OnePostulate/ClassificationDerivation.lean`
+- Aristotle-assisted validation, repair, paper alignment, and review -> `docs/aristotle/README.md`
 - paper text -> `paper/one-postulate.tex`
 - theorem dependency ledger -> `blueprint/src/content.tex`
+
+## Aristotle Docs
+
+The repo-specific Aristotle guide lives under `docs/aristotle/`. It explains
+how to use Aristotle to validate Lean outputs, compare Lean statements against
+the paper, search for counterexamples, and review deferred or full-paper work
+without widening the phase-1 proof surface.
+- Aristotle validation, repair, hardening, or paper-to-Lean workflow -> `docs/aristotle/README.md`
 
 ## Retrieval Keywords
 
