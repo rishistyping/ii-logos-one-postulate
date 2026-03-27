@@ -110,6 +110,9 @@ Aristotle should complement those checks, not replace them.
 
 ## Archived validation runs
 
+- Main-surface run [b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a](runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/README.md)
+- [Aristotle summary](runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/ARISTOTLE_SUMMARY_b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a.md)
+- [Validation report](runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/VALIDATION_REPORT.md)
 - Full-paper run [eaa48588-a529-405f-a871-13665c6b85c5](runs/eaa48588-a529-405f-a871-13665c6b85c5/README.md)
 - [Aristotle summary](runs/eaa48588-a529-405f-a871-13665c6b85c5/ARISTOTLE_SUMMARY_eaa48588-a529-405f-a871-13665c6b85c5.md)
 - [Validation report](runs/eaa48588-a529-405f-a871-13665c6b85c5/VALIDATION_REPORT.md)

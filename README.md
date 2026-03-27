@@ -92,6 +92,12 @@ The current repository outputs are:
   for `OnePostulateFull.lean` and `OnePostulate/ClassificationDerivation.lean`
   that reported a full match with the paper across `κ < 0`, `κ = 0`, and
   `κ > 0`, required no fixes, and left only cosmetic warnings
+- an archived Aristotle main-surface validation run
+  [`b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a`](docs/aristotle/runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/README.md)
+  for `OnePostulate.lean`, `OnePostulate/SpacetimeRepresentation.lean`, and
+  `OnePostulate/Selection.lean` that reported no theorem or import changes, no
+  mismatches against the paper, preserved the main-root boundary, and left only
+  cosmetic warnings
 - CI guards that reject `sorry|admit` in the guarded OnePostulate surface
 - CI guards that reject importing `OnePostulate.ClassificationDerivation` into
   `OnePostulate.lean`

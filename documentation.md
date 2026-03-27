@@ -173,6 +173,7 @@ how to use Aristotle to validate Lean outputs, compare Lean statements against
 the paper, search for counterexamples, and review deferred or full-paper work
 without widening the phase-1 proof surface.
 - Aristotle validation, repair, hardening, or paper-to-Lean workflow -> `docs/aristotle/README.md`
+- Archived main-surface Aristotle validation run `b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a` -> `docs/aristotle/runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/README.md`
 - Archived full-paper Aristotle validation run `eaa48588-a529-405f-a871-13665c6b85c5` -> `docs/aristotle/runs/eaa48588-a529-405f-a871-13665c6b85c5/README.md`
 
 ## Retrieval Keywords
