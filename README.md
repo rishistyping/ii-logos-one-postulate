@@ -1,137 +1,186 @@
 # One Postulate Lean
 
-`one-postulate-lean` is a Lean 4 + Mathlib formalization repository for the
-*One Postulate* project. It combines the paper source, a matrix-first Lean
-formalization, a dependency-ordered theorem ledger, and project metadata for
-external OpenGauss workflows.
+`one-postulate-lean` is a Lean 4 + Mathlib formalization of the mathematical
+argument developed in *One Postulate*. The repository brings together the
+current paper source, a matrix-first Lean development, a dependency-ordered
+blueprint ledger, and validation workflows that check the Lean statements
+against the paper.
 
-This repository does **not** ship the OpenGauss runtime itself. The supported
-workflow is:
+The project starts from a familiar question in the foundations of relativity:
+what follows if one takes the relativity principle seriously and asks what kind
+of kinematics it permits before assuming a fixed invariant speed? The paper's
+answer is that this principle determines a one-parameter family of kinematic
+algebras, and that the algebra's own canonical invariant, the Killing form,
+separates that family into three qualitatively different branches. The Lean
+formalization tracks that argument directly, using explicit matrices and
+concrete calculations rather than hiding the geometry behind abstract
+machinery.
 
-1. build and validate the Lean repository with Lake
-2. use a globally installed `gauss` against this repository root
+## Narrative project summary
 
-## What the paper argues
+This repository is both a paper workspace and a formalization workspace. The
+paper in `paper/one-postulate.tex` gives the mathematical narrative: rotations
+and boosts satisfy a one-parameter commutator law, the resulting algebra has a
+Killing form with a rigid diagonal shape, and that form determines whether the
+resulting spacetime geometry is Euclidean, Galilean, or Lorentzian. The Lean
+code mirrors that story step by step. It starts from explicit spacetime and
+adjoint matrices, proves the bracket table, computes the Killing form,
+analyzes invariant forms on velocity space and spacetime, and packages the
+three-way branch split into reusable summary theorems.
 
-The paper in `paper/one-postulate.tex` argues that Einstein's relativity
-principle determines a one-parameter family of kinematic algebras
-`\mathfrak{h}_\kappa`, and that the algebra's canonical invariant, the Killing
-form, selects the physically acceptable branch.
+As a result, the repository is not just a collection of isolated Lean lemmas.
+It is a structured formal account of the paper's central claim: the existence
+of a finite invariant speed is not an extra axiom laid on top of relativity,
+but a consequence of the algebraic branch selected by the sign of `κ`.
 
-Its branch picture is:
+## What the paper shows
 
-- `κ < 0`: Euclidean branch, compact boosts, and no causal structure
-- `κ = 0`: Galilean branch, degenerate boost-sector Killing form, only a
-  conformal class on velocity space, reducible spacetime representation, and
-  invariant `dt²`
-- `κ > 0`: Lorentz branch, nondegenerate Killing form, Lorentzian spacetime
-  metric, and finite real invariant speed
+The paper begins with the relativity principle and the most general isotropic
+kinematic Lie algebra compatible with rotations and boosts. That produces a
+one-parameter family `\mathfrak{h}_\kappa`, where the parameter `κ` controls
+the boost-boost commutator. From there, the decisive object is the Killing
+form. Its diagonal structure records how the algebra "sees" rotations and
+boosts, and that information determines what kind of invariant geometry can
+exist.
 
-The paper's final claim is that observation calibrates the value of the
-invariant speed, but the algebra determines its existence: “Einstein needed one
-postulate, not two.”
+When `κ < 0`, the invariant form is definite on the relevant spacetime data,
+there is no lightcone structure, and no nontrivial causal ordering emerges.
+When `κ = 0`, the Killing form becomes blind to boosts, leaving only a
+conformal shape on velocity space and collapsing the spacetime metric to the
+absolute-time direction `dt²`; the representation becomes reducible and one is
+forced into Galilean structure. When `κ > 0`, the algebra fixes a Lorentzian
+metric, determines a finite real invariant speed, and yields the relativistic
+branch without requiring an independent postulate for that speed.
 
-## What this repository formalizes
+In short, the paper's three outcomes are:
 
-The Lean development formalizes that argument using explicit matrix
-calculations rather than abstract representation-theoretic machinery. The
-current formal surface covers:
+- `κ < 0`: Euclidean branch, no lightcone, no causal structure
+- `κ = 0`: Galilean branch, degenerate boost-sector structure, invariant `dt²`, and reducible spacetime representation
+- `κ > 0`: Lorentz branch, nondegenerate invariant metric, and finite real invariant speed
 
-- the homogeneous bracket table for rotations and boosts
-- the explicit Killing-form computation
-- the boost-space metric and conformal-only zero-`κ` story
-- the invariant spacetime metric and zero-`κ` reducibility story
-- the `κ < 0 / κ = 0 / κ > 0` branch-selection consequences
-- a separate full-paper bridge that packages the stronger classification surface
+## How the Lean formalization tracks the paper
 
-The repository is therefore best read as a paper formalization workspace with a
-guarded main Lean root, a separate full-paper root, and supporting paper and
-blueprint artifacts.
+The Lean development follows the paper in the same order that a careful human
+reader would reconstruct the argument. It starts with explicit `4 x 4`
+spacetime generators for rotations and boosts, then lifts those calculations to
+the six-dimensional kinematic algebra. From there it computes the adjoint
+representation, derives the diagonal Killing form, and uses that computation to
+study which invariant symmetric forms can exist on the boost sector and on the
+full spacetime representation.
+
+This is a deliberately matrix-first formalization. Instead of beginning from
+high-level classification theorems and working backward, the repository proves
+the paper's claims through concrete matrix formulas, commutator identities,
+trace calculations, and explicit invariant-form arguments. The blueprint ledger
+in `blueprint/src/content.tex` records this dependency order, so the paper, the
+Lean code, and the theorem ledger all tell the same story from different
+angles.
+
+That design matters for readability and for validation. It makes it possible to
+check the formalization against the paper claim by claim: the bracket table,
+the Killing form, the boost-space metric story, the spacetime metric story, the
+zero-`κ` invariant-time and reducibility story, and the final branch-selection
+results are all exposed as concrete outcomes of the development.
+
+## Main mathematical outcomes
+
+The current repository proves the core mathematical claims of the paper's main
+argument and its stronger full-paper packaging.
+
+- The homogeneous bracket table for rotations and boosts is derived explicitly.
+- The Killing form is computed explicitly as a diagonal form with rotation and
+  boost blocks of different sign behavior.
+- The boost sector is shown to support a unique invariant symmetric form up to
+  scale, with the zero-`κ` case degenerating to a conformal-only situation.
+- The invariant spacetime metric is identified in diagonal form as
+  `diag(1, -κ, -κ, -κ)`.
+- The `κ = 0` branch is shown to preserve an absolute-time direction and to
+  produce a reducible spacetime representation.
+- The `κ > 0` branch is shown to yield Lorentzian structure and a finite real
+  invariant speed.
+- The stronger full-paper surface packages these results into the full
+  classification bridge without widening the main imported root.
 
 ## Formalization structure
 
-The main formalization lives under `OnePostulate/` and progresses in this
-order:
+The main formalization lives under `OnePostulate/` and proceeds in dependency
+order.
 
-- `OnePostulate/SpacetimeMatrices.lean` — explicit matrix generators and
-  spacetime-level objects
-- `OnePostulate/KinematicAlgebra.lean` — the six-dimensional kinematic algebra
-  and bracket table
-- `OnePostulate/KillingForm.lean` — adjoint-matrix and trace-based Killing-form
-  computation
-- `OnePostulate/VelocitySpace.lean` — boost-subspace metric and conformal
-  arguments
-- `OnePostulate/SpacetimeRepresentation.lean` — spacetime metric, reducibility,
-  invariant covectors, and Lorentzian normal form
-- `OnePostulate/Selection.lean` — branch-selection and summary theorems
-- `OnePostulate/ClassificationDerivation.lean` — supplemental classification
-  bridge kept outside the main imported root
+- `OnePostulate/SpacetimeMatrices.lean` defines the explicit spacetime
+  generators and concrete matrix objects.
+- `OnePostulate/KinematicAlgebra.lean` builds the six-dimensional algebra and
+  proves the bracket table.
+- `OnePostulate/KillingForm.lean` computes the adjoint trace form and connects
+  it to Mathlib's abstract Killing form.
+- `OnePostulate/VelocitySpace.lean` analyzes invariant forms on the boost
+  sector.
+- `OnePostulate/SpacetimeRepresentation.lean` studies the spacetime metric,
+  invariant covectors, reducibility, and Lorentzian normal form.
+- `OnePostulate/Selection.lean` packages the branch-selection consequences.
+- `OnePostulate/ClassificationDerivation.lean` provides the
+  supplemental/full-paper classification bridge.
 
-The theorem dependency ledger in `blueprint/src/content.tex` tracks the same
-development in dependency order.
+The dependency-ordered theorem ledger in `blueprint/src/content.tex` mirrors
+that progression.
 
-## Root surfaces
+## Roots and proof-surface boundaries
 
-- `OnePostulate.lean` is the main root import surface and must remain free of
-  `OnePostulate.ClassificationDerivation`.
-- `OnePostulateFull.lean` is the full-paper mathematical root and imports the
-  main surface plus `OnePostulate.ClassificationDerivation`.
-- `OnePostulate/ClassificationDerivation.lean` is the supplemental/deferred
-  bridge that is validated separately and not imported into `OnePostulate.lean`.
+The repository deliberately separates its root surfaces.
 
-## Current validated outputs
+- `OnePostulate.lean` is the main imported root.
+- `OnePostulateFull.lean` is the full-paper root.
+- `OnePostulate.ClassificationDerivation` remains outside
+  `OnePostulate.lean` and is validated separately.
 
-The current repository outputs are:
+That boundary is a real repository invariant, not just a documentation choice.
+The main root is kept narrow so that the core formal surface remains stable and
+reviewable, while the stronger full-paper bridge can be checked on its own
+terms.
 
-- a green `lake build` for the main Lean project
-- a separately typechecked supplemental classification bridge at
-  `OnePostulate/ClassificationDerivation.lean`
-- a separately typechecked full-paper root at `OnePostulateFull.lean`
-- an archived Aristotle full-paper validation run
-  [`e6639ca2-b91a-4b73-aa99-780e921628ab`](docs/aristotle/runs/e6639ca2-b91a-4b73-aa99-780e921628ab/README.md)
-  for `OnePostulateFull.lean` and `OnePostulate/ClassificationDerivation.lean`
-  against the current `paper/one-postulate.tex` that reported no mismatches,
-  preserved theorem statements and imports, preserved the main-root boundary,
-  and left only cosmetic warnings
-- an archived Aristotle main-surface validation run
+## Current validation state
+
+The current repository state is validated both locally and through archived
+Aristotle runs against the current paper source.
+
+Locally:
+
+- `lake build` is green for the main Lean project.
+- `OnePostulate/ClassificationDerivation.lean` typechecks separately.
+- `OnePostulateFull.lean` typechecks separately.
+- CI guards reject `sorry|admit` in the guarded `OnePostulate` surface.
+- CI guards reject importing `OnePostulate.ClassificationDerivation` into
+  `OnePostulate.lean`.
+
+Against the current paper:
+
+- archived main-surface Aristotle run
   [`483c60fc-d712-4426-b086-30bf99699fa2`](docs/aristotle/runs/483c60fc-d712-4426-b086-30bf99699fa2/README.md)
-  for `OnePostulate.lean`, `OnePostulate/SpacetimeRepresentation.lean`, and
+  validated `OnePostulate.lean`,
+  `OnePostulate/SpacetimeRepresentation.lean`, and
   `OnePostulate/Selection.lean` against the current `paper/one-postulate.tex`
-  that reported no theorem or import changes, no mismatches against the paper,
-  preserved the main-root boundary, and left only cosmetic warnings
-- CI guards that reject `sorry|admit` in the guarded OnePostulate surface
-- CI guards that reject importing `OnePostulate.ClassificationDerivation` into
-  `OnePostulate.lean`
+  and reported no mismatches, no theorem or import changes, preserved
+  boundaries, and only cosmetic warnings
+- archived full-paper Aristotle run
+  [`e6639ca2-b91a-4b73-aa99-780e921628ab`](docs/aristotle/runs/e6639ca2-b91a-4b73-aa99-780e921628ab/README.md)
+  validated `OnePostulateFull.lean` and
+  `OnePostulate/ClassificationDerivation.lean` against the current
+  `paper/one-postulate.tex` and likewise reported no mismatches, no theorem or
+  import changes, preserved boundaries, and only cosmetic warnings
 
-In practical terms, the repo currently exposes:
-
-- `OnePostulate.lean` as the main imported root for the guarded formal surface
-- `OnePostulateFull.lean` as the stronger full-paper entrypoint
-
-## Project milestones
-
-The user-facing shape of the repository was built in a few major steps:
-
-- initial Lean import with the paper source, blueprint, and core formalization
-  scaffold
-- Lean CI added for repository validation
-- main-surface formal repairs and completion of the matrix-first core
-- import-surface guards tightened so `OnePostulate.lean` stays narrow
-- `OnePostulateFull.lean` added as a separate full-paper root
-- Aristotle documentation added for repo-specific validation, repair, and
-  paper-to-Lean review
+In practical terms, the repository currently exposes `OnePostulate.lean` as the
+main imported root and `OnePostulateFull.lean` as the stronger full-paper
+entrypoint, with both surfaces already checked against the current paper.
 
 ## Repository contents
 
 - `OnePostulate/` — main formalization modules
-- `OnePostulate.lean` — main root import surface
-- `OnePostulateFull.lean` — full-paper mathematical root import surface
-- `docs/aristotle/` — repo-specific Aristotle validation, repair, and review
-  docs
+- `OnePostulate.lean` — main imported root
+- `OnePostulateFull.lean` — full-paper root
+- `docs/aristotle/` — repository-specific Aristotle validation and review docs
 - `GaussProofSandbox/` — preserved smoke-test scaffold
 - `GaussProofSandbox.lean` — preserved smoke-test root module
 - `Main.lean` — preserved executable entry
-- `paper/` — editable paper source and rendered PDF
+- `paper/` — paper source and rendered PDF
 - `blueprint/src/content.tex` — dependency-ordered theorem ledger
 - `.gauss/project.yaml` — OpenGauss project manifest for this repository
 - `lakefile.toml`, `lake-manifest.json`, `lean-toolchain` — Lean/Lake project
@@ -197,28 +246,25 @@ Expected result:
 
 ## Documentation
 
-- [documentation.md](documentation.md) — detailed technical repo map and theorem
-  surface
+- [documentation.md](documentation.md) — detailed technical repository map and
+  theorem surface
 - [docs/aristotle/README.md](docs/aristotle/README.md) — Aristotle-based
   validation, repair, hardening, and paper-to-Lean review
-- `paper/one-postulate.tex` — editable paper source
+- `paper/one-postulate.tex` — current editable paper source
 - `blueprint/src/content.tex` — dependency-ordered theorem ledger
-
-## Aristotle docs
-
-Repo-specific Aristotle documentation lives under `docs/aristotle/`.
-
-- Start with [docs/aristotle/README.md](docs/aristotle/README.md).
-- Use those docs for Aristotle-based validation, repair, hardening, and
-  paper-to-Lean checking in this repository.
-- The Aristotle docs also explain how to use Aristotle without widening the
-  current proof surface rooted at `OnePostulate.lean`.
 
 ## Using OpenGauss with this repository
 
 OpenGauss is the project-scoped Lean workflow orchestrator used with this
 repository. In practice, it gives `gauss` a managed frontend for proving and
-formalization workflows such as:
+formalization workflows while leaving this repository itself as the source of
+truth for Lean code, paper text, and project metadata.
+
+This repository does **not** ship the OpenGauss runtime itself. The supported
+pattern is to validate the Lean project locally and then point a globally
+installed `gauss` client at this repository root.
+
+The OpenGauss workflow family supported here includes:
 
 - `/prove`
 - `/draft`
@@ -226,107 +272,52 @@ formalization workflows such as:
 - `/formalize`
 - `/autoformalize`
 
-Those workflows run against the active project root, so the intended setup here
-is an external/global OpenGauss installation pointed at this repository.
+For upstream installation and broader workflow documentation, see the
+[math-inc/OpenGauss README](https://github.com/math-inc/OpenGauss).
 
-If `gauss` is not installed yet, use the richer installer and platform guidance
-in the upstream [math-inc/OpenGauss README](https://github.com/math-inc/OpenGauss).
-
-### Quick start in this repository
-
-From the repository root:
+A typical repository-local flow is:
 
 ```bash
 gauss
 ```
 
-At the `gauss>` prompt:
-
-```text
-/project status
-/autoformalize-backend codex
-```
-
-If ambient project detection is not already active, run:
+Then in the Gauss interface:
 
 ```text
 /project use .
+/project status
 ```
 
-### Core loop
-
-The normal OpenGauss loop in this repository is:
-
-1. Start `gauss` from the repository root.
-2. Confirm that this repository is the active project with `/project status` or
-   `/project use .`.
-3. Launch a managed workflow such as `/prove`, `/draft`, `/formalize`, or
-   `/autoformalize`.
-4. Let OpenGauss spawn the backend child session inside this repository root.
-5. Use `/swarm` to inspect or reattach to running workflow agents when needed.
-
-For an already existing Lean project like this one, the important step is
-project selection, not project creation.
-
-### What OpenGauss should manage here
-
-For this repository, OpenGauss should operate as a project-scoped workflow
-layer over the existing Lean codebase. It should:
-
-- detect this repository as the active Lean workspace
-- keep workflow execution inside this repository root
-- preserve the existing root split between `OnePostulate.lean` and
-  `OnePostulateFull.lean`
-- complement local Lake validation rather than replace it
-
-### Example `/draft`
+Typical next steps are:
 
 ```text
-/draft
-In ClassificationDerivation.lean, replace the deferred placeholder with the next dependency-ordered derivation statements, keep the file unimported, preserve the matrix-first style, and keep lake build green.
-```
-
-### Example `/prove`
-
-```text
+/autoformalize-backend codex
 /prove
-In Selection.lean, strengthen the final positive/zero/negative branch summary using the current explicit matrix statements only, and keep unrelated declarations unchanged.
-```
-
-### Example `/formalize`
-
-```text
 /formalize
-Use paper/one-postulate.tex as the source text, keep the result aligned with the current matrix-first Lean development, and do not widen the import surface rooted at OnePostulate.lean.
 ```
 
-## Expected OpenGauss checks
+Within this repository, OpenGauss is best used as an orchestrator around the
+existing formal surface rather than as a replacement for local Lean validation.
+The core loop is:
 
-When `gauss` is started from this repository root, the following should hold:
+1. validate the repository locally with Lake
+2. target this repository root from `gauss`
+3. use `gauss` workflows to draft, prove, or formalize against the existing
+   Lean surface
+4. rerun local Lean checks before accepting any resulting change
 
-- the TUI banner shows the repository path
-- the banner or status area shows `Project: one-postulate-lean · blueprint`
-- `/project status` reports:
-  - root = this repository
-  - manifest = `.gauss/project.yaml`
-  - source mode = `init`
-- `/autoformalize-backend codex` is accepted
-- managed workflow agents stay attached to this repository as the active
-  project
-- `/swarm` shows the running workflow sessions when a proof or formalization
-  job is active
+For this project specifically, OpenGauss should respect the same surface
+boundaries as the rest of the toolchain: `OnePostulate.lean` remains the main
+root, while `OnePostulateFull.lean` and
+`OnePostulate/ClassificationDerivation.lean` cover the stronger full-paper
+surface.
 
-## Workflow note
+## Aristotle docs
 
-This repository is a Lean/formalization workspace. It is not the OpenGauss
-runtime repository. Build and test the Lean project locally with Lake, and use
-an external/global `gauss` installation for managed workflow commands. The
-upstream OpenGauss repository owns installer, platform, and runtime details; this
-repository owns the Lean code, paper source, and project-scoped workflow usage.
+Repository-specific Aristotle guidance lives under `docs/aristotle/`.
 
-## Clone
-
-```bash
-git clone https://github.com/rishistyping/one-postulate-lean.git
-cd one-postulate-lean
-```
+- Start with [docs/aristotle/README.md](docs/aristotle/README.md).
+- Use those docs for Aristotle-based validation, repair, hardening, and
+  paper-to-Lean checking in this repository.
+- The Aristotle docs explain how to validate or review the repository without
+  widening the current proof-surface boundary rooted at `OnePostulate.lean`.
