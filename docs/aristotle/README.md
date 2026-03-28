@@ -110,6 +110,12 @@ Aristotle should complement those checks, not replace them.
 
 ## Archived validation runs
 
+- Current-paper main-surface run [483c60fc-d712-4426-b086-30bf99699fa2](runs/483c60fc-d712-4426-b086-30bf99699fa2/README.md)
+- [Aristotle summary](runs/483c60fc-d712-4426-b086-30bf99699fa2/ARISTOTLE_SUMMARY_483c60fc-d712-4426-b086-30bf99699fa2.md)
+- [Validation report](runs/483c60fc-d712-4426-b086-30bf99699fa2/VALIDATION_REPORT.md)
+- Current-paper full-paper run [e6639ca2-b91a-4b73-aa99-780e921628ab](runs/e6639ca2-b91a-4b73-aa99-780e921628ab/README.md)
+- [Aristotle summary](runs/e6639ca2-b91a-4b73-aa99-780e921628ab/ARISTOTLE_SUMMARY_e6639ca2-b91a-4b73-aa99-780e921628ab.md)
+- [Validation report](runs/e6639ca2-b91a-4b73-aa99-780e921628ab/VALIDATION_REPORT.md)
 - Main-surface run [b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a](runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/README.md)
 - [Aristotle summary](runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/ARISTOTLE_SUMMARY_b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a.md)
 - [Validation report](runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/VALIDATION_REPORT.md)

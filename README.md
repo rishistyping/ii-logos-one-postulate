@@ -88,16 +88,17 @@ The current repository outputs are:
   `OnePostulate/ClassificationDerivation.lean`
 - a separately typechecked full-paper root at `OnePostulateFull.lean`
 - an archived Aristotle full-paper validation run
-  [`eaa48588-a529-405f-a871-13665c6b85c5`](docs/aristotle/runs/eaa48588-a529-405f-a871-13665c6b85c5/README.md)
+  [`e6639ca2-b91a-4b73-aa99-780e921628ab`](docs/aristotle/runs/e6639ca2-b91a-4b73-aa99-780e921628ab/README.md)
   for `OnePostulateFull.lean` and `OnePostulate/ClassificationDerivation.lean`
-  that reported a full match with the paper across `κ < 0`, `κ = 0`, and
-  `κ > 0`, required no fixes, and left only cosmetic warnings
+  against the current `paper/one-postulate.tex` that reported no mismatches,
+  preserved theorem statements and imports, preserved the main-root boundary,
+  and left only cosmetic warnings
 - an archived Aristotle main-surface validation run
-  [`b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a`](docs/aristotle/runs/b96cbb4a-93c2-43c6-b494-98d9cc0b2f6a/README.md)
+  [`483c60fc-d712-4426-b086-30bf99699fa2`](docs/aristotle/runs/483c60fc-d712-4426-b086-30bf99699fa2/README.md)
   for `OnePostulate.lean`, `OnePostulate/SpacetimeRepresentation.lean`, and
-  `OnePostulate/Selection.lean` that reported no theorem or import changes, no
-  mismatches against the paper, preserved the main-root boundary, and left only
-  cosmetic warnings
+  `OnePostulate/Selection.lean` against the current `paper/one-postulate.tex`
+  that reported no theorem or import changes, no mismatches against the paper,
+  preserved the main-root boundary, and left only cosmetic warnings
 - CI guards that reject `sorry|admit` in the guarded OnePostulate surface
 - CI guards that reject importing `OnePostulate.ClassificationDerivation` into
   `OnePostulate.lean`
