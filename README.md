@@ -125,3 +125,20 @@ For repository-specific workflow notes and archived review runs, see [docs/arist
 - Public-facing visuals and notebooks are intended to make the argument easier to read, not to widen the formal surface.
 - External validation story:
   Aristotle run summaries are archived in-tree; OpenGauss is configured in-tree, but this checkout does not currently archive a dedicated OpenGauss validation report.
+
+## Completed TODO Checklist
+
+- [x] 2026-03-30 `91880ef`: Fix Mermaid labels so GitHub renders the proof diagrams correctly. Current branch only.
+- [x] 2026-03-30 `fae4848`: Refresh the public docs and notebook surfaces, including the landing-page README, proof visuals, notebook guide, Wolfram companion notebook, and preview assets. Current branch only.
+- [x] 2026-03-29 `46309e7`: Archive Aristotle validation bundles as tracked tarballs. Present only on `origin/aristotle-one-postulate`.
+- [x] 2026-03-29 `04b2de7` / `9b8d8b8`: Add a paper-aligned narrative to the SymPy notebook. Shared across the SymPy, Aristotle, and current branch lines.
+- [x] 2026-03-28 `3d819f2`: Rewrite the README as a narrative overview. Shared across the docs-oriented branch lines.
+- [x] 2026-03-28 `11d7901`: Update the paper and archive the current Aristotle validation runs.
+- [x] 2026-03-28 `ca63e19`: Archive the Aristotle main-surface validation run.
+- [x] 2026-03-27 `33b22f1`: Archive the Aristotle full-paper validation run.
+- [x] 2026-03-27 `a872df5`: Improve the README documentation.
+- [x] 2026-03-27 `7e604b9`: Add repository-specific Aristotle documentation.
+- [x] 2026-03-27 `176dd3e`: Add the full-paper `OnePostulateFull` surface and the deferred classification bridge.
+- [x] 2026-03-27 `7c22460`: Close out the phase-1 branch guards and validation hardening docs.
+- [x] 2026-03-26 `b67c260`: Complete the phase-1 formal fixes.
+- [x] 2026-03-26 `5c83dca`: Repair the phase-1 Lean surface baseline.
