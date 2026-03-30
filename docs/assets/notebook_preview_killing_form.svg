@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="320" viewBox="0 0 820 320" role="img" aria-labelledby="title desc">
+  <title id="title">Killing form preview</title>
+  <desc id="desc">The rotation block stays fixed while the boost block scales with kappa.</desc>
+  <rect width="820" height="320" fill="#fbfcfe"/>
+  <style>
+    .title { font: 700 28px 'Georgia', 'Times New Roman', serif; fill: #253446; }
+    .subtitle { font: 16px 'Georgia', 'Times New Roman', serif; fill: #415264; }
+    .blockLabel { font: 700 22px 'Georgia', 'Times New Roman', serif; }
+    .blockValue { font: 700 30px 'Georgia', 'Times New Roman', serif; }
+    .frame { stroke: #4c5d70; stroke-width: 3; }
+  </style>
+  <text x="410" y="48" text-anchor="middle" class="title">B = diag(-4 I₃, 4 κ I₃)</text>
+  <text x="410" y="78" text-anchor="middle" class="subtitle">The algebra's canonical invariant reveals the branch structure before any final spacetime metric is assumed.</text>
+  <rect x="96" y="116" width="256" height="116" rx="20" ry="20" class="frame" fill="#e5eef8"/>
+  <text x="224" y="154" text-anchor="middle" class="blockLabel" fill="#1e4774">rotation block</text>
+  <text x="224" y="204" text-anchor="middle" class="blockValue" fill="#1e4774">-4 I₃</text>
+  <rect x="468" y="116" width="256" height="116" rx="20" ry="20" class="frame" fill="#e8f5ec"/>
+  <text x="596" y="154" text-anchor="middle" class="blockLabel" fill="#1f6a46">boost block</text>
+  <text x="596" y="204" text-anchor="middle" class="blockValue" fill="#1f6a46">4 κ I₃</text>
+  <path d="M352 174 H468" stroke="#4c5d70" stroke-width="4" fill="none"/>
+  <polygon points="460,164 484,174 460,184" fill="#4c5d70"/>
+  <text x="410" y="274" text-anchor="middle" class="subtitle">Rotation data stays fixed; the boost sector alone changes sign, degenerates at κ = 0, and becomes Lorentzian for κ &gt; 0.</text>
+</svg>

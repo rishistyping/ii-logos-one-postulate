@@ -5,6 +5,14 @@ working on `one-postulate-lean`.
 
 Treat source files as the final authority. Use this document as the quick map.
 
+## Public-facing entry points
+
+For the public narrative, start with:
+
+- `README.md`
+- `docs/proof-visuals.md`
+- `docs/notebooks.md`
+
 ## Identity
 
 - Repository name: `one-postulate-lean`

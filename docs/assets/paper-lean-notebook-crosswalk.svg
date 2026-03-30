@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="420" viewBox="0 0 1040 420" role="img" aria-labelledby="title desc">
+  <title id="title">Paper, Lean, and notebook crosswalk</title>
+  <desc id="desc">A three-column crosswalk connecting paper sections, Lean modules and theorems, and symbolic notebook sections.</desc>
+  <rect width="1040" height="420" fill="#f8f5ef"/>
+  <text x="48" y="50" fill="#1f2933" font-family="Palatino, Georgia, serif" font-size="28" font-weight="700">Paper, Lean, and notebook crosswalk</text>
+  <text x="48" y="78" fill="#52606d" font-family="Palatino, Georgia, serif" font-size="15">Each surface tells the same story at a different level of detail and authority.</text>
+
+  <rect x="48" y="110" width="272" height="44" rx="14" ry="14" fill="#d9e8f5"/>
+  <rect x="384" y="110" width="272" height="44" rx="14" ry="14" fill="#e7f7ee"/>
+  <rect x="720" y="110" width="272" height="44" rx="14" ry="14" fill="#fff2db"/>
+  <text x="166" y="138" fill="#102a43" font-family="Palatino, Georgia, serif" font-size="22" font-weight="700">Paper</text>
+  <text x="504" y="138" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="22" font-weight="700">Lean</text>
+  <text x="807" y="138" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="22" font-weight="700">Notebook</text>
+
+  <rect x="48" y="178" width="272" height="72" rx="18" ry="18" fill="#ffffff" stroke="#6b7c93" stroke-width="1.5"/>
+  <rect x="384" y="178" width="272" height="72" rx="18" ry="18" fill="#ffffff" stroke="#6b7c93" stroke-width="1.5"/>
+  <rect x="720" y="178" width="272" height="72" rx="18" ry="18" fill="#ffffff" stroke="#6b7c93" stroke-width="1.5"/>
+  <text x="68" y="205" fill="#243b53" font-family="Palatino, Georgia, serif" font-size="18" font-weight="700">What the postulate determines</text>
+  <text x="68" y="229" fill="#243b53" font-family="Palatino, Georgia, serif" font-size="15">1+1 transformation family and the</text>
+  <text x="68" y="248" fill="#243b53" font-family="Palatino, Georgia, serif" font-size="15">single parameter kappa</text>
+  <text x="404" y="205" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="17" font-weight="700">SpacetimeMatrices / KinematicAlgebra</text>
+  <text x="404" y="228" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="14">matrix_bracket_* and</text>
+  <text x="404" y="247" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="14">kinematic_bracket_table</text>
+  <text x="740" y="205" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="17" font-weight="700">SymPy opening sections</text>
+  <text x="740" y="228" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="14">transformation law, Galilean limit,</text>
+  <text x="740" y="247" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="14">adopted algebra</text>
+
+  <rect x="48" y="270" width="272" height="72" rx="18" ry="18" fill="#ffffff" stroke="#6b7c93" stroke-width="1.5"/>
+  <rect x="384" y="270" width="272" height="72" rx="18" ry="18" fill="#ffffff" stroke="#6b7c93" stroke-width="1.5"/>
+  <rect x="720" y="270" width="272" height="72" rx="18" ry="18" fill="#ffffff" stroke="#6b7c93" stroke-width="1.5"/>
+  <text x="68" y="297" fill="#243b53" font-family="Palatino, Georgia, serif" font-size="18" font-weight="700">Can the rules examine themselves?</text>
+  <text x="68" y="321" fill="#243b53" font-family="Palatino, Georgia, serif" font-size="15">The Killing form as the algebra's</text>
+  <text x="68" y="340" fill="#243b53" font-family="Palatino, Georgia, serif" font-size="15">own diagnostic</text>
+  <text x="404" y="297" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="17" font-weight="700">KillingForm / VelocitySpace</text>
+  <text x="404" y="320" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="14">killing_form_diag, boost_killing_form_eq,</text>
+  <text x="404" y="339" fill="#014d40" font-family="Palatino, Georgia, serif" font-size="14">killing_restricts_to_metric</text>
+  <text x="740" y="297" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="17" font-weight="700">SymPy middle sections</text>
+  <text x="740" y="320" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="14">adjoint action, Killing form,</text>
+  <text x="740" y="339" fill="#7c3e10" font-family="Palatino, Georgia, serif" font-size="14">boost block behavior</text>
+
+  <path d="M320 214 L370 214" fill="none" stroke="#52606d" stroke-width="2.5"/>
+  <polygon points="370,214 358,208 358,220" fill="#52606d"/>
+  <path d="M656 214 L706 214" fill="none" stroke="#52606d" stroke-width="2.5"/>
+  <polygon points="706,214 694,208 694,220" fill="#52606d"/>
+  <path d="M320 306 L370 306" fill="none" stroke="#52606d" stroke-width="2.5"/>
+  <polygon points="370,306 358,300 358,312" fill="#52606d"/>
+  <path d="M656 306 L706 306" fill="none" stroke="#52606d" stroke-width="2.5"/>
+  <polygon points="706,306 694,300 694,312" fill="#52606d"/>
+
+  <text x="48" y="386" fill="#7b8794" font-family="Palatino, Georgia, serif" font-size="15">Proof authority stays in Lean. The notebooks make the paper's calculations easier to inspect; they do not replace the formal proof.</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="280" viewBox="0 0 820 280" role="img" aria-labelledby="title desc">
+  <title id="title">Kappa branch comparison</title>
+  <desc id="desc">A single parameter kappa splits into the Euclidean, Galilean, and Lorentzian branches.</desc>
+  <rect width="820" height="280" fill="#fbfcfe"/>
+  <style>
+    .label { font: 700 22px 'Georgia', 'Times New Roman', serif; fill: #213247; }
+    .cardTitle { font: 700 20px 'Georgia', 'Times New Roman', serif; }
+    .cardText { font: 15px 'Georgia', 'Times New Roman', serif; fill: #384859; }
+    .axis { stroke: #526274; stroke-width: 4; fill: none; }
+    .card { stroke: #526274; stroke-width: 2.5; rx: 18; ry: 18; }
+  </style>
+  <rect x="52" y="92" width="184" height="82" class="card" fill="#e9f0f8"/>
+  <text x="144" y="140" text-anchor="middle" class="label">κ</text>
+  <path class="axis" d="M236 133 C300 133, 306 56, 370 56" />
+  <path class="axis" d="M236 133 L370 133" />
+  <path class="axis" d="M236 133 C300 133, 306 210, 370 210" />
+  <polygon points="364,49 382,56 364,63" fill="#526274"/>
+  <polygon points="364,126 382,133 364,140" fill="#526274"/>
+  <polygon points="364,203 382,210 364,217" fill="#526274"/>
+  <rect x="386" y="22" width="366" height="70" class="card" fill="#f7eed4"/>
+  <text x="412" y="52" class="cardTitle" fill="#775319">κ &lt; 0</text>
+  <text x="412" y="76" class="cardText">Euclidean branch; no nonzero null vectors</text>
+  <rect x="386" y="98" width="366" height="70" class="card" fill="#e9f4e7"/>
+  <text x="412" y="128" class="cardTitle" fill="#1e6b48">κ = 0</text>
+  <text x="412" y="152" class="cardText">Galilean branch; degenerate boost sector</text>
+  <rect x="386" y="174" width="366" height="70" class="card" fill="#f8e4e4"/>
+  <text x="412" y="204" class="cardTitle" fill="#8c2929">κ &gt; 0</text>
+  <text x="412" y="228" class="cardText">Lorentzian branch; finite real invariant speed</text>
+</svg>

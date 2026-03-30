@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="300" viewBox="0 0 820 300" role="img" aria-labelledby="title desc">
+  <title id="title">Spacetime metric preview</title>
+  <desc id="desc">The invariant spacetime metric follows from the algebraic invariant and separates the Galilean and Lorentzian branches.</desc>
+  <rect width="820" height="300" fill="#fbfcfe"/>
+  <style>
+    .title { font: 700 28px 'Georgia', 'Times New Roman', serif; fill: #253446; }
+    .body { font: 16px 'Georgia', 'Times New Roman', serif; fill: #405161; }
+    .cardTitle { font: 700 21px 'Georgia', 'Times New Roman', serif; }
+    .cardText { font: 15px 'Georgia', 'Times New Roman', serif; fill: #3e4f60; }
+    .frame { stroke: #4d5f72; stroke-width: 3; }
+  </style>
+  <text x="410" y="46" text-anchor="middle" class="title">g = diag(1, -κ, -κ, -κ)</text>
+  <text x="410" y="76" text-anchor="middle" class="body">The spacetime form is read from the algebraic invariant. The positive-κ branch yields a Lorentzian signature; the zero branch leaves an absolute-time direction.</text>
+  <rect x="78" y="114" width="288" height="118" rx="20" ry="20" class="frame" fill="#edf6ea"/>
+  <text x="222" y="154" text-anchor="middle" class="cardTitle" fill="#246845">κ = 0</text>
+  <text x="222" y="184" text-anchor="middle" class="cardText">boost sector collapses</text>
+  <text x="222" y="208" text-anchor="middle" class="cardText">absolute time survives</text>
+  <rect x="454" y="114" width="288" height="118" rx="20" ry="20" class="frame" fill="#f8e6e6"/>
+  <text x="598" y="154" text-anchor="middle" class="cardTitle" fill="#8e2a2a">κ &gt; 0</text>
+  <text x="598" y="184" text-anchor="middle" class="cardText">nondegenerate invariant metric</text>
+  <text x="598" y="208" text-anchor="middle" class="cardText">finite invariant speed appears</text>
+  <path d="M366 173 H454" stroke="#4d5f72" stroke-width="4" fill="none"/>
+  <polygon points="444,163 468,173 444,183" fill="#4d5f72"/>
+</svg>
