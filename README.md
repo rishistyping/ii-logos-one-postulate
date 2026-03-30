@@ -156,7 +156,7 @@ For repository-specific workflow notes and archived review runs, see [docs/arist
 - External validation story:
   Aristotle run summaries are archived in-tree; OpenGauss is configured in-tree, but this checkout does not currently archive a dedicated OpenGauss validation report.
 
-## Completed TODO Checklist
+## TODO Checklist
 
 - [x] 2026-03-30 `91880ef`: Fix Mermaid labels so GitHub renders the proof diagrams correctly. Current branch only.
 - [x] 2026-03-30 `fae4848`: Refresh the public docs and notebook surfaces, including the landing-page README, proof visuals, notebook guide, Wolfram companion notebook, and preview assets. Current branch only.
@@ -172,3 +172,10 @@ For repository-specific workflow notes and archived review runs, see [docs/arist
 - [x] 2026-03-27 `7c22460`: Close out the phase-1 branch guards and validation hardening docs.
 - [x] 2026-03-26 `b67c260`: Complete the phase-1 formal fixes.
 - [x] 2026-03-26 `5c83dca`: Repair the phase-1 Lean surface baseline.
+- [ ] Add D3 and SVG animations.
+- [ ] Add Wolfram + Mathematica and Observable D3.
+- [ ] Map to interactive website experience.
+- [ ] Add license and attribution.
+- [ ] Add backlinks to II website + blogs.
+- [ ] Add social buttons to README.
+- [ ] Human factors and editorial on README content.
