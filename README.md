@@ -91,11 +91,11 @@ flowchart TB
 
 | Paper idea | Lean proof surface | Computational companion |
 | --- | --- | --- |
-| `The postulate` / `What the postulate determines` | [`OnePostulate/SpacetimeMatrices.lean`](OnePostulate/SpacetimeMatrices.lean), [`OnePostulate/KinematicAlgebra.lean`](OnePostulate/KinematicAlgebra.lean), `matrix_bracket_*`, `kinematic_bracket_table` | [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) opening sections on the `1+1` law, Galilean limit, and adopted algebra |
+| `The postulate` / `What the postulate determines` | [`OnePostulate/SpacetimeMatrices.lean`](OnePostulate/SpacetimeMatrices.lean), [`OnePostulate/KinematicAlgebra.lean`](OnePostulate/KinematicAlgebra.lean), `matrix_bracket_*`, `kinematic_bracket_table` | [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1QicnUoHA3gSGQjb5NJxH09PDSXWZb8tr?usp=sharing) opening sections on the `1+1` law, Galilean limit, and adopted algebra |
 | `Can the rules examine themselves?` | [`OnePostulate/KillingForm.lean`](OnePostulate/KillingForm.lean), [`OnePostulate/VelocitySpace.lean`](OnePostulate/VelocitySpace.lean), `killing_form_diag`, `boost_killing_form_eq`, `killing_restricts_to_metric` | SymPy notebook middle sections on adjoint action, Killing form, and the `κ = 0` collapse |
 | `Three verdicts` / `Structure and scale` | [`OnePostulate/SpacetimeRepresentation.lean`](OnePostulate/SpacetimeRepresentation.lean), [`OnePostulate/Selection.lean`](OnePostulate/Selection.lean), [`OnePostulate/ClassificationDerivation.lean`](OnePostulate/ClassificationDerivation.lean) | notebook regime table and branch comparison cells |
 
-For the deeper walkthrough, see [docs/proof-visuals.md](docs/proof-visuals.md), the notebook guide in [docs/notebooks.md](docs/notebooks.md), and the notebook itself in [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb).
+For the deeper walkthrough, see [docs/proof-visuals.md](docs/proof-visuals.md), the notebook guide in [docs/notebooks.md](docs/notebooks.md), and the notebook itself in [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1QicnUoHA3gSGQjb5NJxH09PDSXWZb8tr?usp=sharing).
 
 ## Formalization and Validation Story
 
