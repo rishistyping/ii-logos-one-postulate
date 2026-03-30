@@ -14,7 +14,13 @@ The formalization is intentionally concrete.
 
 That choice matches the paper's local narrative: geometry is recovered from the algebra's own invariant, not imposed first.
 
-![Why the Killing form matters](assets/killing-form-explainer.svg)
+```mermaid
+flowchart LR
+    A["Relativity principle<br/>one-parameter kinematic family"] --> B["Bracket structure<br/>adjoint setup"]
+    B --> C["Killing form computation"]
+    C --> D["Boost-sector and spacetime consequences<br/>geometry is read off here, not assumed first"]
+    D --> E["Three kappa branches<br/>Euclidean / Galilean / Lorentzian"]
+```
 
 ## Module Flow
 
@@ -63,7 +69,31 @@ flowchart LR
 
 ## Paper / Lean / Notebook Crosswalk
 
-![Paper, Lean, and notebook crosswalk](assets/paper-lean-notebook-crosswalk.svg)
+```mermaid
+flowchart TB
+    subgraph S1["Bracket setup"]
+        direction LR
+        P1["Paper<br/>The postulate / What the postulate determines"]
+        L1["Lean<br/>SpacetimeMatrices + KinematicAlgebra<br/>matrix_bracket_JJ / matrix_bracket_JK / matrix_bracket_KK / kinematic_bracket_table"]
+        N1["Notebook<br/>Transformation law, Galilean limit, adopted algebra"]
+        P1 --> L1 --> N1
+    end
+    subgraph S2["Killing form"]
+        direction LR
+        P2["Paper<br/>Can the rules examine themselves?"]
+        L2["Lean<br/>KillingForm + VelocitySpace<br/>killing_form_diag / boost_killing_form_eq / killing_restricts_to_metric"]
+        N2["Notebook<br/>Adjoint action and Killing form"]
+        P2 --> L2 --> N2
+    end
+    subgraph S3["Branch classification"]
+        direction LR
+        P3["Paper<br/>Three verdicts / Structure and scale"]
+        L3["Lean<br/>SpacetimeRepresentation + Selection + ClassificationDerivation<br/>phase1_selection_summary / classification_derivation_complete_full"]
+        N3["Notebook<br/>Regime table and branch comparison"]
+        P3 --> L3 --> N3
+    end
+    S1 --> S2 --> S3
+```
 
 | Paper section | Lean files and theorems | Notebook surface |
 | --- | --- | --- |
