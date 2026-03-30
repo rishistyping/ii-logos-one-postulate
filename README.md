@@ -18,35 +18,35 @@
 
 ```mermaid
 flowchart LR
-    A["`SpacetimeMatrices`"] --> B["`KinematicAlgebra`"]
-    B --> C["`KillingForm`"]
-    C --> D["`VelocitySpace`"]
-    C --> E["`SpacetimeRepresentation`"]
-    D --> F["`Selection`"]
+    A["SpacetimeMatrices"] --> B["KinematicAlgebra"]
+    B --> C["KillingForm"]
+    C --> D["VelocitySpace"]
+    C --> E["SpacetimeRepresentation"]
+    D --> F["Selection"]
     E --> F
-    F --> G["`ClassificationDerivation`"]
+    F --> G["ClassificationDerivation"]
 ```
 
 ```mermaid
 flowchart TD
-    A["`matrix_bracket_JJ` / `matrix_bracket_JK` / `matrix_bracket_KK`"] --> B["`kinematic_bracket_table`"]
-    B --> C["`killing_form_diag`"]
-    C --> D["`boost_killing_form_eq`"]
-    D --> E["`killing_restricts_to_metric`"]
-    D --> F["`spacetime_metric_invariant`"]
-    E --> G["`zero_kappa_velocity_metric_only_conformal`"]
-    F --> H["`reducible_of_kappa_zero`"]
-    F --> I["`spacetime_metric_congruent_stdLorentz_of_kappa_pos`"]
-    G --> J["`phase1_selection_summary`"]
+    A["matrix_bracket_JJ / matrix_bracket_JK / matrix_bracket_KK"] --> B["kinematic_bracket_table"]
+    B --> C["killing_form_diag"]
+    C --> D["boost_killing_form_eq"]
+    D --> E["killing_restricts_to_metric"]
+    D --> F["spacetime_metric_invariant"]
+    E --> G["zero_kappa_velocity_metric_only_conformal"]
+    F --> H["reducible_of_kappa_zero"]
+    F --> I["spacetime_metric_congruent_stdLorentz_of_kappa_pos"]
+    G --> J["phase1_selection_summary"]
     H --> J
     I --> J
 ```
 
 ```mermaid
 flowchart LR
-    K["`κ`"] --> N["`κ < 0`<br/>Euclidean"]
-    K --> Z["`κ = 0`<br/>Galilean"]
-    K --> P["`κ > 0`<br/>Lorentzian"]
+    K["kappa"] --> N["kappa < 0<br/>Euclidean"]
+    K --> Z["kappa = 0<br/>Galilean"]
+    K --> P["kappa > 0<br/>Lorentzian"]
 ```
 
 ## Why the Killing Form Matters

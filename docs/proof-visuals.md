@@ -20,45 +20,45 @@ That choice matches the paper's local narrative: geometry is recovered from the 
 
 ```mermaid
 flowchart LR
-    A["`SpacetimeMatrices`<br/>explicit 4x4 generators"] --> B["`KinematicAlgebra`<br/>six-dimensional algebra and bracket table"]
-    B --> C["`KillingForm`<br/>adjoint matrices and trace form"]
-    C --> D["`VelocitySpace`<br/>boost-sector metric behavior"]
-    C --> E["`SpacetimeRepresentation`<br/>invariant spacetime forms"]
-    D --> F["`Selection`<br/>phase-1 branch split"]
+    A["SpacetimeMatrices<br/>explicit 4x4 generators"] --> B["KinematicAlgebra<br/>six-dimensional algebra and bracket table"]
+    B --> C["KillingForm<br/>adjoint matrices and trace form"]
+    C --> D["VelocitySpace<br/>boost-sector metric behavior"]
+    C --> E["SpacetimeRepresentation<br/>invariant spacetime forms"]
+    D --> F["Selection<br/>phase-1 branch split"]
     E --> F
-    F --> G["`ClassificationDerivation`<br/>full-paper bridge"]
+    F --> G["ClassificationDerivation<br/>full-paper bridge"]
 ```
 
 ## Theorem Spine
 
 ```mermaid
 flowchart TD
-    A["`matrix_bracket_JJ` / `matrix_bracket_JK` / `matrix_bracket_KK`"] --> B["`kinematic_bracket_table`"]
-    B --> C["`kinematic_bracket_jacobi`"]
-    B --> D["`killing_form_diag`"]
-    D --> E["`boost_killing_form_eq`"]
-    E --> F["`boost_killing_nondegenerate_iff_kappa_ne_zero`"]
-    E --> G["`killing_restricts_to_metric`"]
-    G --> H["`zero_kappa_velocity_metric_only_conformal`"]
-    G --> I["`invariantSpeedSquared_formula`"]
-    D --> J["`spacetime_metric_eq_diagonal`"]
-    J --> K["`spacetime_metric_invariant`"]
-    K --> L["`reducible_of_kappa_zero`"]
-    K --> M["`spacetime_metric_congruent_stdLorentz_of_kappa_pos`"]
-    H --> N["`phase1_selection_summary`"]
+    A["matrix_bracket_JJ / matrix_bracket_JK / matrix_bracket_KK"] --> B["kinematic_bracket_table"]
+    B --> C["kinematic_bracket_jacobi"]
+    B --> D["killing_form_diag"]
+    D --> E["boost_killing_form_eq"]
+    E --> F["boost_killing_nondegenerate_iff_kappa_ne_zero"]
+    E --> G["killing_restricts_to_metric"]
+    G --> H["zero_kappa_velocity_metric_only_conformal"]
+    G --> I["invariantSpeedSquared_formula"]
+    D --> J["spacetime_metric_eq_diagonal"]
+    J --> K["spacetime_metric_invariant"]
+    K --> L["reducible_of_kappa_zero"]
+    K --> M["spacetime_metric_congruent_stdLorentz_of_kappa_pos"]
+    H --> N["phase1_selection_summary"]
     I --> N
     L --> N
     M --> N
-    N --> O["`classification_derivation_complete` / `classification_derivation_complete_full`"]
+    N --> O["classification_derivation_complete / classification_derivation_complete_full"]
 ```
 
 ## The Branch Split
 
 ```mermaid
 flowchart LR
-    K["`κ`"] --> N["`κ < 0`<br/>`negative_kappa_selects_euclidean`<br/>`negative_kappa_no_nonzero_null_vectors`"]
-    K --> Z["`κ = 0`<br/>`zero_kappa_selects_galilean`<br/>`reducible_of_kappa_zero`"]
-    K --> P["`κ > 0`<br/>`positive_kappa_selects_lorentz`<br/>`positive_kappa_gives_finite_real_invariant_speed`"]
+    K["kappa"] --> N["kappa < 0<br/>negative_kappa_selects_euclidean<br/>negative_kappa_no_nonzero_null_vectors"]
+    K --> Z["kappa = 0<br/>zero_kappa_selects_galilean<br/>reducible_of_kappa_zero"]
+    K --> P["kappa > 0<br/>positive_kappa_selects_lorentz<br/>positive_kappa_gives_finite_real_invariant_speed"]
 ```
 
 ## Paper / Lean / Notebook Crosswalk
