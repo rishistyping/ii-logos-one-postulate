@@ -1,0 +1,3777 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[    155674,       3768]
+NotebookOptionsPosition[    147605,       3643]
+NotebookOutlinePosition[    148082,       3661]
+CellTagsIndexPosition[    148039,       3658]
+WindowTitle->One Postulate in Wolfram
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["One Postulate in Wolfram", "Title",ExpressionUUID->"909a8917-e6ef-40e9-a4ef-9fb2eea8871d"],
+
+Cell["\<\
+This notebook is a public-facing computational companion to the local paper \
+and Lean development. It follows the paper's narrative arc while keeping the \
+proofs in Lean.\
+\>", "Text",ExpressionUUID->"9d2d3eda-6263-4166-a32e-f4c7532fe8f7"],
+
+Cell["\<\
+It is not a proof-assistant notebook and not a raw symbolic scratchpad. Its \
+job is to compute and visualize the kappa-family clearly enough that a \
+non-Lean reader can see why the Killing form is the pivot.\
+\>", "Text",ExpressionUUID->"96addc05-c401-42ec-8dbd-52129e2884a8"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{InsetBox[
+        StyleBox["\<\"One parameter, three worlds\"\>",
+         StripOnInput->False,
+         LineColor->RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+         FrontFaceColor->RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+         BackFaceColor->RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+         GraphicsColor->RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+         FontFamily->"Helvetica",
+         FontSize->24,
+         FontWeight->Bold,
+         FontColor->RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 
+           0.16862745098039217`]], {4.8, 5.15}], InsetBox[
+        StyleBox["\<\"The relativity postulate yields a kappa-family. The \
+Killing form reads the family before geometry is interpreted.\"\>",
+         StripOnInput->False,
+         LineColor->RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+         FrontFaceColor->RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+         BackFaceColor->RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+         GraphicsColor->RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+         FontFamily->"Helvetica",
+         FontSize->14,
+         FontColor->RGBColor[
+          0.4196078431372549, 0.4588235294117647, 
+           0.5176470588235295]], {4.8, 4.72}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa controls the family\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              FrontFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              BackFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              GraphicsColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]},
+            {
+             StyleBox[
+              RowBox[{"{", 
+               RowBox[{
+                FractionBox[
+                 RowBox[{"t", "-", 
+                  RowBox[{"kappa", " ", "v", " ", "x"}]}], 
+                 SqrtBox[
+                  RowBox[{"1", "-", 
+                   RowBox[{"kappa", " ", 
+                    SuperscriptBox["v", "2"]}]}]]], ",", 
+                FractionBox[
+                 RowBox[{"x", "-", 
+                  RowBox[{"t", " ", "v"}]}], 
+                 SqrtBox[
+                  RowBox[{"1", "-", 
+                   RowBox[{"kappa", " ", 
+                    SuperscriptBox["v", "2"]}]}]]]}], "}"}],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox["\<\"kappa -> 0 recovers the Galilean limit\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+          "Column"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{14, 14}, {12, 12}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{250, 170},
+         RoundingRadius->12,
+         StripOnInput->False], {1.55, 2.85}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Killing form pivot\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              FrontFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              BackFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              GraphicsColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+            {
+             StyleBox["\<\"diag(-4 I3, 4 kappa I3)\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->20,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             
+             StyleBox["\<\"The boost block changes sign and vanishes only at \
+kappa = 0.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{14, 14}, {12, 12}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+           AbsoluteThickness[2]],
+         ImageSize->{285, 170},
+         RoundingRadius->12,
+         StripOnInput->False], {4.8, 2.85}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Spacetime consequence summary\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox["\<\"g = diag(1, -kappa, -kappa, -kappa)\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->14,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             
+             StyleBox["\<\"positive kappa -> Lorentzian, zero -> Galilean \
+degeneration, negative -> Euclidean branch\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+          "Column"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{14, 14}, {12, 12}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{280, 170},
+         RoundingRadius->12,
+         StripOnInput->False], {8.05, 2.85}], 
+       {RGBColor[0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+        AbsoluteThickness[2.5], Arrowheads[0.032], 
+        ArrowBox[{{2.8, 2.85}, {3.3, 2.85}}], 
+        ArrowBox[{{6.3, 2.85}, {6.75, 2.85}}]}, InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa < 0\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              FrontFaceColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              BackFaceColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              GraphicsColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451]]},
+            {
+             StyleBox["\<\"Euclidean\"\>",
+              StripOnInput->False,
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             GraphicsBox[{
+               {RGBColor[
+                0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+                 AbsoluteThickness[4], CircleBox[{0, 0}, 0.84]}, 
+               {RGBColor[
+                0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+                 AbsoluteThickness[4], 
+                ArrowBox[
+                 BezierCurveBox[{{0.55, -0.66}, {1.08, -0.1}, {0.45, 
+                  0.72}}]]}, InsetBox[
+                StyleBox["\<\"all directions stay geometric\"\>",
+                 StripOnInput->False,
+                 
+                 LineColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 
+                 FrontFaceColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 
+                 BackFaceColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 
+                 GraphicsColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 FontFamily->"Helvetica",
+                 FontSize->10,
+                 
+                 FontColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 
+                   0.5176470588235295]], {0, -1.18}]},
+              Background->None,
+              ImageSize->130,
+              PlotRange->{{-1.25, 1.25}, {-1.35, 1.15}}]},
+            {
+             StyleBox[
+              TemplateBox[{"\"\[AHat]\.80\[Cent] \"", "\"no null vectors\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              TemplateBox[{"\"\[AHat]\.80\[Cent] \"", "\"compact branch\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.9725490196078431, 0.9254901960784314, 0.8666666666666667],
+         FrameMargins->{{16, 16}, {14, 14}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.7215686274509804, 0.41568627450980394`, 0.1803921568627451], 
+           AbsoluteThickness[2]],
+         ImageSize->{255, 300},
+         RoundingRadius->12,
+         StripOnInput->False], {3.05, 0.65}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa = 0\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              FrontFaceColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              BackFaceColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              GraphicsColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 
+                0.42745098039215684`]]},
+            {
+             StyleBox["\<\"Galilean\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             GraphicsBox[
+              {RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+               AbsoluteThickness[1.4], LineBox[{{0, -1.1}, {0, 1.15}}], 
+               LineBox[{{-1.15, 0}, {1.15, 0}}], 
+               {RGBColor[
+                0.1803921568627451, 0.49019607843137253`, 
+                 0.42745098039215684`], AbsoluteThickness[3.4], 
+                LineBox[{{-1., -0.7}, {1., -0.7}}], 
+                LineBox[{{-1., -0.29999999999999993`}, {
+                 1., -0.29999999999999993`}}], 
+                LineBox[{{-1., 0.10000000000000009`}, {1., 
+                 0.10000000000000009`}}], 
+                LineBox[{{-1., 0.5000000000000001}, {1., 
+                 0.5000000000000001}}], 
+                LineBox[{{-1., 0.9000000000000001}, {1., 
+                 0.9000000000000001}}]}},
+              Background->None,
+              ImageSize->130,
+              PlotRange->{{-1.2, 1.2}, {-1.2, 1.2}}]},
+            {
+             StyleBox[
+              TemplateBox[{"\"\[AHat]\.80\[Cent] \"", "\"boost block = 0\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", "\"absolute time survives\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.8941176470588236, 0.9529411764705882, 0.9372549019607843],
+         FrameMargins->{{16, 16}, {14, 14}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+           AbsoluteThickness[2]],
+         ImageSize->{255, 300},
+         RoundingRadius->12,
+         StripOnInput->False], {4.85, 0.65}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa > 0\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              FrontFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              BackFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              GraphicsColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+            {
+             StyleBox["\<\"Lorentzian\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             GraphicsBox[
+              {RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+               AbsoluteThickness[1.4], LineBox[{{0, -1.1}, {0, 1.15}}], 
+               LineBox[{{-1.15, 0}, {1.15, 0}}], 
+               {RGBColor[
+                0.7595294117647059, 0.8155294117647058, 0.9022745098039215], 
+                PolygonBox[{{0, 0}, {-0.78, 1.05}, {0.78, 1.05}}]}, 
+               {RGBColor[
+                0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+                AbsoluteThickness[4], LineBox[{{0, 0}, {-0.78, 1.05}}], 
+                LineBox[{{0, 0}, {0.78, 1.05}}]}},
+              Background->None,
+              ImageSize->130,
+              PlotRange->{{-1.2, 1.2}, {-1.2, 1.2}}]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", "\"finite real invariant speed\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              TemplateBox[{"\"\[AHat]\.80\[Cent] \"", "\"Lorentz metric\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[0.9098039215686274, 0.9411764705882353, 1.],
+         FrameMargins->{{16, 16}, {14, 14}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+           AbsoluteThickness[2]],
+         ImageSize->{255, 300},
+         RoundingRadius->12,
+         StripOnInput->False], {6.65, 0.65}]},
+      Background->RGBColor[
+       0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+      ImageSize->1280,
+      PlotRange->{{0.25, 9.35}, {-1.15, 5.55}}]},
+    {
+     StyleBox["\<\"Hero overview. One parameter controls the transformation \
+family, the Killing form reads the branch structure, and the spacetime \
+consequences follow afterward.\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FrontFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      BackFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      GraphicsColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FontFamily->"Helvetica",
+      FontSize->11,
+      FontColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+  "Column"]], "Output",ExpressionUUID->"ba574501-01b6-4e6a-9622-d8fdcaa92b47"],
+
+Cell["What this notebook is for", "Section",ExpressionUUID->"80749fb5-20d5-4446-b067-5e2b1cb59fe8"],
+
+Cell["\<\
+Computed or visualized here means: Wolfram evaluates exact limits, matrix \
+formulas, determinants, congruence calculations, and visual summaries of \
+formulas already present in the paper and Lean files.\
+\>", "Text",ExpressionUUID->"93bc959b-2da4-4153-b0fb-ac77c5976d6c"],
+
+Cell["\<\
+Formally proved in Lean means: theorem names and proof-structure claims come \
+from local Lean modules, not from Wolfram. Interpretive framing comes from \
+the paper.\
+\>", "Text",ExpressionUUID->"c0ee0faf-8e5c-423d-89bc-06ef12cf74ef"],
+
+Cell["One parameter, three worlds", "Section",ExpressionUUID->"4552e272-3f3e-4fa3-b932-fab58226846d"],
+
+Cell["\<\
+The paper's starting point is a single kappa-controlled family of \
+inertial-frame transformations. The sign of kappa is not interpreted first; \
+the notebook computes the shared structure and then reads the branch split \
+from the invariant form.\
+\>", "Text",ExpressionUUID->"f66bbed7-dd2f-46fe-aeb6-48058b7289d3"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"one parameter\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              FrontFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              BackFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              GraphicsColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]},
+            {
+             
+             StyleBox["\<\"The paper's transformation family is controlled by \
+a single real number kappa.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              TemplateBox[{"\"gamma = \"", 
+                FractionBox["1", 
+                 SqrtBox[
+                  RowBox[{"1", "-", 
+                    RowBox[{"kappa", " ", 
+                    SuperscriptBox["v", "2"]}]}]]], "\"\\n\"", "\"t' = \"", 
+                FractionBox[
+                 RowBox[{"t", "-", 
+                   RowBox[{"kappa", " ", "v", " ", "x"}]}], 
+                 SqrtBox[
+                  RowBox[{"1", "-", 
+                    RowBox[{"kappa", " ", 
+                    SuperscriptBox["v", "2"]}]}]]], "\"\\n\"", "\"x' = \"", 
+                FractionBox[
+                 RowBox[{"x", "-", 
+                   RowBox[{"t", " ", "v"}]}], 
+                 SqrtBox[
+                  RowBox[{"1", "-", 
+                    RowBox[{"kappa", " ", 
+                    SuperscriptBox["v", "2"]}]}]]]},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.6}}}],
+          "Column"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{16, 16}, {16, 16}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{280, 220},
+         RoundingRadius->12,
+         StripOnInput->False], {1.8, 2.4}], 
+       {RGBColor[0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+        AbsoluteThickness[2.4], Arrowheads[0.03], 
+        ArrowBox[{{3.35, 2.8}, {4.25, 4.85}}], 
+        ArrowBox[{{3.35, 2.4}, {4.25, 2.4}}], 
+        ArrowBox[{{3.35, 2.}, {4.25, 0.9}}]}, InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa > 0\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              FrontFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              BackFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              GraphicsColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+            {
+             StyleBox["\<\"Lorentzian branch\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             GraphicsBox[
+              {RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+               AbsoluteThickness[1.4], LineBox[{{0, -1.1}, {0, 1.15}}], 
+               LineBox[{{-1.15, 0}, {1.15, 0}}], 
+               {RGBColor[
+                0.7595294117647059, 0.8155294117647058, 0.9022745098039215], 
+                PolygonBox[{{0, 0}, {-0.78, 1.05}, {0.78, 1.05}}]}, 
+               {RGBColor[
+                0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+                AbsoluteThickness[4], LineBox[{{0, 0}, {-0.78, 1.05}}], 
+                LineBox[{{0, 0}, {0.78, 1.05}}]}},
+              Background->None,
+              ImageSize->130,
+              PlotRange->{{-1.2, 1.2}, {-1.2, 1.2}}]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"boost block 4 kappa I3 is positive\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"finite real invariant speed 1/Sqrt[kappa]\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"spacetime interval mixes time and space\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[0.9098039215686274, 0.9411764705882353, 1.],
+         FrameMargins->{{16, 16}, {14, 14}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+           AbsoluteThickness[2]],
+         ImageSize->{255, 300},
+         RoundingRadius->12,
+         StripOnInput->False], {6.2, 4.85}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa = 0\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              FrontFaceColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              BackFaceColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              GraphicsColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 
+                0.42745098039215684`]]},
+            {
+             StyleBox["\<\"Galilean branch\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             GraphicsBox[
+              {RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+               AbsoluteThickness[1.4], LineBox[{{0, -1.1}, {0, 1.15}}], 
+               LineBox[{{-1.15, 0}, {1.15, 0}}], 
+               {RGBColor[
+                0.1803921568627451, 0.49019607843137253`, 
+                 0.42745098039215684`], AbsoluteThickness[3.4], 
+                LineBox[{{-1., -0.7}, {1., -0.7}}], 
+                LineBox[{{-1., -0.29999999999999993`}, {
+                 1., -0.29999999999999993`}}], 
+                LineBox[{{-1., 0.10000000000000009`}, {1., 
+                 0.10000000000000009`}}], 
+                LineBox[{{-1., 0.5000000000000001}, {1., 
+                 0.5000000000000001}}], 
+                LineBox[{{-1., 0.9000000000000001}, {1., 
+                 0.9000000000000001}}]}},
+              Background->None,
+              ImageSize->130,
+              PlotRange->{{-1.2, 1.2}, {-1.2, 1.2}}]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", "\"boost block vanishes exactly\""},
+               
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", "\"Galilean limit gives t' = t\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"absolute time survives as background structure\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.8941176470588236, 0.9529411764705882, 0.9372549019607843],
+         FrameMargins->{{16, 16}, {14, 14}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+           AbsoluteThickness[2]],
+         ImageSize->{255, 300},
+         RoundingRadius->12,
+         StripOnInput->False], {6.2, 2.4}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"kappa < 0\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              FrontFaceColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              BackFaceColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              GraphicsColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451]]},
+            {
+             StyleBox["\<\"Euclidean branch\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->12,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             GraphicsBox[{
+               {RGBColor[
+                0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+                 AbsoluteThickness[4], CircleBox[{0, 0}, 0.84]}, 
+               {RGBColor[
+                0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+                 AbsoluteThickness[4], 
+                ArrowBox[
+                 BezierCurveBox[{{0.55, -0.66}, {1.08, -0.1}, {0.45, 
+                  0.72}}]]}, InsetBox[
+                StyleBox["\<\"all directions stay geometric\"\>",
+                 StripOnInput->False,
+                 
+                 LineColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 
+                 FrontFaceColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 
+                 BackFaceColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 
+                 GraphicsColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+                 
+                 FontFamily->"Helvetica",
+                 FontSize->10,
+                 
+                 FontColor->RGBColor[
+                  0.4196078431372549, 0.4588235294117647, 
+                   0.5176470588235295]], {0, -1.18}]},
+              Background->None,
+              ImageSize->130,
+              PlotRange->{{-1.25, 1.25}, {-1.35, 1.15}}]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"boost block 4 kappa I3 is negative\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"no real invariant speed emerges\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"\[AHat]\.80\[Cent] \"", 
+                "\"time is not singled out from geometry\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.55}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.9725490196078431, 0.9254901960784314, 0.8666666666666667],
+         FrameMargins->{{16, 16}, {14, 14}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.7215686274509804, 0.41568627450980394`, 0.1803921568627451], 
+           AbsoluteThickness[2]],
+         ImageSize->{255, 300},
+         RoundingRadius->12,
+         StripOnInput->False], {6.2, 0.}]},
+      Background->RGBColor[
+       0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+      ImageSize->980,
+      PlotRange->{{0, 8.1}, {-1., 5.8}}]},
+    {
+     StyleBox["\<\"Branch overview. The same symbolic family produces \
+Lorentzian, Galilean, and Euclidean regimes depending only on the sign of \
+kappa.\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FrontFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      BackFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      GraphicsColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FontFamily->"Helvetica",
+      FontSize->11,
+      FontColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+  "Column"]], "Output",ExpressionUUID->"ae739da5-6260-443f-8759-50a93455bca9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FrameBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\<\"Selected kappa\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       FrontFaceColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       BackFaceColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       GraphicsColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       FontFamily->"Helvetica",
+       FontSize->18,
+       FontWeight->Bold,
+       FontColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628]], 
+      StyleBox[
+       TagBox[
+        FormBox[
+         FractionBox["1", "2"],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FrontFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       BackFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       GraphicsColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FontFamily->"Helvetica",
+       FontSize->18,
+       FontColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]},
+     {
+      StyleBox["\<\"Branch\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FrontFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       BackFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       GraphicsColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FontFamily->"Helvetica",
+       FontSize->13,
+       FontColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]], 
+      StyleBox["\<\"Lorentzian branch\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       FrontFaceColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       BackFaceColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       GraphicsColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       FontFamily->"Helvetica",
+       FontSize->15,
+       FontWeight->Bold,
+       FontColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+     {
+      StyleBox["\<\"gamma(v)\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FrontFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       BackFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       GraphicsColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FontFamily->"Helvetica",
+       FontSize->13,
+       FontColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]], 
+      StyleBox[
+       TagBox[
+        FormBox[
+         FractionBox["1", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            FractionBox[
+             SuperscriptBox["v", "2"], "2"]}]]],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FrontFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       BackFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       GraphicsColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FontFamily->"Helvetica",
+       FontSize->15,
+       FontColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]},
+     {
+      StyleBox["\<\"Galilean limit\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FrontFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       BackFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       GraphicsColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FontFamily->"Helvetica",
+       FontSize->13,
+       FontColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]], 
+      StyleBox[
+       TagBox[
+        FormBox[
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{"x", "-", 
+            RowBox[{"t", " ", "v"}]}]}], "}"}],
+         TraditionalForm],
+        TraditionalForm,
+        Editable->True],
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FrontFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       BackFaceColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       GraphicsColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+       FontFamily->"Helvetica",
+       FontSize->14,
+       FontColor->RGBColor[
+        0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}
+    },
+    AutoDelete->False,
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.9}}}],
+   "Grid"],
+  Background->RGBColor[0.9098039215686274, 0.9411764705882353, 1.],
+  FrameMargins->{{14, 14}, {10, 10}},
+  FrameStyle->Directive[
+    RGBColor[0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+    AbsoluteThickness[2]],
+  ImageSize->{430, Automatic},
+  RoundingRadius->10,
+  StripOnInput->False]], "Output",ExpressionUUID->"188f6e30-1c4b-4a85-ab1a-\
+b253b2a526b3"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = Rational[1, 2], Typeset`show$$ = True,
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k$$], 
+       Rational[1, 2], "kappa"}, {-1, 
+       Rational[-1, 2], 0, 
+       Rational[1, 2], 1}, ControlType -> SetterBar}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, Typeset`keyframeActionsQ$$ = False, 
+    Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`k$$ = Rational[1, 2]}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> $CellContext`regimeGraphic[$CellContext`k$$], 
+      "Specifications" :> {{{$CellContext`k$$, 
+          Rational[1, 2], "kappa"}, {-1, 
+          Rational[-1, 2], 0, 
+          Rational[1, 2], 1}}}, "Options" :> {ControlType -> SetterBar}, 
+      "DefaultOptions" :> {}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`regimeGraphic[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Framed[
+         Grid[{{
+            Style["Selected kappa", 
+             $CellContext`cardTitleStyle[
+              $CellContext`branchColor[$CellContext`k]]], 
+            Style[
+             TraditionalForm[$CellContext`k], FontFamily -> "Helvetica", 
+             FontSize -> 18, 
+             $CellContext`colors["Text"]]}, {
+            Style["Branch", $CellContext`baseLabelStyle], 
+            Style[
+             $CellContext`branchName[$CellContext`k], FontFamily -> 
+             "Helvetica", FontSize -> 15, Bold, 
+             $CellContext`branchColor[$CellContext`k]]}, {
+            Style["gamma(v)", $CellContext`baseLabelStyle], 
+            Style[
+             TraditionalForm[
+              $CellContext`gammaExpr[$CellContext`k]], FontFamily -> 
+             "Helvetica", FontSize -> 15, 
+             $CellContext`colors["Text"]]}, {
+            Style["Galilean limit", $CellContext`baseLabelStyle], 
+            Style[
+             TraditionalForm[{
+               Limit[
+                $CellContext`tPrimeExpr[$CellContext`kappa], \
+$CellContext`kappa -> 0], 
+               Limit[
+                $CellContext`xPrimeExpr[$CellContext`kappa], \
+$CellContext`kappa -> 0]}], FontFamily -> "Helvetica", FontSize -> 14, 
+             $CellContext`colors["Text"]]}}, Alignment -> Left, 
+          Spacings -> {1., 0.9}], 
+         Background -> $CellContext`branchFill[$CellContext`k], FrameStyle -> 
+         Directive[
+           $CellContext`branchColor[$CellContext`k], 
+           AbsoluteThickness[2]], RoundingRadius -> 10, 
+         FrameMargins -> {{14, 14}, {10, 10}}, 
+         ImageSize -> {430, Automatic}], $CellContext`cardTitleStyle[
+         Pattern[$CellContext`color, 
+          Blank[]]] := 
+       Directive[$CellContext`color, FontFamily -> "Helvetica", FontSize -> 
+         18, Bold], $CellContext`branchColor[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Which[$CellContext`k < 0, 
+         $CellContext`colors["Euclidean"], $CellContext`k == 0, 
+         $CellContext`colors["Galilean"], True, 
+         $CellContext`colors["Lorentz"]], $CellContext`colors = <|
+        "Background" -> 
+         RGBColor[0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+          "Card" -> RGBColor[1., 0.9921568627450981, 0.9764705882352941], 
+         "Text" -> RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`], 
+         "Slate" -> RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+         "Lorentz" -> 
+         RGBColor[0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+          "Galilean" -> 
+         RGBColor[
+          0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+         "Euclidean" -> 
+         RGBColor[
+          0.7215686274509804, 0.41568627450980394`, 0.1803921568627451], 
+         "SoftLorentz" -> 
+         RGBColor[0.9098039215686274, 0.9411764705882353, 1.], "SoftGalilean" -> 
+         RGBColor[0.8941176470588236, 0.9529411764705882, 0.9372549019607843],
+          "SoftEuclidean" -> 
+         RGBColor[0.9725490196078431, 0.9254901960784314, 0.8666666666666667],
+          "SoftSlate" -> 
+         RGBColor[
+          0.9294117647058824, 0.9411764705882353, 
+           0.9568627450980393]|>, $CellContext`baseLabelStyle = Directive[
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`], 
+         FontFamily -> "Helvetica", FontSize -> 13], $CellContext`branchName[
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Piecewise[{{"Euclidean branch", $CellContext`k < 0}, {
+          "Galilean branch", $CellContext`k == 0}, {
+          "Lorentzian branch", $CellContext`k > 0}}], $CellContext`gammaExpr[
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       1/Sqrt[1 - $CellContext`k $CellContext`v^2], $CellContext`tPrimeExpr[
+         Pattern[$CellContext`k, 
+          
+          Blank[]]] := $CellContext`gammaExpr[$CellContext`k] ($CellContext`t - \
+$CellContext`k $CellContext`v $CellContext`x), $CellContext`xPrimeExpr[
+         Pattern[$CellContext`k, 
+          
+          Blank[]]] := $CellContext`gammaExpr[$CellContext`k] ($CellContext`x - \
+$CellContext`v $CellContext`t), $CellContext`branchFill[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Which[$CellContext`k < 0, 
+         $CellContext`colors["SoftEuclidean"], $CellContext`k == 0, 
+         $CellContext`colors["SoftGalilean"], True, 
+         $CellContext`colors["SoftLorentz"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",ExpressionUUID->"723346d9-2e94-\
+457f-a05e-d5ca48d25842"]
+}, Open  ]],
+
+Cell["The transformation law and the Galilean limit", "Section",ExpressionUUID->"baf866c1-d91c-4e6b-9491-86d342246cf7"],
+
+Cell["\<\
+These are the same formulas stated in the paper: gamma controls the boost \
+family, time-space mixing is scaled by kappa, and the Galilean case appears \
+as the exact kappa -> 0 limit.\
+\>", "Text",ExpressionUUID->"2f700287-51dc-4272-a5d9-cdd1082669a5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FractionBox["1", 
+  SqrtBox[
+   RowBox[{"1", "-", 
+    RowBox[{"kappa", " ", 
+     SuperscriptBox["v", "2"]}]}]]]], "Input",ExpressionUUID->"64e7dfea-effa-\
+443b-b76e-96ec3bae0605"],
+
+Cell[BoxData[
+ FractionBox["1", 
+  SqrtBox[
+   RowBox[{"1", "-", 
+    RowBox[{"kappa", " ", 
+     SuperscriptBox["v", "2"]}]}]]]], "Output",ExpressionUUID->"b581b349-8da4-\
+42f1-9275-23be384d79b9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"t", "-", 
+   RowBox[{"kappa", " ", "v", " ", "x"}]}], 
+  SqrtBox[
+   RowBox[{"1", "-", 
+    RowBox[{"kappa", " ", 
+     SuperscriptBox["v", "2"]}]}]]]], "Input",ExpressionUUID->"a3c6f6a3-ee12-\
+4cd6-a4c8-56b2a3bdc6c8"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"t", "-", 
+   RowBox[{"kappa", " ", "v", " ", "x"}]}], 
+  SqrtBox[
+   RowBox[{"1", "-", 
+    RowBox[{"kappa", " ", 
+     SuperscriptBox["v", "2"]}]}]]]], "Output",ExpressionUUID->"649a6508-b1bd-\
+4244-ae93-12f8568382f5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "t"}], " ", "v"}], "+", "x"}], 
+  SqrtBox[
+   RowBox[{"1", "-", 
+    RowBox[{"kappa", " ", 
+     SuperscriptBox["v", "2"]}]}]]]], "Input",ExpressionUUID->"c65d0740-79ac-\
+4a6f-8130-d930997c591a"],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "t"}], " ", "v"}], "+", "x"}], 
+  SqrtBox[
+   RowBox[{"1", "-", 
+    RowBox[{"kappa", " ", 
+     SuperscriptBox["v", "2"]}]}]]]], "Output",ExpressionUUID->"b5980d5c-5d9e-\
+46a0-a4b0-7be9b5e2b75c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["1"], "Input",ExpressionUUID->"49e7ba75-5fe4-4940-8a0a-527e8fa10502"],
+
+Cell[BoxData["1"], "Output",ExpressionUUID->"81c8dabe-282c-4005-89c4-c4cbada5944e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"t", ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "t"}], " ", "v"}], "+", "x"}]}], "}"}]], "Input",ExpressionU\
+UID->"79f6df5c-2c88-44e4-a55e-12b8b559a152"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"t", ",", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "t"}], " ", "v"}], "+", "x"}]}], "}"}]], "Output",Expression\
+UUID->"a245a807-343b-4e3c-8f1a-98e59c3e2a32"]
+}, Open  ]],
+
+Cell["The kinematic bracket family", "Section",ExpressionUUID->"6f562701-572a-445a-a2c5-95af50b57795"],
+
+Cell["\<\
+The bracket table below matches the local Lean conventions: rotations close \
+among themselves, rotations send boosts to boosts, and the boost commutator \
+scales as -kappa times a rotation.\
+\>", "Text",ExpressionUUID->"eb4622a5-e7ac-4cad-8289-329eba1257de"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Bracket\"\>", "\<\"Exact local formula\"\>"},
+    {"\<\"[J_i, J_j]\"\>", "\<\"Sum_k epsilon_ijk J_k\"\>"},
+    {"\<\"[J_i, K_j]\"\>", "\<\"Sum_k epsilon_ijk K_k\"\>"},
+    {"\<\"[K_i, K_j]\"\>", "\<\"Sum_k (-(kappa) epsilon_ijk) J_k\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.9294117647058824, 0.9411764705882353, 0.9568627450980393], 
+       GrayLevel[1], 
+       GrayLevel[1], 
+       GrayLevel[1]}},
+   GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxItemStyle->{"Columns" -> {{
+        Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}}, 
+     "Rows" -> {{
+        Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.9}}}],
+  "Grid"]], "Output",ExpressionUUID->"9e48798b-dca3-4f27-8f66-79bb5bee38bf"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "kappa"}]}], "}"}]}], "}"}]], "Input",ExpressionUUID->\
+"01430489-be3d-4708-aa18-e8bc0cc84388"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "kappa"}]}], "}"}]}], "}"}]], "Output",ExpressionUUID->\
+"c3f5cc33-d464-4d05-8b9c-6d890f8a89f6"]
+}, Open  ]],
+
+Cell["\<\
+That boost block scaling is the local computational shadow of \
+`boostCommutator_scales_with_kappa` in `OnePostulate/KinematicAlgebra.lean`.\
+\>", "Text",ExpressionUUID->"4c81627a-10e5-418b-9886-50485fa02ad0"],
+
+Cell["Computing the Killing form", "Section",ExpressionUUID->"2e953db0-a25e-4052-80df-af643c2fc5d9"],
+
+Cell["\<\
+The decisive invariant is computed before any geometry is interpreted. In the \
+local Lean development this is `killing_form_diag` and \
+`boost_killing_form_eq`.\
+\>", "Text",ExpressionUUID->"43119ec9-616e-4b84-8f2e-57a4e3e83d2d"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Computing the Killing form\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             
+             StyleBox["\<\"The decisive invariant appears as a 6 x 6 block \
+diagonal matrix.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              RowBox[{"(", "\[NoBreak]", GridBox[{
+                 {
+                  RowBox[{"-", "4"}], "0", "0", "0", "0", "0"},
+                 {"0", 
+                  RowBox[{"-", "4"}], "0", "0", "0", "0"},
+                 {"0", "0", 
+                  RowBox[{"-", "4"}], "0", "0", "0"},
+                 {"0", "0", "0", 
+                  RowBox[{"4", " ", "kappa"}], "0", "0"},
+                 {"0", "0", "0", "0", 
+                  RowBox[{"4", " ", "kappa"}], "0"},
+                 {"0", "0", "0", "0", "0", 
+                  RowBox[{"4", " ", "kappa"}]}
+                },
+                
+                GridBoxAlignment->{
+                 "Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+                GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.7]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.4]}, 
+                    Offset[0.2]}}], "\[NoBreak]", ")"}],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->16,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             
+             StyleBox["\<\"Rotation block stays fixed at -4 I3 while the \
+boost block scales with kappa.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.7}}}],
+          "Column"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{18, 18}, {16, 16}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{340, 220},
+         RoundingRadius->12,
+         StripOnInput->False], {2.15, 2.2}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"rotation block\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              FrontFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              BackFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              GraphicsColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]},
+            {
+             StyleBox["\<\"-4 I3\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->28,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox["\<\"Always nonzero\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Center}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.45}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.9294117647058824, 0.9411764705882353, 0.9568627450980393],
+         FrameMargins->{{16, 16}, {16, 16}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{200, 180},
+         RoundingRadius->12,
+         StripOnInput->False], {5.05, 2.75}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"boost block\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              FrontFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              BackFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              GraphicsColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+            {
+             StyleBox["\<\"4 kappa I3\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->28,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             
+             StyleBox["\<\"This is the sign-changing pivot of the whole \
+story.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Center}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.45}}}],
+          
+          "Column"],
+         Background->RGBColor[0.9098039215686274, 0.9411764705882353, 1.],
+         FrameMargins->{{16, 16}, {16, 16}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+           AbsoluteThickness[2]],
+         ImageSize->{220, 180},
+         RoundingRadius->12,
+         StripOnInput->False], {7.45, 2.75}], 
+       {RGBColor[0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+        AbsoluteThickness[2.4], Arrowheads[0.035], 
+        ArrowBox[{{3.95, 2.55}, {4.55, 2.7}}], 
+        ArrowBox[{{6.1, 2.7}, {6.6, 2.7}}]}, InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {"\<\"kappa < 0\"\>", "\<\"negative boost block\"\>", \
+"\<\"compact / Euclidean verdict\"\>"},
+            {"\<\"kappa = 0\"\>", "\<\"zero boost block\"\>", "\<\"degenerate \
+Galilean verdict\"\>"},
+            {"\<\"kappa > 0\"\>", "\<\"positive boost block\"\>", \
+"\<\"Lorentzian verdict\"\>"}
+           },
+           AutoDelete->False,
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+               RGBColor[
+               0.9725490196078431, 0.9254901960784314, 0.8666666666666667], 
+               RGBColor[
+               0.8941176470588236, 0.9529411764705882, 0.9372549019607843], 
+               RGBColor[0.9098039215686274, 0.9411764705882353, 1.]}},
+           GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxItemStyle->{"Columns" -> {{
+                Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+                 RGBColor[
+                 0.13333333333333333`, 0.1450980392156863, 
+                  0.16862745098039217`]]}}, "Rows" -> {{
+                Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+                 RGBColor[
+                 0.13333333333333333`, 0.1450980392156863, 
+                  0.16862745098039217`]]}}, "ItemsIndexed" -> {
+               Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+                RGBColor[
+                0.13333333333333333`, 0.1450980392156863, 
+                 0.16862745098039217`]]}},
+           GridBoxSpacings->{"Columns" -> {{1.1}}, "Rows" -> {{0.9}}}],
+          "Grid"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{12, 12}, {10, 10}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{520, Automatic},
+         RoundingRadius->10,
+         StripOnInput->False], {5.95, 0.58}]},
+      Background->RGBColor[
+       0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+      ImageSize->980,
+      PlotRange->{{0.2, 8.6}, {-0.4, 3.8}}]},
+    {
+     StyleBox["\<\"Killing-form preview. The rotation block never vanishes; \
+the boost block is exactly where kappa enters.\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FrontFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      BackFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      GraphicsColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FontFamily->"Helvetica",
+      FontSize->11,
+      FontColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+  "Column"]], "Output",ExpressionUUID->"4640d012-410e-4a64-8d5f-18afadcdd335"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "4"}], ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "4"}], ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "4"}], ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}]}], "}"}]}], "}"}]], "Input",ExpressionUUID->\
+"b2906c10-d811-468e-bfa9-5fa62b973457"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "4"}], ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "4"}], ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "4"}], ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}]}], "}"}]}], "}"}]], "Output",ExpressionUUID->\
+"fdd35d83-808f-4094-a087-0b4f5ec8ee9e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "4096"}], " ", 
+  SuperscriptBox["kappa", "3"]}]], "Input",ExpressionUUID->"d79e745c-345b-\
+4a8d-9415-749b55854b72"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "4096"}], " ", 
+  SuperscriptBox["kappa", "3"]}]], "Output",ExpressionUUID->"6e327453-d427-\
+4e6e-8a19-37e535f9b93d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "4"}], ",", 
+   RowBox[{"-", "4"}], ",", 
+   RowBox[{"-", "4"}], ",", 
+   RowBox[{"4", " ", "kappa"}], ",", 
+   RowBox[{"4", " ", "kappa"}], ",", 
+   RowBox[{"4", " ", "kappa"}]}], "}"}]], "Input",ExpressionUUID->"7eec89cd-\
+bebc-4029-a5c9-91a5b0cbf785"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"-", "4"}], ",", 
+   RowBox[{"-", "4"}], ",", 
+   RowBox[{"-", "4"}], ",", 
+   RowBox[{"4", " ", "kappa"}], ",", 
+   RowBox[{"4", " ", "kappa"}], ",", 
+   RowBox[{"4", " ", "kappa"}]}], "}"}]], "Output",ExpressionUUID->"ed4cedb7-\
+05b0-4c28-9db6-ca6a4e42a6c2"]
+}, Open  ]],
+
+Cell["Why the Killing form decides the geometry", "Section",ExpressionUUID->"41bb35e6-4a03-42ac-984a-b2042ba49ff2"],
+
+Cell["\<\
+Once the Killing form is diagonalized, the sign and degeneracy of the boost \
+block become a structural test. At kappa = 0 the form goes blind on boosts; \
+away from zero it sees them.\
+\>", "Text",ExpressionUUID->"d786f0f1-a4e7-4724-a34d-505dd010ada3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FrameBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\<\"Boost block focus\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+       FrontFaceColor->RGBColor[
+        0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+       BackFaceColor->RGBColor[
+        0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+       GraphicsColor->RGBColor[
+        0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+       FontFamily->"Helvetica",
+       FontSize->18,
+       FontWeight->Bold,
+       FontColor->RGBColor[
+        0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`]]},
+     {
+      TagBox[GridBox[{
+         {"\<\"Boost block\"\>", 
+          TagBox[
+           FormBox[
+            RowBox[{"(", "\[NoBreak]", GridBox[{
+               {"0", "0", "0"},
+               {"0", "0", "0"},
+               {"0", "0", "0"}
+              },
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.7]}, 
+                  Offset[0.27999999999999997`]}, "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.4]}, 
+                  Offset[0.2]}}], "\[NoBreak]", ")"}],
+            TraditionalForm],
+           TraditionalForm,
+           Editable->True]},
+         {"\<\"Determinant of full Killing form\"\>", 
+          TagBox[
+           FormBox["0",
+            TraditionalForm],
+           TraditionalForm,
+           Editable->True]},
+         {"\<\"Nondegenerate?\"\>", "\<\"No: the boost block vanishes.\"\>"}
+        },
+        AutoDelete->False,
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, True, True, False}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxItemStyle->{"Columns" -> {{
+             Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+              RGBColor[
+              0.13333333333333333`, 0.1450980392156863, 
+               0.16862745098039217`]]}}, "Rows" -> {{
+             Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+              RGBColor[
+              0.13333333333333333`, 0.1450980392156863, 
+               0.16862745098039217`]]}}},
+        GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.8}}}],
+       "Grid"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.75}}}],
+   "Column"],
+  Background->RGBColor[
+   0.8941176470588236, 0.9529411764705882, 0.9372549019607843],
+  FrameMargins->{{14, 14}, {12, 12}},
+  FrameStyle->Directive[
+    RGBColor[0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+    
+    AbsoluteThickness[2]],
+  ImageSize->{470, Automatic},
+  RoundingRadius->10,
+  StripOnInput->False]], "Output",ExpressionUUID->"da70bc93-7081-402e-a256-\
+aa3a2bc55134"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k$$], 0, "kappa"}, {-1, 
+       Rational[-1, 2], 0, 
+       Rational[1, 2], 1}, ControlType -> SetterBar}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, Typeset`keyframeActionsQ$$ = False, 
+    Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`k$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> $CellContext`killingInteractivePanel[$CellContext`k$$], 
+      "Specifications" :> {{{$CellContext`k$$, 0, "kappa"}, {-1, 
+          Rational[-1, 2], 0, 
+          Rational[1, 2], 1}}}, "Options" :> {ControlType -> SetterBar}, 
+      "DefaultOptions" :> {}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`killingInteractivePanel[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Framed[
+         Column[{
+           Style["Boost block focus", 
+            $CellContext`cardTitleStyle[
+             $CellContext`branchColor[$CellContext`k]]], 
+           Grid[{{"Boost block", 
+              TraditionalForm[
+               $CellContext`boostBlockExpr[$CellContext`k]]}, {
+             "Determinant of full Killing form", 
+              TraditionalForm[
+               Factor[
+                Det[
+                 $CellContext`killingFormMatrixExpr[$CellContext`k]]]]}, {
+             "Nondegenerate?", 
+              
+              If[$CellContext`k === 0, "No: the boost block vanishes.", 
+               "Yes: kappa != 0 keeps the boost block visible."]}}, Alignment -> 
+            Left, Dividers -> {None, {False, True, True, False}}, ItemStyle -> {
+              Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+               $CellContext`colors["Text"]], 
+              Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+               $CellContext`colors["Text"]]}, Spacings -> {1., 0.8}]}, 
+          Spacings -> 0.75], 
+         Background -> $CellContext`branchFill[$CellContext`k], FrameStyle -> 
+         Directive[
+           $CellContext`branchColor[$CellContext`k], 
+           AbsoluteThickness[2]], RoundingRadius -> 10, 
+         FrameMargins -> {{14, 14}, {12, 12}}, 
+         ImageSize -> {470, Automatic}], $CellContext`cardTitleStyle[
+         Pattern[$CellContext`color, 
+          Blank[]]] := 
+       Directive[$CellContext`color, FontFamily -> "Helvetica", FontSize -> 
+         18, Bold], $CellContext`branchColor[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Which[$CellContext`k < 0, 
+         $CellContext`colors["Euclidean"], $CellContext`k == 0, 
+         $CellContext`colors["Galilean"], True, 
+         $CellContext`colors["Lorentz"]], $CellContext`colors = <|
+        "Background" -> 
+         RGBColor[0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+          "Card" -> RGBColor[1., 0.9921568627450981, 0.9764705882352941], 
+         "Text" -> RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`], 
+         "Slate" -> RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+         "Lorentz" -> 
+         RGBColor[0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+          "Galilean" -> 
+         RGBColor[
+          0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+         "Euclidean" -> 
+         RGBColor[
+          0.7215686274509804, 0.41568627450980394`, 0.1803921568627451], 
+         "SoftLorentz" -> 
+         RGBColor[0.9098039215686274, 0.9411764705882353, 1.], "SoftGalilean" -> 
+         RGBColor[0.8941176470588236, 0.9529411764705882, 0.9372549019607843],
+          "SoftEuclidean" -> 
+         RGBColor[0.9725490196078431, 0.9254901960784314, 0.8666666666666667],
+          "SoftSlate" -> 
+         RGBColor[
+          0.9294117647058824, 0.9411764705882353, 
+           0.9568627450980393]|>, $CellContext`boostBlockExpr[
+         Pattern[$CellContext`k, 
+          Blank[]]] := DiagonalMatrix[
+         ConstantArray[
+         4 $CellContext`k, 3]], $CellContext`killingFormMatrixExpr[
+         Pattern[$CellContext`k, 
+          Blank[]]] := DiagonalMatrix[
+         Join[
+          ConstantArray[-4, 3], 
+          ConstantArray[4 $CellContext`k, 3]]], $CellContext`branchFill[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Which[$CellContext`k < 0, 
+         $CellContext`colors["SoftEuclidean"], $CellContext`k == 0, 
+         $CellContext`colors["SoftGalilean"], True, 
+         $CellContext`colors["SoftLorentz"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",ExpressionUUID->"ea61e784-cc16-\
+41d7-beed-04b2d999a577"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"4", " ", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}]}], "}"}]}], "}"}]], "Input",ExpressionUUID->\
+"80e47f71-2152-4142-a05b-987447ec1dd5"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"4", " ", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}]}], "}"}]}], "}"}]], "Output",ExpressionUUID->\
+"c8fb820d-132b-40ef-9be4-0ac09cb7b6dc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"64", " ", 
+  SuperscriptBox["kappa", "3"]}]], "Input",ExpressionUUID->"46ed93f5-ea29-4c51-8982-fefac3ad576d"],
+
+Cell[BoxData[
+ RowBox[{"64", " ", 
+  SuperscriptBox["kappa", "3"]}]], "Output",ExpressionUUID->"95ab7550-dad5-465c-b008-d73b5f41d485"]
+}, Open  ]],
+
+Cell["Velocity-space and spacetime consequences", "Section",ExpressionUUID->"515454da-457c-44ac-9b2a-bc506cc7d199"],
+
+Cell["\<\
+The same kappa that scales the boost block fixes the velocity metric and the \
+spacetime metric. Positive kappa gives a real invariant speed; zero kappa \
+loses the canonical scale; negative kappa removes Lorentzian causal structure.\
+\>", "Text",ExpressionUUID->"c1c41891-e140-4034-8580-877eac567fbc"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     GraphicsBox[{InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Spacetime metric consequences\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox[
+              TemplateBox[{"\"g = \"", 
+                RowBox[{"(", "\[NoBreak]", 
+                  GridBox[{{"1", "0", "0", "0"}, {"0", 
+                    RowBox[{"-", "kappa"}], "0", "0"}, {"0", "0", 
+                    RowBox[{"-", "kappa"}], "0"}, {"0", "0", "0", 
+                    RowBox[{"-", "kappa"}]}}, RowSpacings -> 1, 
+                   ColumnSpacings -> 1, RowAlignments -> Baseline, 
+                   ColumnAlignments -> Center], "\[NoBreak]", ")"}]},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->16,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             
+             StyleBox["\<\"The same parameter that scales the boost block \
+also controls the invariant quadratic form.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.65}}}],
+          
+          "Column"],
+         Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+         FrameMargins->{{18, 18}, {16, 16}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+           AbsoluteThickness[2]],
+         ImageSize->{360, 200},
+         RoundingRadius->12,
+         StripOnInput->False], {2.45, 2.65}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Euclidean\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              FrontFaceColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              BackFaceColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              
+              GraphicsColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.7215686274509804, 0.41568627450980394`, 0.1803921568627451]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"diag(1, \"", 
+                "\"\\!\\(\\*FormBox[FractionBox[\\\"1\\\", \\\"2\\\"], \
+TraditionalForm]\\)\"", "\", \"", 
+                "\"\\!\\(\\*FormBox[FractionBox[\\\"1\\\", \\\"2\\\"], \
+TraditionalForm]\\)\"", "\", \"", 
+                "\"\\!\\(\\*FormBox[FractionBox[\\\"1\\\", \\\"2\\\"], \
+TraditionalForm]\\)\"", "\")\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox["\<\"No null directions survive.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              FrontFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              BackFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              GraphicsColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.45}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.9610196078431372, 0.9181960784313725, 0.8852549019607843],
+         FrameMargins->{{14, 14}, {10, 10}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.7215686274509804, 0.41568627450980394`, 0.1803921568627451], 
+           AbsoluteThickness[2]],
+         ImageSize->{210, Automatic},
+         RoundingRadius->10,
+         StripOnInput->False], {5.65, 3.05}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Galilean\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              FrontFaceColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              BackFaceColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              
+              GraphicsColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1803921568627451, 0.49019607843137253`, 
+                0.42745098039215684`]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"diag(1, \"", "\"0\"", "\", \"", "\"0\"", "\", \"", "\"0\"", 
+                "\")\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox["\<\"Only dt^2 remains canonical.\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              FrontFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              BackFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              GraphicsColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.45}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.8852549019607843, 0.9286274509803921, 0.9198431372549019],
+         FrameMargins->{{14, 14}, {10, 10}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+           AbsoluteThickness[2]],
+         ImageSize->{210, Automatic},
+         RoundingRadius->10,
+         StripOnInput->False], {5.65, 1.9}], InsetBox[
+        FrameBox[
+         TagBox[GridBox[{
+            {
+             StyleBox["\<\"Lorentzian\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              FrontFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              BackFaceColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              
+              GraphicsColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+              FontFamily->"Helvetica",
+              FontSize->18,
+              FontWeight->Bold,
+              
+              FontColor->RGBColor[
+               0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+            {
+             StyleBox[
+              
+              TemplateBox[{
+               "\"diag(1, \"", 
+                "\"\\!\\(\\*FormBox[RowBox[{\\\"-\\\", FractionBox[\\\"1\\\", \
+\\\"2\\\"]}], TraditionalForm]\\)\"", "\", \"", 
+                "\"\\!\\(\\*FormBox[RowBox[{\\\"-\\\", FractionBox[\\\"1\\\", \
+\\\"2\\\"]}], TraditionalForm]\\)\"", "\", \"", 
+                "\"\\!\\(\\*FormBox[RowBox[{\\\"-\\\", FractionBox[\\\"1\\\", \
+\\\"2\\\"]}], TraditionalForm]\\)\"", "\")\""},
+               "RowDefault"],
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              FrontFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              BackFaceColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              
+              GraphicsColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+              FontFamily->"Helvetica",
+              FontSize->13,
+              
+              FontColor->RGBColor[
+               0.13333333333333333`, 0.1450980392156863, 
+                0.16862745098039217`]]},
+            {
+             StyleBox["\<\"Congruent to diag(1,-1,-1,-1).\"\>",
+              StripOnInput->False,
+              
+              LineColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              FrontFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              BackFaceColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              
+              GraphicsColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+              FontFamily->"Helvetica",
+              FontSize->11,
+              
+              FontColor->RGBColor[
+               0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+           },
+           DefaultBaseStyle->"Column",
+           GridBoxAlignment->{"Columns" -> {{Left}}},
+           
+           GridBoxItemSize->{
+            "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+           GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.45}}}],
+          
+          "Column"],
+         Background->RGBColor[
+          0.879764705882353, 0.9077647058823529, 0.9511372549019608],
+         FrameMargins->{{14, 14}, {10, 10}},
+         FrameStyle->Directive[
+           RGBColor[
+           0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+           AbsoluteThickness[2]],
+         ImageSize->{210, Automatic},
+         RoundingRadius->10,
+         StripOnInput->False], {5.65, 0.75}], 
+       {RGBColor[0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+        AbsoluteThickness[2.2], Arrowheads[0.03], 
+        ArrowBox[{{3.95, 2.6}, {4.55, 3.}}], 
+        ArrowBox[{{3.95, 2.35}, {4.55, 1.9}}], 
+        ArrowBox[{{3.95, 2.1}, {4.55, 0.8}}]}},
+      Background->RGBColor[
+       0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+      ImageSize->980,
+      PlotRange->{{0.2, 8.4}, {0., 4.}}]},
+    {
+     StyleBox["\<\"Spacetime consequence preview. The invariant form is \
+`diag(1,-kappa,-kappa,-kappa)`, with distinct geometric readings in the three \
+regimes.\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FrontFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      BackFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      GraphicsColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FontFamily->"Helvetica",
+      FontSize->11,
+      FontColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+  "Column"]], "Output",ExpressionUUID->"5da4527f-e9b8-43ee-93a3-efc29630fd8c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"4", " ", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}]}], "}"}]}], "}"}]], "Input",ExpressionUUID->\
+"898ebfba-5827-446e-bef9-980c9195ec88"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"4", " ", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"4", " ", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"4", " ", "kappa"}]}], "}"}]}], "}"}]], "Output",ExpressionUUID->\
+"7e6512b6-b7ad-43a9-bf74-bd748dc9950b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FractionBox["1", "kappa"]], "Input",ExpressionUUID->"d1bd96c3-bb81-4928-991b-5cfa1c2b1374"],
+
+Cell[BoxData[
+ FractionBox["1", "kappa"]], "Output",ExpressionUUID->"5055ff48-4964-423d-bf0d-53124e0fa07c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", 
+     RowBox[{"-", "kappa"}]}], "}"}]}], "}"}]], "Input",ExpressionUUID->\
+"7a11e880-9203-44a6-9a1b-8d13007c98d6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "kappa"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "kappa"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", 
+     RowBox[{"-", "kappa"}]}], "}"}]}], "}"}]], "Output",ExpressionUUID->\
+"5de56fc5-0bda-4964-b0e5-64a128f3f289"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "1"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", 
+     RowBox[{"-", "1"}]}], "}"}]}], "}"}]], "Input",ExpressionUUID->"b13f7abd-\
+2df1-4f79-994c-1c622a867ecc"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", 
+     RowBox[{"-", "1"}], ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", 
+     RowBox[{"-", "1"}]}], "}"}]}], "}"}]], "Output",ExpressionUUID->\
+"35685603-d90a-4413-a452-8963f1f3cf2e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ FrameBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\<\"Spacetime and velocity consequences\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       FrontFaceColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       BackFaceColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       GraphicsColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+       FontFamily->"Helvetica",
+       FontSize->18,
+       FontWeight->Bold,
+       FontColor->RGBColor[
+        0.1411764705882353, 0.3411764705882353, 0.6509803921568628]]},
+     {
+      TagBox[GridBox[{
+         {"\<\"Metric\"\>", 
+          TagBox[
+           FormBox[
+            RowBox[{"(", "\[NoBreak]", GridBox[{
+               {"1", "0", "0", "0"},
+               {"0", 
+                RowBox[{"-", 
+                 FractionBox["1", "2"]}], "0", "0"},
+               {"0", "0", 
+                RowBox[{"-", 
+                 FractionBox["1", "2"]}], "0"},
+               {"0", "0", "0", 
+                RowBox[{"-", 
+                 FractionBox["1", "2"]}]}
+              },
+              
+              GridBoxAlignment->{
+               "Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+              GridBoxSpacings->{"Columns" -> {
+                  Offset[0.27999999999999997`], {
+                   Offset[0.7]}, 
+                  Offset[0.27999999999999997`]}, "Rows" -> {
+                  Offset[0.2], {
+                   Offset[0.4]}, 
+                  Offset[0.2]}}], "\[NoBreak]", ")"}],
+            TraditionalForm],
+           TraditionalForm,
+           Editable->True]},
+         {"\<\"Invariant speed squared\"\>", 
+          TagBox[
+           FormBox["2",
+            TraditionalForm],
+           TraditionalForm,
+           Editable->True]},
+         {"\<\"Interpretation\"\>", "\<\"1/Sqrt[kappa] is finite and real, \
+giving a shared invariant speed.\"\>"},
+         {"\<\"Geometry\"\>", "\<\"Rescaling space by 1/Sqrt[kappa] yields \
+diag(1,-1,-1,-1).\"\>"}
+        },
+        AutoDelete->False,
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, True, True, True, False}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxItemStyle->{"Columns" -> {{
+             Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+              RGBColor[
+              0.13333333333333333`, 0.1450980392156863, 
+               0.16862745098039217`]]}}, "Rows" -> {{
+             Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+              RGBColor[
+              0.13333333333333333`, 0.1450980392156863, 
+               0.16862745098039217`]]}}},
+        GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.8}}}],
+       "Grid"]}
+    },
+    DefaultBaseStyle->"Column",
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+    GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.7}}}],
+   "Column"],
+  Background->RGBColor[0.9098039215686274, 0.9411764705882353, 1.],
+  FrameMargins->{{14, 14}, {12, 12}},
+  FrameStyle->Directive[
+    RGBColor[0.1411764705882353, 0.3411764705882353, 0.6509803921568628], 
+    AbsoluteThickness[2]],
+  ImageSize->{500, Automatic},
+  RoundingRadius->10,
+  StripOnInput->False]], "Output",ExpressionUUID->"6f9a3627-4de1-4f1c-a243-\
+a005a60de813"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = Rational[1, 2], Typeset`show$$ = True,
+     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`k$$], 
+       Rational[1, 2], "kappa"}, {-1, 
+       Rational[-1, 2], 0, 
+       Rational[1, 2], 1}, ControlType -> SetterBar}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, Typeset`keyframeActionsQ$$ = False, 
+    Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`k$$ = Rational[1, 2]}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> $CellContext`spacetimeInteractivePanel[$CellContext`k$$], 
+      "Specifications" :> {{{$CellContext`k$$, 
+          Rational[1, 2], "kappa"}, {-1, 
+          Rational[-1, 2], 0, 
+          Rational[1, 2], 1}}}, "Options" :> {ControlType -> SetterBar}, 
+      "DefaultOptions" :> {}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`spacetimeInteractivePanel[
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Module[{$CellContext`speedText = 
+          Which[$CellContext`k < 0, 
+            "1/Sqrt[kappa] is imaginary, so no real invariant speed \
+appears.", $CellContext`k == 0, 
+            "1/kappa is undefined at kappa = 0, matching the missing \
+velocity-scale ruler.", True, 
+            "1/Sqrt[kappa] is finite and real, giving a shared invariant \
+speed."], $CellContext`congruenceText = 
+          Which[$CellContext`k < 0, 
+            "The metric is positive on every nonzero direction once kappa is \
+negative.", $CellContext`k == 0, 
+            "The spatial part disappears from the canonical invariant form.", 
+            True, "Rescaling space by 1/Sqrt[kappa] yields \
+diag(1,-1,-1,-1)."]}, 
+         Framed[
+          Column[{
+            Style["Spacetime and velocity consequences", 
+             $CellContext`cardTitleStyle[
+              $CellContext`branchColor[$CellContext`k]]], 
+            Grid[{{"Metric", 
+               TraditionalForm[
+                $CellContext`spacetimeMetricExpr[$CellContext`k]]}, {
+              "Invariant speed squared", 
+               Which[$CellContext`k == 0, "undefined at kappa = 0", True, 
+                TraditionalForm[
+                 $CellContext`invariantSpeedSquaredExpr[$CellContext`k]]]}, {
+              "Interpretation", $CellContext`speedText}, {
+              "Geometry", $CellContext`congruenceText}}, Alignment -> Left, 
+             Dividers -> {None, {False, True, True, True, False}}, ItemStyle -> {
+               Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+                $CellContext`colors["Text"]], 
+               Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+                $CellContext`colors["Text"]]}, Spacings -> {1., 0.8}]}, 
+           Spacings -> 0.7], 
+          Background -> $CellContext`branchFill[$CellContext`k], FrameStyle -> 
+          Directive[
+            $CellContext`branchColor[$CellContext`k], 
+            AbsoluteThickness[2]], RoundingRadius -> 10, 
+          FrameMargins -> {{14, 14}, {12, 12}}, 
+          ImageSize -> {500, Automatic}]], $CellContext`cardTitleStyle[
+         Pattern[$CellContext`color, 
+          Blank[]]] := 
+       Directive[$CellContext`color, FontFamily -> "Helvetica", FontSize -> 
+         18, Bold], $CellContext`branchColor[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Which[$CellContext`k < 0, 
+         $CellContext`colors["Euclidean"], $CellContext`k == 0, 
+         $CellContext`colors["Galilean"], True, 
+         $CellContext`colors["Lorentz"]], $CellContext`colors = <|
+        "Background" -> 
+         RGBColor[0.9686274509803922, 0.9568627450980393, 0.9333333333333333],
+          "Card" -> RGBColor[1., 0.9921568627450981, 0.9764705882352941], 
+         "Text" -> RGBColor[
+          0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`], 
+         "Slate" -> RGBColor[
+          0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+         "Lorentz" -> 
+         RGBColor[0.1411764705882353, 0.3411764705882353, 0.6509803921568628],
+          "Galilean" -> 
+         RGBColor[
+          0.1803921568627451, 0.49019607843137253`, 0.42745098039215684`], 
+         "Euclidean" -> 
+         RGBColor[
+          0.7215686274509804, 0.41568627450980394`, 0.1803921568627451], 
+         "SoftLorentz" -> 
+         RGBColor[0.9098039215686274, 0.9411764705882353, 1.], "SoftGalilean" -> 
+         RGBColor[0.8941176470588236, 0.9529411764705882, 0.9372549019607843],
+          "SoftEuclidean" -> 
+         RGBColor[0.9725490196078431, 0.9254901960784314, 0.8666666666666667],
+          "SoftSlate" -> 
+         RGBColor[
+          0.9294117647058824, 0.9411764705882353, 
+           0.9568627450980393]|>, $CellContext`spacetimeMetricExpr[
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       DiagonalMatrix[{
+         1, -$CellContext`k, -$CellContext`k, -$CellContext`k}], \
+$CellContext`invariantSpeedSquaredExpr[
+         Pattern[$CellContext`k, 
+          Blank[]]] := 1/$CellContext`k, $CellContext`branchFill[
+         Pattern[$CellContext`k, 
+          Blank[]]] := Which[$CellContext`k < 0, 
+         $CellContext`colors["SoftEuclidean"], $CellContext`k == 0, 
+         $CellContext`colors["SoftGalilean"], True, 
+         $CellContext`colors["SoftLorentz"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",ExpressionUUID->"eecaca13-71eb-\
+4a26-8505-ebbf4532774b"]
+}, Open  ]],
+
+Cell["Three branches, three verdicts", "Section",ExpressionUUID->"75c38e88-a091-43ec-a9bb-60d6c43b91cd"],
+
+Cell["\<\
+The notebook keeps the interpretation compact: Euclidean when kappa is \
+negative, Galilean when the boost block vanishes, Lorentzian when kappa is \
+positive and spacetime is congruent to the standard Lorentz metric.\
+\>", "Text",ExpressionUUID->"1dd95cca-8643-4690-8940-6a1a85a102f1"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Regime\"\>", "\<\"Boost block\"\>", "\<\"Invariant speed\"\>", \
+"\<\"Spacetime consequence\"\>"},
+    {"\<\"kappa < 0\"\>", "\<\"4 kappa I3 is negative\"\>", "\<\"imaginary / \
+no real invariant speed\"\>", "\<\"Euclidean branch; no nonzero null \
+vectors\"\>"},
+    {"\<\"kappa = 0\"\>", "\<\"0\"\>", "\<\"undefined\"\>", "\<\"absolute \
+time survives; spacetime form degenerates\"\>"},
+    {"\<\"kappa > 0\"\>", "\<\"4 kappa I3 is positive\"\>", \
+"\<\"1/Sqrt[kappa] is finite and real\"\>", "\<\"Lorentzian branch; metric \
+congruent to diag(1,-1,-1,-1)\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.9294117647058824, 0.9411764705882353, 0.9568627450980393], 
+       RGBColor[0.9725490196078431, 0.9254901960784314, 0.8666666666666667], 
+       RGBColor[0.8941176470588236, 0.9529411764705882, 0.9372549019607843], 
+       RGBColor[0.9098039215686274, 0.9411764705882353, 1.]}},
+   GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxItemStyle->{"Columns" -> {{
+        Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}}, 
+     "Rows" -> {{
+        Directive[FontFamily -> "Helvetica", FontSize -> 12, 
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}}},
+   GridBoxSpacings->{"Columns" -> {{1.1}}, "Rows" -> {{0.9}}}],
+  "Grid"]], "Output",ExpressionUUID->"3fa60f45-aab6-4ee1-ae6e-1b41d3afc540"],
+
+Cell["How this connects to the Lean proof", "Section",ExpressionUUID->"517265a4-2860-4fa3-bbfc-36ab3a24b8a1"],
+
+Cell["\<\
+The crosswalk is intentionally concise. Wolfram computes exact expressions \
+and visuals; Lean remains the proof authority for bracket identities, \
+invariant forms, and branch-selection statements.\
+\>", "Text",ExpressionUUID->"d0f87087-52e6-40af-8b6b-3a12df099afc"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     FrameBox[
+      TagBox[GridBox[{
+         {
+          StyleBox["\<\"Notebook to Lean crosswalk\"\>",
+           StripOnInput->False,
+           
+           LineColor->RGBColor[
+            0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+           
+           FrontFaceColor->RGBColor[
+            0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+           
+           BackFaceColor->RGBColor[
+            0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+           
+           GraphicsColor->RGBColor[
+            0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`],
+           FontFamily->"Helvetica",
+           FontSize->18,
+           FontWeight->Bold,
+           
+           FontColor->RGBColor[
+            0.13333333333333333`, 0.1450980392156863, 
+             0.16862745098039217`]]},
+         {
+          TagBox[GridBox[{
+             {"\<\"Narrative stage\"\>", "\<\"Computed / visualized \
+here\"\>", "\<\"Lean anchors\"\>", "\<\"Source of authority\"\>"},
+             {"\<\"One parameter, three worlds\"\>", "\<\"Galilean limit and \
+branch visual\"\>", "\<\"OnePostulate/SpacetimeMatrices.lean; \
+OnePostulate/Selection.lean\"\>", "\<\"paper plus Lean\"\>"},
+             {"\<\"Kinematic bracket family\"\>", "\<\"commutator table and \
+boost block scaling\"\>", "\<\"matrix_bracket_JJ; matrix_bracket_JK; \
+matrix_bracket_KK; kinematic_bracket_table; boostCommutator_scales_with_kappa\
+\"\>", "\<\"Lean\"\>"},
+             {"\<\"Killing form pivot\"\>", "\<\"diag(-4 I3, 4 kappa I3), \
+determinant, eigenvalues\"\>", "\<\"killing_form_diag; boost_killing_form_eq; \
+boost_killing_nondegenerate_iff_kappa_ne_zero\"\>", "\<\"Lean\"\>"},
+             {"\<\"Velocity and spacetime consequences\"\>", "\<\"1/kappa, \
+spacetime metric, Lorentz congruence\"\>", "\<\"killing_restricts_to_metric; \
+invariantSpeedSquared_formula; spacetime_metric_eq_diagonal; \
+spacetime_metric_invariant; \
+spacetime_metric_congruent_stdLorentz_of_kappa_pos; phase1_selection_summary; \
+classification_derivation_complete\"\>", "\<\"Lean plus paper framing\"\>"}
+            },
+            AutoDelete->False,
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxBackground->{"Columns" -> {
+                RGBColor[
+                0.9294117647058824, 0.9411764705882353, 0.9568627450980393], 
+                None, None, None, None}, "Rows" -> {
+                RGBColor[
+                0.9294117647058824, 0.9411764705882353, 0.9568627450980393], 
+                RGBColor[0.9098039215686274, 0.9411764705882353, 1.], 
+                RGBColor[
+                0.8941176470588236, 0.9529411764705882, 0.9372549019607843], 
+                RGBColor[
+                0.9725490196078431, 0.9254901960784314, 0.8666666666666667], 
+                RGBColor[
+                0.9294117647058824, 0.9411764705882353, 0.9568627450980393]}},
+            
+            GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {14, 18, 28, 12}, "Rows" -> {{Automatic}}},
+            GridBoxItemStyle->{"Columns" -> {{
+                 Directive[FontFamily -> "Helvetica", FontSize -> 12, Bold, 
+                  RGBColor[
+                  0.13333333333333333`, 0.1450980392156863, 
+                   0.16862745098039217`]]}}, "Rows" -> {{
+                 Directive[FontFamily -> "Helvetica", FontSize -> 11, 
+                  RGBColor[
+                  0.13333333333333333`, 0.1450980392156863, 
+                   0.16862745098039217`]]}}},
+            GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.9}}}],
+           "Grid"]}
+        },
+        DefaultBaseStyle->"Column",
+        GridBoxAlignment->{"Columns" -> {{Left}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.8}}}],
+       "Column"],
+      Background->RGBColor[1., 0.9921568627450981, 0.9764705882352941],
+      FrameMargins->{{16, 16}, {16, 16}},
+      FrameStyle->Directive[
+        RGBColor[0.4196078431372549, 0.4588235294117647, 0.5176470588235295], 
+        
+        AbsoluteThickness[2]],
+      ImageSize->1100,
+      RoundingRadius->12,
+      StripOnInput->False]},
+    {
+     StyleBox["\<\"Crosswalk graphic. Each narrative stage names what is \
+computed or visualized here and the corresponding Lean anchors that formalize \
+it.\"\>",
+      StripOnInput->False,
+      LineColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FrontFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      BackFaceColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      GraphicsColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295],
+      FontFamily->"Helvetica",
+      FontSize->11,
+      FontColor->RGBColor[
+       0.4196078431372549, 0.4588235294117647, 0.5176470588235295]]}
+   },
+   DefaultBaseStyle->"Column",
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{Automatic}}, "Rows" -> {{0.5}}}],
+  "Column"]], "Output",ExpressionUUID->"65b836ae-5a57-4a79-b625-021c81852e7e"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Narrative stage\"\>", "\<\"Computed / visualized here\"\>", \
+"\<\"Lean anchors\"\>", "\<\"Source of authority\"\>"},
+    {"\<\"One parameter, three worlds\"\>", "\<\"Galilean limit and branch \
+visual\"\>", "\<\"OnePostulate/SpacetimeMatrices.lean; \
+OnePostulate/Selection.lean\"\>", "\<\"paper plus Lean\"\>"},
+    {"\<\"Kinematic bracket family\"\>", "\<\"commutator table and boost \
+block scaling\"\>", "\<\"matrix_bracket_JJ; matrix_bracket_JK; \
+matrix_bracket_KK; kinematic_bracket_table; boostCommutator_scales_with_kappa\
+\"\>", "\<\"Lean\"\>"},
+    {"\<\"Killing form pivot\"\>", "\<\"diag(-4 I3, 4 kappa I3), determinant, \
+eigenvalues\"\>", "\<\"killing_form_diag; boost_killing_form_eq; \
+boost_killing_nondegenerate_iff_kappa_ne_zero\"\>", "\<\"Lean\"\>"},
+    {"\<\"Velocity and spacetime consequences\"\>", "\<\"1/kappa, spacetime \
+metric, Lorentz congruence\"\>", "\<\"killing_restricts_to_metric; \
+invariantSpeedSquared_formula; spacetime_metric_eq_diagonal; \
+spacetime_metric_invariant; \
+spacetime_metric_congruent_stdLorentz_of_kappa_pos; phase1_selection_summary; \
+classification_derivation_complete\"\>", "\<\"Lean plus paper framing\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {
+       RGBColor[0.9294117647058824, 0.9411764705882353, 0.9568627450980393], 
+       None, None, None, None}, "Rows" -> {
+       RGBColor[0.9294117647058824, 0.9411764705882353, 0.9568627450980393], 
+       RGBColor[0.9098039215686274, 0.9411764705882353, 1.], 
+       RGBColor[0.8941176470588236, 0.9529411764705882, 0.9372549019607843], 
+       RGBColor[0.9725490196078431, 0.9254901960784314, 0.8666666666666667], 
+       RGBColor[0.9294117647058824, 0.9411764705882353, 0.9568627450980393]}},
+   
+   GridBoxDividers->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {14, 18, 28, 12}, "Rows" -> {{Automatic}}},
+   GridBoxItemStyle->{"Columns" -> {{
+        Directive[FontFamily -> "Helvetica", FontSize -> 11, 
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}}, 
+     "Rows" -> {{
+        Directive[FontFamily -> "Helvetica", FontSize -> 11, 
+         RGBColor[
+         0.13333333333333333`, 0.1450980392156863, 0.16862745098039217`]]}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.8}}}],
+  "Grid"]], "Output",ExpressionUUID->"ccc39292-f84a-4a49-bbf4-a41adc71c4c2"],
+
+Cell["What is computed here vs proved in Lean", "Section",ExpressionUUID->"57728de2-54d4-48c0-8a41-cd9175789b33"],
+
+Cell["Computed or visualized here", "Subsection",ExpressionUUID->"bdeb5821-c8e2-4983-a629-2c2e794d2fa2"],
+
+Cell["\<\
+Exact limits of the transformation law, the diagonal Killing form, \
+determinant and eigenvalue checks, the invariant speed formula 1/kappa, the \
+spacetime metric, and the Lorentz congruence calculation for positive kappa.\
+\>", "Text",ExpressionUUID->"e7476213-5763-4d46-bb63-b5d4ccd760c4"],
+
+Cell["Formally proved in Lean", "Subsection",ExpressionUUID->"7a27784b-9adf-4a74-9ff9-072e15dd7e2c"],
+
+Cell["\<\
+`matrix_bracket_JJ`, `matrix_bracket_JK`, `matrix_bracket_KK`, \
+`kinematic_bracket_table`, `kinematic_bracket_jacobi`, \
+`boostCommutator_scales_with_kappa`, `killing_form_diag`, \
+`boost_killing_form_eq`, `boost_killing_nondegenerate_iff_kappa_ne_zero`, \
+`killing_restricts_to_metric`, `zero_kappa_velocity_metric_only_conformal`, \
+`invariantSpeedSquared_formula`, `spacetime_metric_eq_diagonal`, \
+`spacetime_metric_invariant`, `reducible_of_kappa_zero`, \
+`spacetime_metric_congruent_stdLorentz_of_kappa_pos`, \
+`positive_kappa_selects_lorentz`, `zero_kappa_selects_galilean`, \
+`negative_kappa_selects_euclidean`, `negative_kappa_no_nonzero_null_vectors`, \
+`positive_kappa_gives_finite_real_invariant_speed`, \
+`phase1_selection_summary`, and the supplemental \
+`classification_derivation_complete` / \
+`classification_derivation_complete_full`.\
+\>", "Text",ExpressionUUID->"08a6b734-05cd-4b92-9d3f-5002dfebf8c8"],
+
+Cell["Interpretive narrative from the paper", "Subsection",ExpressionUUID->"69f0e305-0e91-4a55-951d-3abfc55f6365"],
+
+Cell["\<\
+The public-facing claims about causality, absolute time, and why the Killing \
+form is read before geometry are narrative summaries from \
+`paper/one-postulate.tex`. They are separated from the exact Wolfram \
+computations and the formal Lean theorems on purpose.\
+\>", "Text",ExpressionUUID->"61515fe0-8fed-43c6-8f71-827534a44bd7"]
+},
+WindowTitle->"One Postulate in Wolfram",
+TaggingRules-><|
+ "Repository" -> "one-postulate-lean", "Generator" -> 
+  "wolfram/build_one_postulate_notebook.wl"|>,
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"dc289d0e-9950-44f6-bdea-d3694850d7eb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[592, 21, 96, 0, 70, "Title",ExpressionUUID->"909a8917-e6ef-40e9-a4ef-9fb2eea8871d"],
+Cell[691, 23, 251, 4, 70, "Text",ExpressionUUID->"9d2d3eda-6263-4166-a32e-f4c7532fe8f7"],
+Cell[945, 29, 288, 4, 70, "Text",ExpressionUUID->"96addc05-c401-42ec-8dbd-52129e2884a8"],
+Cell[1236, 35, 30225, 738, 70, "Output",ExpressionUUID->"ba574501-01b6-4e6a-9622-d8fdcaa92b47"],
+Cell[31464, 775, 99, 0, 70, "Section",ExpressionUUID->"80749fb5-20d5-4446-b067-5e2b1cb59fe8"],
+Cell[31566, 777, 283, 4, 70, "Text",ExpressionUUID->"93bc959b-2da4-4153-b0fb-ac77c5976d6c"],
+Cell[31852, 783, 245, 4, 70, "Text",ExpressionUUID->"c0ee0faf-8e5c-423d-89bc-06ef12cf74ef"],
+Cell[32100, 789, 101, 0, 70, "Section",ExpressionUUID->"4552e272-3f3e-4fa3-b932-fab58226846d"],
+Cell[32204, 791, 326, 5, 70, "Text",ExpressionUUID->"f66bbed7-dd2f-46fe-aeb6-48058b7289d3"],
+Cell[32533, 798, 25493, 636, 70, "Output",ExpressionUUID->"ae739da5-6260-443f-8759-50a93455bca9"],
+Cell[CellGroupData[{
+Cell[58051, 1438, 6376, 160, 70, "Output",ExpressionUUID->"188f6e30-1c4b-4a85-ab1a-b253b2a526b3"],
+Cell[64430, 1600, 6493, 135, 70, "Input",ExpressionUUID->"723346d9-2e94-457f-a05e-d5ca48d25842"]
+}, Open  ]],
+Cell[70938, 1738, 119, 0, 70, "Section",ExpressionUUID->"baf866c1-d91c-4e6b-9491-86d342246cf7"],
+Cell[71060, 1740, 263, 4, 70, "Text",ExpressionUUID->"2f700287-51dc-4272-a5d9-cdd1082669a5"],
+Cell[CellGroupData[{
+Cell[71348, 1748, 196, 6, 70, "Input",ExpressionUUID->"64e7dfea-effa-443b-b76e-96ec3bae0605"],
+Cell[71547, 1756, 197, 6, 70, "Output",ExpressionUUID->"b581b349-8da4-42f1-9275-23be384d79b9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[71781, 1767, 257, 8, 70, "Input",ExpressionUUID->"a3c6f6a3-ee12-4cd6-a4c8-56b2a3bdc6c8"],
+Cell[72041, 1777, 258, 8, 70, "Output",ExpressionUUID->"649a6508-b1bd-4244-ae93-12f8568382f5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[72336, 1790, 263, 9, 70, "Input",ExpressionUUID->"c65d0740-79ac-4a6f-8130-d930997c591a"],
+Cell[72602, 1801, 264, 9, 70, "Output",ExpressionUUID->"b5980d5c-5d9e-46a0-a4b0-7be9b5e2b75c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[72903, 1815, 82, 0, 70, "Input",ExpressionUUID->"49e7ba75-5fe4-4940-8a0a-527e8fa10502"],
+Cell[72988, 1817, 83, 0, 70, "Output",ExpressionUUID->"81c8dabe-282c-4005-89c4-c4cbada5944e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73108, 1822, 199, 6, 70, "Input",ExpressionUUID->"79f6df5c-2c88-44e4-a55e-12b8b559a152"],
+Cell[73310, 1830, 200, 6, 70, "Output",ExpressionUUID->"a245a807-343b-4e3c-8f1a-98e59c3e2a32"]
+}, Open  ]],
+Cell[73525, 1839, 102, 0, 70, "Section",ExpressionUUID->"6f562701-572a-445a-a2c5-95af50b57795"],
+Cell[73630, 1841, 269, 4, 70, "Text",ExpressionUUID->"eb4622a5-e7ac-4cad-8289-329eba1257de"],
+Cell[73902, 1847, 1211, 25, 70, "Output",ExpressionUUID->"9e48798b-dca3-4f27-8f66-79bb5bee38bf"],
+Cell[CellGroupData[{
+Cell[75138, 1876, 391, 12, 70, "Input",ExpressionUUID->"01430489-be3d-4708-aa18-e8bc0cc84388"],
+Cell[75532, 1890, 392, 12, 70, "Output",ExpressionUUID->"c3f5cc33-d464-4d05-8b9c-6d890f8a89f6"]
+}, Open  ]],
+Cell[75939, 1905, 219, 3, 70, "Text",ExpressionUUID->"4c81627a-10e5-418b-9886-50485fa02ad0"],
+Cell[76161, 1910, 100, 0, 70, "Section",ExpressionUUID->"2e953db0-a25e-4052-80df-af643c2fc5d9"],
+Cell[76264, 1912, 240, 4, 70, "Text",ExpressionUUID->"43119ec9-616e-4b84-8f2e-57a4e3e83d2d"],
+Cell[76507, 1918, 15642, 379, 70, "Output",ExpressionUUID->"4640d012-410e-4a64-8d5f-18afadcdd335"],
+Cell[CellGroupData[{
+Cell[92174, 2301, 861, 22, 70, "Input",ExpressionUUID->"b2906c10-d811-468e-bfa9-5fa62b973457"],
+Cell[93038, 2325, 862, 22, 70, "Output",ExpressionUUID->"fdd35d83-808f-4094-a087-0b4f5ec8ee9e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93937, 2352, 155, 4, 70, "Input",ExpressionUUID->"d79e745c-345b-4a8d-9415-749b55854b72"],
+Cell[94095, 2358, 156, 4, 70, "Output",ExpressionUUID->"6e327453-d427-4e6e-8a19-37e535f9b93d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94288, 2367, 310, 9, 70, "Input",ExpressionUUID->"7eec89cd-bebc-4029-a5c9-91a5b0cbf785"],
+Cell[94601, 2378, 311, 9, 70, "Output",ExpressionUUID->"ed4cedb7-05b0-4c28-9db6-ca6a4e42a6c2"]
+}, Open  ]],
+Cell[94927, 2390, 115, 0, 70, "Section",ExpressionUUID->"41bb35e6-4a03-42ac-984a-b2042ba49ff2"],
+Cell[95045, 2392, 263, 4, 70, "Text",ExpressionUUID->"d786f0f1-a4e7-4724-a34d-505dd010ada3"],
+Cell[CellGroupData[{
+Cell[95333, 2400, 3200, 82, 70, "Output",ExpressionUUID->"da70bc93-7081-402e-a256-aa3a2bc55134"],
+Cell[98536, 2484, 5566, 115, 70, "Input",ExpressionUUID->"ea61e784-cc16-41d7-beed-04b2d999a577"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[104139, 2604, 406, 12, 70, "Input",ExpressionUUID->"80e47f71-2152-4142-a05b-987447ec1dd5"],
+Cell[104548, 2618, 407, 12, 70, "Output",ExpressionUUID->"c8fb820d-132b-40ef-9be4-0ac09cb7b6dc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[104992, 2635, 133, 2, 70, "Input",ExpressionUUID->"46ed93f5-ea29-4c51-8982-fefac3ad576d"],
+Cell[105128, 2639, 134, 2, 70, "Output",ExpressionUUID->"95ab7550-dad5-465c-b008-d73b5f41d485"]
+}, Open  ]],
+Cell[105277, 2644, 115, 0, 70, "Section",ExpressionUUID->"515454da-457c-44ac-9b2a-bc506cc7d199"],
+Cell[105395, 2646, 312, 4, 70, "Text",ExpressionUUID->"c1c41891-e140-4034-8580-877eac567fbc"],
+Cell[105710, 2652, 16449, 405, 70, "Output",ExpressionUUID->"5da4527f-e9b8-43ee-93a3-efc29630fd8c"],
+Cell[CellGroupData[{
+Cell[122184, 3061, 406, 12, 70, "Input",ExpressionUUID->"898ebfba-5827-446e-bef9-980c9195ec88"],
+Cell[122593, 3075, 407, 12, 70, "Output",ExpressionUUID->"7e6512b6-b7ad-43a9-bf74-bd748dc9950b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[123037, 3092, 106, 1, 70, "Input",ExpressionUUID->"d1bd96c3-bb81-4928-991b-5cfa1c2b1374"],
+Cell[123146, 3095, 107, 1, 70, "Output",ExpressionUUID->"5055ff48-4964-423d-bf0d-53124e0fa07c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[123290, 3101, 500, 14, 70, "Input",ExpressionUUID->"7a11e880-9203-44a6-9a1b-8d13007c98d6"],
+Cell[123793, 3117, 501, 14, 70, "Output",ExpressionUUID->"5de56fc5-0bda-4964-b0e5-64a128f3f289"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[124331, 3136, 488, 14, 70, "Input",ExpressionUUID->"b13f7abd-2df1-4f79-994c-1c622a867ecc"],
+Cell[124822, 3152, 489, 14, 70, "Output",ExpressionUUID->"35685603-d90a-4413-a452-8963f1f3cf2e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[125348, 3171, 3557, 90, 70, "Output",ExpressionUUID->"6f9a3627-4de1-4f1c-a243-a005a60de813"],
+Cell[128908, 3263, 6297, 127, 70, "Input",ExpressionUUID->"eecaca13-71eb-4a26-8505-ebbf4532774b"]
+}, Open  ]],
+Cell[135220, 3393, 104, 0, 70, "Section",ExpressionUUID->"75c38e88-a091-43ec-a9bb-60d6c43b91cd"],
+Cell[135327, 3395, 296, 4, 70, "Text",ExpressionUUID->"1dd95cca-8643-4690-8940-6a1a85a102f1"],
+Cell[135626, 3401, 1689, 31, 70, "Output",ExpressionUUID->"3fa60f45-aab6-4ee1-ae6e-1b41d3afc540"],
+Cell[137318, 3434, 109, 0, 70, "Section",ExpressionUUID->"517265a4-2860-4fa3-bbfc-36ab3a24b8a1"],
+Cell[137430, 3436, 277, 4, 70, "Text",ExpressionUUID->"d0f87087-52e6-40af-8b6b-3a12df099afc"],
+Cell[137710, 3442, 5380, 116, 70, "Output",ExpressionUUID->"65b836ae-5a57-4a79-b625-021c81852e7e"],
+Cell[143093, 3560, 2480, 43, 70, "Output",ExpressionUUID->"ccc39292-f84a-4a49-bbf4-a41adc71c4c2"],
+Cell[145576, 3605, 113, 0, 70, "Section",ExpressionUUID->"57728de2-54d4-48c0-8a41-cd9175789b33"],
+Cell[145692, 3607, 104, 0, 70, "Subsection",ExpressionUUID->"bdeb5821-c8e2-4983-a629-2c2e794d2fa2"],
+Cell[145799, 3609, 302, 4, 70, "Text",ExpressionUUID->"e7476213-5763-4d46-bb63-b5d4ccd760c4"],
+Cell[146104, 3615, 100, 0, 70, "Subsection",ExpressionUUID->"7a27784b-9adf-4a74-9ff9-072e15dd7e2c"],
+Cell[146207, 3617, 932, 15, 70, "Text",ExpressionUUID->"08a6b734-05cd-4b92-9d3f-5002dfebf8c8"],
+Cell[147142, 3634, 114, 0, 70, "Subsection",ExpressionUUID->"69f0e305-0e91-4a55-951d-3abfc55f6365"],
+Cell[147259, 3636, 342, 5, 70, "Text",ExpressionUUID->"61515fe0-8fed-43c6-8f71-827534a44bd7"]
+}
+]
+*)
+
+(* End of internal cache information *)
