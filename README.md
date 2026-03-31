@@ -193,7 +193,7 @@ For repository-specific workflow notes and archived review runs, see [docs/arist
 ## TODO Checklist
 
 - [ ] Add D3 and SVG animations.
-- [ ] Expand Wolfram/Mathematica simulations and Observable D3.
+- [x] Expand Wolfram/Mathematica simulations and Observable D3.
 - [ ] Map to interactive website experience.
 - [ ] Add license and attribution.
 - [ ] Add backlinks to II website + blogs.
