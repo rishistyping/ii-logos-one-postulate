@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" role="img" aria-labelledby="title desc">
+  <title id="title">Mermaid-style kappa branch comparison</title>
+  <desc id="desc">A central kappa node fans out to Euclidean, Galilean, and Lorentzian branch nodes using a Mermaid-like flowchart style.</desc>
+  <rect width="860" height="300" fill="#ffffff"/>
+  <style>
+    .node { fill: #ececff; stroke: #9370db; stroke-width: 2px; }
+    .edge { stroke: #5f6470; stroke-width: 2.2px; fill: none; }
+    .title { font: 700 17px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #1f2430; }
+    .body { font: 13px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #2f3542; }
+    .hint { font: 12px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #515869; }
+    .center { text-anchor: middle; }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6470"/>
+    </marker>
+  </defs>
+
+  <rect x="58" y="108" width="170" height="84" rx="10" class="node"/>
+  <text x="143" y="140" class="title center">&#954;</text>
+  <text x="143" y="163" class="body center">one parameter</text>
+  <text x="143" y="183" class="hint center">controls the family</text>
+
+  <path class="edge" marker-end="url(#arrow)" d="M228 150 C292 150, 308 66, 378 66"/>
+  <path class="edge" marker-end="url(#arrow)" d="M228 150 L378 150"/>
+  <path class="edge" marker-end="url(#arrow)" d="M228 150 C292 150, 308 234, 378 234"/>
+
+  <rect x="392" y="32" width="398" height="68" rx="10" class="node"/>
+  <text x="414" y="59" class="title">&#954; &lt; 0</text>
+  <text x="414" y="80" class="body">Euclidean branch</text>
+  <text x="414" y="96" class="hint">no nonzero null vectors</text>
+
+  <rect x="392" y="116" width="398" height="68" rx="10" class="node"/>
+  <text x="414" y="143" class="title">&#954; = 0</text>
+  <text x="414" y="164" class="body">Galilean branch</text>
+  <text x="414" y="180" class="hint">degenerate boost sector; absolute time survives</text>
+
+  <rect x="392" y="200" width="398" height="68" rx="10" class="node"/>
+  <text x="414" y="227" class="title">&#954; &gt; 0</text>
+  <text x="414" y="248" class="body">Lorentzian branch</text>
+  <text x="414" y="264" class="hint">finite real invariant speed</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="320" viewBox="0 0 860 320" role="img" aria-labelledby="title desc">
+  <title id="title">Mermaid-style Killing form preview</title>
+  <desc id="desc">A Mermaid-like flowchart showing the bracket family feeding into the Killing form and then splitting into fixed rotation and kappa-scaled boost blocks.</desc>
+  <rect width="860" height="320" fill="#ffffff"/>
+  <style>
+    .node { fill: #ececff; stroke: #9370db; stroke-width: 2px; }
+    .edge { stroke: #5f6470; stroke-width: 2.2px; fill: none; }
+    .title { font: 700 17px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #1f2430; }
+    .body { font: 13px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #2f3542; }
+    .hint { font: 12px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #515869; }
+    .center { text-anchor: middle; }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6470"/>
+    </marker>
+  </defs>
+
+  <rect x="38" y="124" width="208" height="72" rx="10" class="node"/>
+  <text x="142" y="150" class="title center">Bracket family</text>
+  <text x="142" y="172" class="body center">[K_i, K_j] = -&#954; &#949;_ijk J_k</text>
+
+  <rect x="324" y="98" width="214" height="124" rx="10" class="node"/>
+  <text x="431" y="126" class="title center">Killing form pivot</text>
+  <text x="431" y="157" class="body center">B = diag(-4 I3, 4 &#954; I3)</text>
+  <text x="431" y="182" class="hint center">compute invariant first</text>
+  <text x="431" y="201" class="hint center">read geometry afterward</text>
+
+  <rect x="616" y="52" width="194" height="88" rx="10" class="node"/>
+  <text x="713" y="82" class="title center">rotation block</text>
+  <text x="713" y="107" class="body center">-4 I3</text>
+  <text x="713" y="126" class="hint center">fixed across all branches</text>
+
+  <rect x="616" y="178" width="194" height="88" rx="10" class="node"/>
+  <text x="713" y="208" class="title center">boost block</text>
+  <text x="713" y="233" class="body center">4 &#954; I3</text>
+  <text x="713" y="252" class="hint center">changes sign; vanishes at &#954; = 0</text>
+
+  <path class="edge" marker-end="url(#arrow)" d="M246 160 H324"/>
+  <path class="edge" marker-end="url(#arrow)" d="M538 146 C574 146, 580 110, 616 96"/>
+  <path class="edge" marker-end="url(#arrow)" d="M538 174 C574 174, 580 210, 616 222"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="310" viewBox="0 0 860 310" role="img" aria-labelledby="title desc">
+  <title id="title">Mermaid-style spacetime metric preview</title>
+  <desc id="desc">A Mermaid-like flowchart showing the invariant spacetime metric splitting into the Galilean and Lorentzian consequences.</desc>
+  <rect width="860" height="310" fill="#ffffff"/>
+  <style>
+    .node { fill: #ececff; stroke: #9370db; stroke-width: 2px; }
+    .edge { stroke: #5f6470; stroke-width: 2.2px; fill: none; }
+    .title { font: 700 17px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #1f2430; }
+    .body { font: 13px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #2f3542; }
+    .hint { font: 12px 'Trebuchet MS', Verdana, Arial, sans-serif; fill: #515869; }
+    .center { text-anchor: middle; }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6470"/>
+    </marker>
+  </defs>
+
+  <rect x="70" y="104" width="274" height="100" rx="10" class="node"/>
+  <text x="207" y="136" class="title center">Spacetime consequence</text>
+  <text x="207" y="165" class="body center">g = diag(1, -&#954;, -&#954;, -&#954;)</text>
+  <text x="207" y="188" class="hint center">the invariant form is read from the algebra</text>
+
+  <rect x="472" y="58" width="282" height="84" rx="10" class="node"/>
+  <text x="613" y="87" class="title center">&#954; = 0</text>
+  <text x="613" y="110" class="body center">Galilean branch</text>
+  <text x="613" y="128" class="hint center">boost sector collapses; absolute time survives</text>
+
+  <rect x="472" y="178" width="282" height="84" rx="10" class="node"/>
+  <text x="613" y="207" class="title center">&#954; &gt; 0</text>
+  <text x="613" y="230" class="body center">Lorentzian branch</text>
+  <text x="613" y="248" class="hint center">nondegenerate metric; finite invariant speed</text>
+
+  <path class="edge" marker-end="url(#arrow)" d="M344 145 C406 145, 414 100, 472 100"/>
+  <path class="edge" marker-end="url(#arrow)" d="M344 163 C406 163, 414 220, 472 220"/>
+</svg>
