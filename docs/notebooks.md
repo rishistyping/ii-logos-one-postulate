@@ -8,9 +8,9 @@ They are companions to the paper, not replacements for it.
 
 ## What The Notebooks Do
 
-The notebooks make the paper's symbolic calculations easier to inspect.
-They do not widen the proof surface and they do not replace the Lean files as
-the repository's proof authority.
+The notebooks make the paper's symbolic calculations easier to inspect. They
+do not widen the proof surface and they do not replace the Lean files as the
+repository's proof authority.
 
 ### Wolfram workbook
 
@@ -20,9 +20,22 @@ is the primary public-facing computational companion. It is generated from
 and follows the frozen structure in
 [`wolfram/notebook_plan.md`](../wolfram/notebook_plan.md).
 
-- It leads with narrative and visuals, not scratchpad algebra.
-- It presents the `kappa`-controlled story as a guided visual essay.
-- It separates computed or visualized claims from Lean-proved claims.
+- It now follows the paper's rhetorical flow:
+  - `The postulate`
+  - `What the postulate determines`
+  - `Can the rules examine themselves?`
+  - `Three verdicts`
+  - `Structure and scale`
+- It contains one shared exploration suite with:
+  - continuous `kappa`
+  - a velocity slider
+  - a draggable event `(x, t)`
+  - tabbed views for `Transformation`, `Killing form`, `Velocity space`, and
+    `Verdict`
+- It keeps the proof boundary visible with inline badges for:
+  - computed here
+  - paper narrative
+  - Lean proof anchor
 - It is generated from source, so the notebook can be rebuilt reproducibly.
 
 ### SymPy notebook
@@ -42,19 +55,20 @@ available as a secondary companion.
 
 | Narrative stage | Computed / visualized here | Lean anchors | Source of authority |
 | --- | --- | --- | --- |
-| One parameter, three worlds | `kappa` regime visuals and comparison panels | `phase1_selection_summary` | Local paper + Lean |
-| Transformation law and Galilean limit | exact `kappa -> 0` limit and transformation-law cells | `matrix_bracket_JJ`, `matrix_bracket_JK`, `matrix_bracket_KK` | Local paper + Lean |
-| Kinematic bracket family | bracket-table display and block-structured algebra view | `kinematic_bracket_table`, `kinematic_bracket_jacobi`, `boostCommutator_scales_with_kappa` | Local paper + Lean |
-| Computing the Killing form | diagonal Killing-form computation and block comparison | `killing_form_diag`, `boost_killing_form_eq`, `boost_killing_nondegenerate_iff_kappa_ne_zero` | Local paper + Lean |
-| Velocity-space and spacetime consequences | boost-sector metric, spacetime metric, and regime panels | `killing_restricts_to_metric`, `zero_kappa_velocity_metric_only_conformal`, `invariantSpeedSquared_formula`, `spacetime_metric_eq_diagonal`, `spacetime_metric_invariant`, `reducible_of_kappa_zero`, `spacetime_metric_congruent_stdLorentz_of_kappa_pos` | Local paper + Lean |
-| Three branches, three verdicts | branch comparison board and hero summary | `positive_kappa_selects_lorentz`, `zero_kappa_selects_galilean`, `negative_kappa_selects_euclidean`, `negative_kappa_no_nonzero_null_vectors`, `positive_kappa_gives_finite_real_invariant_speed`, `classification_derivation_complete`, `classification_derivation_complete_full` | Local paper + Lean |
+| The postulate | hero overview and the no-background-structure framing | `matrix_bracket_JJ`, `matrix_bracket_JK`, `matrix_bracket_KK` | Local paper + Lean |
+| What the postulate determines | transformation simulator, exact `kappa -> 0` limit, and Figure 1 regime view | `matrix_bracket_JJ`, `matrix_bracket_JK`, `matrix_bracket_KK`, `phase1_selection_summary` | Local paper + Lean |
+| Can the rules examine themselves? | bracket family, Killing form, determinant, eigenvalues, and velocity-space ruler | `kinematic_bracket_table`, `kinematic_bracket_jacobi`, `boostCommutator_scales_with_kappa`, `killing_form_diag`, `boost_killing_form_eq`, `boost_killing_nondegenerate_iff_kappa_ne_zero`, `killing_restricts_to_metric`, `invariantSpeedSquared_formula` | Local paper + Lean |
+| Three verdicts | verdict board, spacetime consequences, and regime comparison | `negative_kappa_no_nonzero_null_vectors`, `negative_kappa_selects_euclidean`, `zero_kappa_selects_galilean`, `positive_kappa_selects_lorentz`, `positive_kappa_gives_finite_real_invariant_speed`, `spacetime_metric_invariant`, `phase1_selection_summary` | Local paper + Lean |
+| Structure and scale | calibration note and Lorentz congruence preview | `spacetime_metric_eq_diagonal`, `spacetime_metric_congruent_stdLorentz_of_kappa_pos`, `classification_derivation_complete`, `classification_derivation_complete_full` | Local paper + Lean |
 
 ## Proof Authority
 
-- Computed or symbolically checked in the Wolfram workbook: formulas already
-  adopted there, direct limits, matrix identities, regime comparisons, and
-  figure generation.
-- Formalized in Lean: the repository claims exposed through
+- Computed or symbolically checked in the Wolfram workbook:
+  transformation-law limits, the dynamic regime views, the diagonal Killing
+  form, determinant and eigenvalue checks, the velocity-space ruler story, the
+  verdict board, and the positive-`kappa` Lorentz congruence calculation.
+- Formalized in Lean:
+  the repository claims exposed through
   [`OnePostulate.lean`](../OnePostulate.lean),
   [`OnePostulateFull.lean`](../OnePostulateFull.lean), and the modules under
   [`OnePostulate/`](../OnePostulate).
@@ -72,11 +86,12 @@ wolframscript -file wolfram/build_one_postulate_notebook.wl
 That workflow regenerates the notebook and the canonical preview assets under
 `wolfram/assets/`.
 
-- Open the notebook in a Wolfram notebook-capable environment from
-  [`wolfram/notebooks/one_postulate_explainer.nb`](../wolfram/notebooks/one_postulate_explainer.nb).
-- Present the story with the exported SVGs, especially
-  [`wolfram/assets/notebook_hero_overview.svg`](../wolfram/assets/notebook_hero_overview.svg)
-  and the supporting previews under `wolfram/assets/`.
+- Open the notebook from
+  [`wolfram/notebooks/one_postulate_explainer.nb`](../wolfram/notebooks/one_postulate_explainer.nb)
+  in a Wolfram notebook-capable environment.
+- Use the shared exploration suite to present the paper live: drag the event,
+  move `kappa`, adjust `v`, and switch between the transformation, Killing
+  form, velocity-space, and verdict tabs.
 - Share the static previews on GitHub; they are designed to stand on their own
   outside the notebook.
 
@@ -86,8 +101,7 @@ GitHub-safe preview layer.
 
 ## Preview Assets
 
-The generated preview graphics are lightweight and suitable for GitHub
-Markdown:
+The generated preview graphics are suitable for GitHub Markdown:
 
 ![Notebook hero overview](../wolfram/assets/notebook_hero_overview.svg)
 
@@ -100,7 +114,12 @@ Markdown:
 ![Paper-Lean crosswalk preview](../wolfram/assets/notebook_preview_crosswalk.svg)
 
 - [`wolfram/assets/notebook_hero_overview.svg`](../wolfram/assets/notebook_hero_overview.svg)
+  - one-parameter story -> self-test -> final verdict
 - [`wolfram/assets/notebook_preview_branches.svg`](../wolfram/assets/notebook_preview_branches.svg)
+  - the paper's Figure 1 style comparison of the three kinematic universes
 - [`wolfram/assets/notebook_preview_killing_form.svg`](../wolfram/assets/notebook_preview_killing_form.svg)
+  - the boost-sector sign and degeneracy story
 - [`wolfram/assets/notebook_preview_spacetime.svg`](../wolfram/assets/notebook_preview_spacetime.svg)
+  - the transformation simulator's default live state
 - [`wolfram/assets/notebook_preview_crosswalk.svg`](../wolfram/assets/notebook_preview_crosswalk.svg)
+  - the later paper -> notebook -> Lean map

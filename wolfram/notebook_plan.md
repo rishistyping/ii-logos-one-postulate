@@ -1,8 +1,10 @@
 # One Postulate Wolfram Notebook Plan
 
-This file freezes the narrative, visual, and artifact contract for the Wolfram
-explainer workflow. Implementation should follow this structure exactly unless a
-source-truth conflict in the local paper or Lean files requires a correction.
+This file freezes the narrative, interaction, and asset contract for the
+Wolfram explainer workflow. The canonical editable source remains
+`wolfram/build_one_postulate_notebook.wl`. The generated notebook and preview
+assets should follow this plan unless the local paper or Lean files require a
+source-truth correction.
 
 ## Canonical Artifact Hierarchy
 
@@ -19,49 +21,115 @@ source-truth conflict in the local paper or Lean files requires a correction.
   - `README.md`
   - `docs/notebooks.md`
 
-SVG is canonical. Do not add PNG fallbacks unless a concrete readability or
-sharing problem appears during the build-and-consistency pass.
+SVG remains canonical. Keep the filenames stable and repurpose the visuals if
+the notebook grows stronger.
 
 ## Notebook Section Titles
 
 1. `One Postulate in Wolfram`
 2. `What this notebook is for`
-3. `One parameter, three worlds`
-4. `The transformation law and the Galilean limit`
-5. `The kinematic bracket family`
-6. `Computing the Killing form`
-7. `Why the Killing form decides the geometry`
-8. `Velocity-space and spacetime consequences`
-9. `Three branches, three verdicts`
-10. `How this connects to the Lean proof`
-11. `What is computed here vs proved in Lean`
+3. `The postulate`
+4. `What the postulate determines`
+5. `Can the rules examine themselves?`
+6. `Three verdicts`
+7. `Structure and scale`
+8. `How this connects to the Lean proof`
+9. `What is computed here vs proved in Lean`
 
-## README Section Order
+## Reader-Facing Question And Answer Pattern
 
-1. `One Postulate, One Parameter`
-2. `Three Worlds from κ`
-3. `The Kinematic Bracket Family`
-4. `The Killing Form Pivot`
-5. `Velocity-Space and Spacetime Consequences`
-6. `What Is Computed Here vs Proved in Lean`
-7. `Explore the Wolfram Workbook`
-8. `Lean Crosswalk`
+Each major section should open with one explicit question and close with one
+explicit answer.
 
-README scope rules:
+- `The postulate`
+  - Question: `What kind of explanation does the relativity principle allow?`
+- `What the postulate determines`
+  - Question: `What changes when kappa changes sign or magnitude?`
+- `Can the rules examine themselves?`
+  - Question: `Can the algebra diagnose its own geometry without experiment?`
+- `Three verdicts`
+  - Question: `What does the self-test say in each regime?`
+- `Structure and scale`
+  - Question: `What still has to be calibrated by experiment?`
 
-- Use one hero visual plus at most three supporting visuals.
-- Keep theorem density low and the landing page cognitively light.
-- Keep any proof-map content compact; deeper proof density belongs in the
-  notebook and docs.
+## Shared Exploration Suite
 
-## Crosswalk Schema
+The notebook should contain one shared `DynamicModule` with a continuous
+`kappa` state and a `TabView`. The controls should update the notebook’s
+geometric story coherently rather than via isolated section widgets.
 
-Use the same columns wherever the public crosswalk appears:
+Required shared controls:
 
-- `Narrative stage`
-- `Computed / visualized here`
-- `Lean anchors`
-- `Source of authority`
+- continuous `kappa` slider
+- regime snap buttons for representative `kappa < 0`, `kappa = 0`, and
+  `kappa > 0` settings
+- velocity slider `v`
+- draggable event `(x, t)` using `LocatorPane`
+
+Required tabs:
+
+1. `Transformation`
+2. `Killing form`
+3. `Velocity space`
+4. `Verdict`
+
+## Required Interactive Content
+
+The exploration suite must make the paper’s argument visible rather than merely
+summarize it.
+
+- `Transformation`
+  - show `t'`, `x'`, and `gamma` live
+  - couple the transformation readout to a Figure 1 style universe panel
+  - show Lorentzian lightcones for `kappa > 0`
+  - show Galilean simultaneity slices for `kappa = 0`
+  - show rotation-like boost behaviour for `kappa < 0`
+  - warn clearly when `kappa > 0` and `|v|` approaches `1 / Sqrt[kappa]`
+- `Killing form`
+  - show `B = diag(-4 I3, 4 kappa I3)` as a live matrix view
+  - show determinant and eigenvalues
+  - show the sign change and degeneracy of the boost sector clearly
+  - include a live eigenvalue plot for `{-4, -4, -4, 4 kappa, 4 kappa, 4 kappa}`
+- `Velocity space`
+  - implement the Figure 2 logic directly
+  - show the preferred radius `V = 1 / Sqrt[kappa]` when `kappa > 0`
+  - show shape without a preferred ruler when `kappa = 0`
+  - explain why the Euclidean branch does not give a real invariant speed
+- `Verdict`
+  - end with a paper-aligned comparison board
+  - include:
+    - Killing form on boosts
+    - invariant speed
+    - spacetime metric
+    - causal structure
+    - space-time unification
+    - background structure needed
+  - include the calibration point that experiment fixes the value, not the
+    existence, of the invariant speed
+
+## Inline Authority Badges
+
+Every major visual panel should carry three compact inline badges:
+
+- `Computed here`
+- `Paper narrative`
+- `Lean proof anchor`
+
+The badge row should stay readable and should point to exact local theorem or
+module anchors where applicable.
+
+## Asset Meanings
+
+- `notebook_hero_overview.svg`
+  - one-parameter story -> self-test -> final verdict
+- `notebook_preview_branches.svg`
+  - the master Figure 1 universe comparison
+- `notebook_preview_killing_form.svg`
+  - the Killing-form default state, including the boost-sector story
+- `notebook_preview_spacetime.svg`
+  - the transformation simulator’s default state
+- `notebook_preview_crosswalk.svg`
+  - the later paper -> notebook -> Lean crosswalk
 
 ## Visual System Brief
 
@@ -78,61 +146,20 @@ Use the same columns wherever the public crosswalk appears:
   - clear section headings
   - compact labels
   - short narrative captions
-- Caption style: 1-2 sentence narrative captions, sentence case, no
-  theorem-dense prose
-- Label style: short, direct, sentence-case callouts
-- Panel logic:
-  - clean card and panel layouts
-  - multi-panel comparisons where contrast helps
-  - consistent spacing and callout placement
-- Asset geometry:
-  - hero asset at 16:9
-  - supporting assets at 4:3 or 3:2
-  - keep the set visually consistent
-- GitHub assumptions:
-  - optimize for light mode first
-  - preserve strong contrast at narrow embed sizes
-- Naming conventions:
-  - `notebook_hero_*` for hero exports
-  - `notebook_preview_*` for supporting exports
-
-## Wolfram MCP Usage Boundary
-
-Use Wolfram MCP for:
-
-- symbolic algebra
-- exact simplification
-- matrix computations
-- parameter sweeps
-- figure data generation
-- interactive visualization generation
-- notebook construction support
-
-Do not use Wolfram MCP as the source of truth for:
-
-- theorem names
-- Lean module names
-- proof-structure claims
-- paper claims
-
-Those come from local repository inspection only.
-
-## Required Interactive Elements
-
-Implement exactly three meaningful interactive sections:
-
-1. A `κ` regime `Manipulate` answering: what changes when `κ` changes sign?
-2. A dynamic Killing-form block panel answering: what happens to the boost
-   block at `κ = 0`?
-3. A branch comparison or spacetime consequences panel answering: how do the
-   three regimes differ geometrically?
-
-Each interactive section must remain understandable in its default static
-state. Interaction must teach, not decorate.
+- Caption style:
+  - one or two sentence narrative captions
+  - sentence case
+  - no theorem-dense prose
+- Layout logic:
+  - one strong hero overview
+  - one master spacetime panel
+  - one master Killing-form panel
+  - one verdict board
+  - crosswalk later, not first
 
 ## Lean Crosswalk Anchors
 
-Use these exact, locally verified anchors:
+Use exact, locally verified anchors only:
 
 - `matrix_bracket_JJ`, `matrix_bracket_JK`, `matrix_bracket_KK`
 - `kinematic_bracket_table`, `kinematic_bracket_jacobi`,
@@ -156,39 +183,32 @@ Guarded boundary reminder:
 - `OnePostulate/ClassificationDerivation.lean` remains supplemental/full-paper
   material.
 
-## Narrative Contract
+## Boundary Of Authority
 
-The public narrative should explain:
-
-- the one-parameter family controlled by `κ`
-- the bracket structure and why it matters
-- the Killing form as the decisive invariant
-- the Euclidean / Galilean / Lorentzian branch split
-- how notebook computations relate to Lean proofs
-- what is computed in the notebook versus what is formally proved in Lean
-
-Notebook and README must distinguish:
+The notebook and notebook-facing docs must keep three categories distinct:
 
 - computed or symbolically checked here
 - formally proved in Lean
 - interpretive narrative from the paper
 
-## Definition of Done
+Lean remains the proof authority. Wolfram computations are explanatory
+companions rather than formal proofs.
 
-The work is only done when all of the following are true:
+## Definition Of Done
 
-- `AGENTS.md` is explicitly updated first and aligned to this workflow
-- the notebook is generated successfully, or as far as the local Wolfram
-  environment permits
-- the notebook is clearly narrative-first and visualization-first
-- at least four polished exported visuals exist
-- `wolfram/assets/notebook_hero_overview.svg` exists
-- at least two interactive sections teach a real concept
-- `README.md` has no broken image references
-- README and notebook follow the same conceptual sequence
-- every "computed here" claim corresponds to an actual Wolfram computation or
-  generated figure
-- every public Lean crosswalk anchor is exact and locally verified
-- no stale public references remain to `notebooks/one_postulate_explainer.nb`
-  or `docs/assets/notebook_preview_*`
-- no Lean proof boundary was widened
+The notebook workflow is only done when all of the following are true:
+
+- the paper-stage section order is present in the generated notebook
+- the shared exploration suite exists with the four required tabs
+- the notebook uses a continuous `kappa` control rather than only discrete
+  branch selectors
+- the transformation view uses `LocatorPane`
+- the Killing-form view shows matrix structure, determinant, and eigenvalue
+  behaviour
+- the velocity-space view makes the missing ruler at `kappa = 0` intuitive
+- the verdict board matches the paper’s comparison logic
+- every major section closes with an explicit answer
+- every major panel carries the inline authority badges
+- the preview asset filenames are unchanged
+- `docs/notebooks.md` accurately describes the revised notebook shape
+- the proof boundary remains unchanged
