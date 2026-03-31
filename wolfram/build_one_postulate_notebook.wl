@@ -159,206 +159,105 @@ branchCard[title_, subtitle_, thumbnail_, bullets_, color_, fill_] := Framed[
   ImageSize -> {255, 300}
 ];
 
-kappaBranchGraphic = Graphics[
+kappaBranchSvg = StringRiffle[
   {
-    Inset[
-      Framed[
-        Column[{
-          Style["one parameter", cardTitleStyle[colors["Slate"]]],
-          Style["The paper's transformation family is controlled by a single real number kappa.",
-            baseLabelStyle],
-          Style[
-            Row[{
-              "gamma = ", TraditionalForm[gammaExpr[kappa]], "\n",
-              "t' = ", TraditionalForm[tPrimeExpr[kappa]], "\n",
-              "x' = ", TraditionalForm[xPrimeExpr[kappa]]
-            }],
-            FontFamily -> "Helvetica", FontSize -> 13, colors["Text"]]
-        }, Spacings -> 0.6, Alignment -> Left],
-        Background -> colors["Card"],
-        FrameStyle -> Directive[colors["Slate"], AbsoluteThickness[2]],
-        RoundingRadius -> 12,
-        FrameMargins -> {{16, 16}, {16, 16}},
-        ImageSize -> {280, 220}
-      ],
-      {1.8, 2.4}
-    ],
-    {Directive[colors["Slate"], AbsoluteThickness[2.4], Arrowheads[0.03]],
-      Arrow[{{3.35, 2.8}, {4.25, 4.85}}],
-      Arrow[{{3.35, 2.4}, {4.25, 2.4}}],
-      Arrow[{{3.35, 2.0}, {4.25, 0.9}}]},
-    Inset[
-      branchCard[
-        "kappa > 0",
-        "Lorentzian branch",
-        lightconeThumbnail[colors["Lorentz"]],
-        {
-          "boost block 4 kappa I3 is positive",
-          "finite real invariant speed 1/Sqrt[kappa]",
-          "spacetime interval mixes time and space"
-        },
-        colors["Lorentz"],
-        colors["SoftLorentz"]
-      ],
-      {6.2, 4.85}
-    ],
-    Inset[
-      branchCard[
-        "kappa = 0",
-        "Galilean branch",
-        simultaneityThumbnail[colors["Galilean"]],
-        {
-          "boost block vanishes exactly",
-          "Galilean limit gives t' = t",
-          "absolute time survives as background structure"
-        },
-        colors["Galilean"],
-        colors["SoftGalilean"]
-      ],
-      {6.2, 2.4}
-    ],
-    Inset[
-      branchCard[
-        "kappa < 0",
-        "Euclidean branch",
-        rotationThumbnail[colors["Euclidean"]],
-        {
-          "boost block 4 kappa I3 is negative",
-          "no real invariant speed emerges",
-          "time is not singled out from geometry"
-        },
-        colors["Euclidean"],
-        colors["SoftEuclidean"]
-      ],
-      {6.2, 0.0}
-    ]
+    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"820\" height=\"280\" viewBox=\"0 0 820 280\" role=\"img\" aria-labelledby=\"title desc\">",
+    "  <title id=\"title\">Kappa branch comparison</title>",
+    "  <desc id=\"desc\">A single parameter kappa splits into the Euclidean, Galilean, and Lorentzian branches.</desc>",
+    "  <rect width=\"820\" height=\"280\" fill=\"#fbfcfe\"/>",
+    "  <style>",
+    "    .label { font: 700 22px 'Georgia', 'Times New Roman', serif; fill: #213247; }",
+    "    .cardTitle { font: 700 20px 'Georgia', 'Times New Roman', serif; }",
+    "    .cardText { font: 15px 'Georgia', 'Times New Roman', serif; fill: #384859; }",
+    "    .axis { stroke: #526274; stroke-width: 4; fill: none; }",
+    "    .card { stroke: #526274; stroke-width: 2.5; rx: 18; ry: 18; }",
+    "  </style>",
+    "  <rect x=\"52\" y=\"92\" width=\"184\" height=\"82\" class=\"card\" fill=\"#e9f0f8\"/>",
+    "  <text x=\"144\" y=\"140\" text-anchor=\"middle\" class=\"label\">&#954;</text>",
+    "  <path class=\"axis\" d=\"M236 133 C300 133, 306 56, 370 56\" />",
+    "  <path class=\"axis\" d=\"M236 133 L370 133\" />",
+    "  <path class=\"axis\" d=\"M236 133 C300 133, 306 210, 370 210\" />",
+    "  <polygon points=\"364,49 382,56 364,63\" fill=\"#526274\"/>",
+    "  <polygon points=\"364,126 382,133 364,140\" fill=\"#526274\"/>",
+    "  <polygon points=\"364,203 382,210 364,217\" fill=\"#526274\"/>",
+    "  <rect x=\"386\" y=\"22\" width=\"366\" height=\"70\" class=\"card\" fill=\"#f7eed4\"/>",
+    "  <text x=\"412\" y=\"52\" class=\"cardTitle\" fill=\"#775319\">&#954; &lt; 0</text>",
+    "  <text x=\"412\" y=\"76\" class=\"cardText\">Euclidean branch; no nonzero null vectors</text>",
+    "  <rect x=\"386\" y=\"98\" width=\"366\" height=\"70\" class=\"card\" fill=\"#e9f4e7\"/>",
+    "  <text x=\"412\" y=\"128\" class=\"cardTitle\" fill=\"#1e6b48\">&#954; = 0</text>",
+    "  <text x=\"412\" y=\"152\" class=\"cardText\">Galilean branch; degenerate boost sector</text>",
+    "  <rect x=\"386\" y=\"174\" width=\"366\" height=\"70\" class=\"card\" fill=\"#f8e4e4\"/>",
+    "  <text x=\"412\" y=\"204\" class=\"cardTitle\" fill=\"#8c2929\">&#954; &gt; 0</text>",
+    "  <text x=\"412\" y=\"228\" class=\"cardText\">Lorentzian branch; finite real invariant speed</text>",
+    "</svg>"
   },
-  PlotRange -> {{0, 8.1}, {-1.0, 5.8}},
-  Background -> colors["Background"],
-  ImageSize -> 980
+  "\n"
 ];
 
-killingGraphic = Graphics[
+kappaBranchGraphic = ImportString[kappaBranchSvg, "SVG"];
+
+killingSvg = StringRiffle[
   {
-    Inset[
-      Framed[
-        Column[{
-          Style["Computing the Killing form", cardTitleStyle[colors["Text"]]],
-          Style["The decisive invariant appears as a 6 x 6 block diagonal matrix.", baseLabelStyle],
-          Style[TraditionalForm[killingFormMatrixExpr[kappa]], FontFamily -> "Helvetica", FontSize -> 16, colors["Text"]],
-          Style["Rotation block stays fixed at -4 I3 while the boost block scales with kappa.", smallLabelStyle]
-        }, Spacings -> 0.7, Alignment -> Left],
-        Background -> colors["Card"],
-        FrameStyle -> Directive[colors["Slate"], AbsoluteThickness[2]],
-        RoundingRadius -> 12,
-        FrameMargins -> {{18, 18}, {16, 16}},
-        ImageSize -> {340, 220}
-      ],
-      {2.15, 2.2}
-    ],
-    Inset[
-      Framed[
-        Column[{
-          Style["rotation block", cardTitleStyle[colors["Slate"]]],
-          Style["-4 I3", FontFamily -> "Helvetica", FontSize -> 28, Bold, colors["Text"]],
-          Style["Always nonzero", baseLabelStyle]
-        }, Spacings -> 0.45, Alignment -> Center],
-        Background -> colors["SoftSlate"],
-        FrameStyle -> Directive[colors["Slate"], AbsoluteThickness[2]],
-        RoundingRadius -> 12,
-        FrameMargins -> {{16, 16}, {16, 16}},
-        ImageSize -> {200, 180}
-      ],
-      {5.05, 2.75}
-    ],
-    Inset[
-      Framed[
-        Column[{
-          Style["boost block", cardTitleStyle[colors["Lorentz"]]],
-          Style["4 kappa I3", FontFamily -> "Helvetica", FontSize -> 28, Bold, colors["Text"]],
-          Style["This is the sign-changing pivot of the whole story.", baseLabelStyle]
-        }, Spacings -> 0.45, Alignment -> Center],
-        Background -> colors["SoftLorentz"],
-        FrameStyle -> Directive[colors["Lorentz"], AbsoluteThickness[2]],
-        RoundingRadius -> 12,
-        FrameMargins -> {{16, 16}, {16, 16}},
-        ImageSize -> {220, 180}
-      ],
-      {7.45, 2.75}
-    ],
-    {Directive[colors["Slate"], AbsoluteThickness[2.4], Arrowheads[0.035]],
-      Arrow[{{3.95, 2.55}, {4.55, 2.7}}],
-      Arrow[{{6.1, 2.7}, {6.6, 2.7}}]},
-    Inset[
-      Framed[
-        Grid[
-          {
-            {"kappa < 0", "negative boost block", "compact / Euclidean verdict"},
-            {"kappa = 0", "zero boost block", "degenerate Galilean verdict"},
-            {"kappa > 0", "positive boost block", "Lorentzian verdict"}
-          },
-          Background -> {
-            None,
-            {
-              colors["SoftEuclidean"],
-              colors["SoftGalilean"],
-              colors["SoftLorentz"]
-            }
-          },
-          Dividers -> {All, All},
-          Alignment -> Left,
-          ItemStyle -> {
-            Directive[FontFamily -> "Helvetica", FontSize -> 12, colors["Text"]],
-            Directive[FontFamily -> "Helvetica", FontSize -> 12, colors["Text"]],
-            Directive[FontFamily -> "Helvetica", FontSize -> 12, colors["Text"]]
-          },
-          Spacings -> {1.1, 0.9}
-        ],
-        Background -> colors["Card"],
-        FrameStyle -> Directive[colors["Slate"], AbsoluteThickness[2]],
-        RoundingRadius -> 10,
-        FrameMargins -> {{12, 12}, {10, 10}},
-        ImageSize -> {520, Automatic}
-      ],
-      {5.95, 0.58}
-    ]
+    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"820\" height=\"320\" viewBox=\"0 0 820 320\" role=\"img\" aria-labelledby=\"title desc\">",
+    "  <title id=\"title\">Killing form preview</title>",
+    "  <desc id=\"desc\">The rotation block stays fixed while the boost block scales with kappa.</desc>",
+    "  <rect width=\"820\" height=\"320\" fill=\"#fbfcfe\"/>",
+    "  <style>",
+    "    .title { font: 700 28px 'Georgia', 'Times New Roman', serif; fill: #253446; }",
+    "    .subtitle { font: 16px 'Georgia', 'Times New Roman', serif; fill: #415264; }",
+    "    .blockLabel { font: 700 22px 'Georgia', 'Times New Roman', serif; }",
+    "    .blockValue { font: 700 30px 'Georgia', 'Times New Roman', serif; }",
+    "    .frame { stroke: #4c5d70; stroke-width: 3; }",
+    "  </style>",
+    "  <text x=\"410\" y=\"48\" text-anchor=\"middle\" class=\"title\">B = diag(-4 I&#8323;, 4 &#954; I&#8323;)</text>",
+    "  <text x=\"410\" y=\"78\" text-anchor=\"middle\" class=\"subtitle\">The algebra's canonical invariant reveals the branch structure before any final spacetime metric is assumed.</text>",
+    "  <rect x=\"96\" y=\"116\" width=\"256\" height=\"116\" rx=\"20\" ry=\"20\" class=\"frame\" fill=\"#e5eef8\"/>",
+    "  <text x=\"224\" y=\"154\" text-anchor=\"middle\" class=\"blockLabel\" fill=\"#1e4774\">rotation block</text>",
+    "  <text x=\"224\" y=\"204\" text-anchor=\"middle\" class=\"blockValue\" fill=\"#1e4774\">-4 I&#8323;</text>",
+    "  <rect x=\"468\" y=\"116\" width=\"256\" height=\"116\" rx=\"20\" ry=\"20\" class=\"frame\" fill=\"#e8f5ec\"/>",
+    "  <text x=\"596\" y=\"154\" text-anchor=\"middle\" class=\"blockLabel\" fill=\"#1f6a46\">boost block</text>",
+    "  <text x=\"596\" y=\"204\" text-anchor=\"middle\" class=\"blockValue\" fill=\"#1f6a46\">4 &#954; I&#8323;</text>",
+    "  <path d=\"M352 174 H468\" stroke=\"#4c5d70\" stroke-width=\"4\" fill=\"none\"/>",
+    "  <polygon points=\"460,164 484,174 460,184\" fill=\"#4c5d70\"/>",
+    "  <text x=\"410\" y=\"274\" text-anchor=\"middle\" class=\"subtitle\">Rotation data stays fixed; the boost sector alone changes sign, degenerates at &#954; = 0, and becomes Lorentzian for &#954; &gt; 0.</text>",
+    "</svg>"
   },
-  PlotRange -> {{0.2, 8.6}, {-0.4, 3.8}},
-  Background -> colors["Background"],
-  ImageSize -> 980
+  "\n"
 ];
 
-spacetimeGraphic = Graphics[
+killingGraphic = ImportString[killingSvg, "SVG"];
+
+spacetimeSvg = StringRiffle[
   {
-    Inset[
-      Framed[
-        Column[{
-          Style["Spacetime metric consequences", cardTitleStyle[colors["Text"]]],
-          Style[
-            Row[{"g = ", TraditionalForm[spacetimeMetricExpr[kappa]]}],
-            FontFamily -> "Helvetica", FontSize -> 16, colors["Text"]],
-          Style["The same parameter that scales the boost block also controls the invariant quadratic form.", baseLabelStyle]
-        }, Spacings -> 0.65, Alignment -> Left],
-        Background -> colors["Card"],
-        FrameStyle -> Directive[colors["Slate"], AbsoluteThickness[2]],
-        RoundingRadius -> 12,
-        FrameMargins -> {{18, 18}, {16, 16}},
-        ImageSize -> {360, 200}
-      ],
-      {2.45, 2.65}
-    ],
-    Inset[metricMiniPanel[-1/2, "Euclidean", "No null directions survive.", colors["Euclidean"]], {5.65, 3.05}],
-    Inset[metricMiniPanel[0, "Galilean", "Only dt^2 remains canonical.", colors["Galilean"]], {5.65, 1.9}],
-    Inset[metricMiniPanel[1/2, "Lorentzian", "Congruent to diag(1,-1,-1,-1).", colors["Lorentz"]], {5.65, 0.75}],
-    {Directive[colors["Slate"], AbsoluteThickness[2.2], Arrowheads[0.03]],
-      Arrow[{{3.95, 2.6}, {4.55, 3.0}}],
-      Arrow[{{3.95, 2.35}, {4.55, 1.9}}],
-      Arrow[{{3.95, 2.1}, {4.55, 0.8}}]}
+    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"820\" height=\"300\" viewBox=\"0 0 820 300\" role=\"img\" aria-labelledby=\"title desc\">",
+    "  <title id=\"title\">Spacetime metric preview</title>",
+    "  <desc id=\"desc\">The invariant spacetime metric follows from the algebraic invariant and separates the Galilean and Lorentzian branches.</desc>",
+    "  <rect width=\"820\" height=\"300\" fill=\"#fbfcfe\"/>",
+    "  <style>",
+    "    .title { font: 700 28px 'Georgia', 'Times New Roman', serif; fill: #253446; }",
+    "    .body { font: 16px 'Georgia', 'Times New Roman', serif; fill: #405161; }",
+    "    .cardTitle { font: 700 21px 'Georgia', 'Times New Roman', serif; }",
+    "    .cardText { font: 15px 'Georgia', 'Times New Roman', serif; fill: #3e4f60; }",
+    "    .frame { stroke: #4d5f72; stroke-width: 3; }",
+    "  </style>",
+    "  <text x=\"410\" y=\"46\" text-anchor=\"middle\" class=\"title\">g = diag(1, -&#954;, -&#954;, -&#954;)</text>",
+    "  <text x=\"410\" y=\"76\" text-anchor=\"middle\" class=\"body\">The spacetime form is read from the algebraic invariant. The positive-&#954; branch yields a Lorentzian signature; the zero branch leaves an absolute-time direction.</text>",
+    "  <rect x=\"78\" y=\"114\" width=\"288\" height=\"118\" rx=\"20\" ry=\"20\" class=\"frame\" fill=\"#edf6ea\"/>",
+    "  <text x=\"222\" y=\"154\" text-anchor=\"middle\" class=\"cardTitle\" fill=\"#246845\">&#954; = 0</text>",
+    "  <text x=\"222\" y=\"184\" text-anchor=\"middle\" class=\"cardText\">boost sector collapses</text>",
+    "  <text x=\"222\" y=\"208\" text-anchor=\"middle\" class=\"cardText\">absolute time survives</text>",
+    "  <rect x=\"454\" y=\"114\" width=\"288\" height=\"118\" rx=\"20\" ry=\"20\" class=\"frame\" fill=\"#f8e6e6\"/>",
+    "  <text x=\"598\" y=\"154\" text-anchor=\"middle\" class=\"cardTitle\" fill=\"#8e2a2a\">&#954; &gt; 0</text>",
+    "  <text x=\"598\" y=\"184\" text-anchor=\"middle\" class=\"cardText\">nondegenerate invariant metric</text>",
+    "  <text x=\"598\" y=\"208\" text-anchor=\"middle\" class=\"cardText\">finite invariant speed appears</text>",
+    "  <path d=\"M366 173 H454\" stroke=\"#4d5f72\" stroke-width=\"4\" fill=\"none\"/>",
+    "  <polygon points=\"444,163 468,173 444,183\" fill=\"#4d5f72\"/>",
+    "</svg>"
   },
-  PlotRange -> {{0.2, 8.4}, {0.0, 4.0}},
-  Background -> colors["Background"],
-  ImageSize -> 980
+  "\n"
 ];
+
+spacetimeGraphic = ImportString[spacetimeSvg, "SVG"];
 
 crosswalkRows = {
   {"One parameter, three worlds",
@@ -779,9 +678,9 @@ notebookPath = FileNameJoin[{notebooksDir, "one_postulate_explainer.nb"}];
 
 Export[notebookPath, nb, "NB"];
 Export[FileNameJoin[{assetsDir, "notebook_hero_overview.svg"}], heroGraphic];
-Export[FileNameJoin[{assetsDir, "notebook_preview_branches.svg"}], kappaBranchGraphic];
-Export[FileNameJoin[{assetsDir, "notebook_preview_killing_form.svg"}], killingGraphic];
-Export[FileNameJoin[{assetsDir, "notebook_preview_spacetime.svg"}], spacetimeGraphic];
+Export[FileNameJoin[{assetsDir, "notebook_preview_branches.svg"}], kappaBranchSvg, "Text"];
+Export[FileNameJoin[{assetsDir, "notebook_preview_killing_form.svg"}], killingSvg, "Text"];
+Export[FileNameJoin[{assetsDir, "notebook_preview_spacetime.svg"}], spacetimeSvg, "Text"];
 Export[FileNameJoin[{assetsDir, "notebook_preview_crosswalk.svg"}], crosswalkGraphic];
 
 Print["Wrote ", notebookPath];
