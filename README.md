@@ -1,173 +1,180 @@
-# One Postulate Lean
+# One Postulate
 
-`one-postulate-lean` is a Lean 4 + Mathlib formalization of the argument in *One Postulate*: starting from the relativity principle and a one-parameter kinematic family indexed by `κ`, the repository derives the homogeneous bracket structure, computes the Killing form, and separates the Euclidean, Galilean, and Lorentzian branches in a matrix-first proof development. The paper in [`paper/one-postulate.tex`](paper/one-postulate.tex) states the narrative, Lean supplies the proof authority, the Wolfram workbook at [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb) is now the primary public-facing computational companion, and the SymPy notebook remains a secondary explainer.
+Einstein built special relativity on two postulates. This repository argues that only one of them is foundational: the relativity principle alone yields a one-parameter family of kinematic universes indexed by `kappa`; the algebra's own self-test, the Killing form, rules out the Euclidean and Galilean branches as fundamental; and experiment calibrates the invariant speed instead of positing it. This repository is the formal verification companion to the paper [*One Postulate*](paper/one-postulate.pdf): the paper states the argument, [Lean 4](https://lean-lang.org/) supplies proof authority for the exact algebraic claims, and the Wolfram and SymPy notebooks make the story explorable.
 
-## At a Glance
+<p align="center">
+  <img src="wolfram/assets/notebook_preview_branches.svg" alt="The three kinematic universes allowed by the relativity principle" width="900" />
+</p>
+<p align="center">
+  <sub>The relativity principle permits a one-parameter family of universes. The paper's claim is that the symmetry rules themselves eliminate two of the three branches.</sub>
+</p>
 
-- The formal development is organized around `κ`, which controls the boost-boost commutator and therefore the kinematic branch.
-- The Lean spine starts with explicit matrices, proves the bracket table, computes the Killing form, and only then reads off metric consequences.
-- The decisive invariant is the Killing form:
-  `diag(-4 I_3, 4 κ I_3)` in the ordered `(Jx, Jy, Jz, Kx, Ky, Kz)` basis.
-- The Wolfram workbook is built from [`wolfram/build_one_postulate_notebook.wl`](wolfram/build_one_postulate_notebook.wl), documented in [docs/notebooks.md](docs/notebooks.md), and intended as the primary public-facing computational companion; [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) remains available as a secondary explainer.
-- The three branches are formalized explicitly:
-  - `κ < 0`: Euclidean branch, no nonzero null vectors
-  - `κ = 0`: Galilean branch, degenerate boost sector, invariant absolute-time direction
-  - `κ > 0`: Lorentzian branch, nondegenerate invariant metric, finite real invariant speed
-- The guarded root is [`OnePostulate.lean`](OnePostulate.lean); the full-paper root is [`OnePostulateFull.lean`](OnePostulateFull.lean).
+## Why this matters
 
-## Visual Proof Map
+Special relativity is usually taught as beginning with two principles:
 
-```mermaid
-flowchart LR
-    A["SpacetimeMatrices"] --> B["KinematicAlgebra"]
-    B --> C["KillingForm"]
-    C --> D["VelocitySpace"]
-    C --> E["SpacetimeRepresentation"]
-    D --> F["Selection"]
-    E --> F
-    F --> G["ClassificationDerivation"]
-```
+1. The laws of physics take the same form in all inertial frames.
+2. Light travels at the same finite speed in every inertial frame.
 
-```mermaid
-flowchart TD
-    A["matrix_bracket_JJ / matrix_bracket_JK / matrix_bracket_KK"] --> B["kinematic_bracket_table"]
-    B --> C["killing_form_diag"]
-    C --> D["boost_killing_form_eq"]
-    D --> E["killing_restricts_to_metric"]
-    D --> F["spacetime_metric_invariant"]
-    E --> G["zero_kappa_velocity_metric_only_conformal"]
-    F --> H["reducible_of_kappa_zero"]
-    F --> I["spacetime_metric_congruent_stdLorentz_of_kappa_pos"]
-    G --> J["phase1_selection_summary"]
-    H --> J
-    I --> J
-```
+The first is a symmetry statement. The second is an empirical statement about one physical phenomenon. The paper asks whether that second statement really had to sit in the foundations.
 
-```mermaid
-flowchart LR
-    K["kappa"] --> N["kappa < 0<br/>Euclidean"]
-    K --> Z["kappa = 0<br/>Galilean"]
-    K --> P["kappa > 0<br/>Lorentzian"]
-```
+If the point of relativity is to remove background structure rather than smuggle it in, then the symmetry rules should be able to diagnose their own geometry. This repository's central claim is that they can: the relativity principle already determines what kind of spacetime is possible, and experiment is only needed to measure the numerical value of the invariant speed.
 
-```mermaid
-flowchart LR
-    K["kappa<br/>one parameter"] --> N["kappa &lt; 0<br/>Euclidean branch<br/>no nonzero null vectors"]
-    K --> Z["kappa = 0<br/>Galilean branch<br/>degenerate boost sector"]
-    K --> P["kappa &gt; 0<br/>Lorentzian branch<br/>finite real invariant speed"]
-```
+## What this paper does differently
 
-## Why the Killing Form Matters
+Rather than start with light and derive Lorentzian kinematics from it, the paper starts with the relativity principle together with the standard assumptions of homogeneity, isotropy, and group composition. Those assumptions lead to the familiar one-parameter family
 
-```mermaid
-flowchart LR
-    A["Relativity principle<br/>one-parameter kinematic family"] --> B["Bracket structure<br/>adjoint setup"]
-    B --> C["Killing form computation"]
-    C --> D["Boost-sector and spacetime consequences<br/>geometry is read off here, not assumed first"]
-    D --> E["Three kappa branches<br/>Euclidean / Galilean / Lorentzian"]
-```
+$$
+t' = \gamma (t - \kappa v x), \qquad
+x' = \gamma (x - vt), \qquad
+\gamma = \frac{1}{\sqrt{1 - \kappa v^2}}.
+$$
 
-The argument does not assume the final spacetime metric first and then check it later. It computes the algebra's canonical invariant, shows how the boost block scales with `κ`, and then reads geometry from that result. The Wolfram workbook is organized around the same pivot: exact symbolic calculations are there to make the invariant visible, not to replace Lean. A fuller walkthrough lives in [docs/proof-visuals.md](docs/proof-visuals.md).
+This is the family found in the one-postulate derivations going back to Ignatowski (1910), sharpened later by [Bacry and Levy-Leblond (1968)](https://www.osti.gov/biblio/4838778), [Pal (2003)](https://arxiv.org/abs/physics/0302045), and [Anker and Ziegler (2020)](https://arxiv.org/abs/2007.09301). What those derivations leave open is the sign and physical meaning of `kappa`.
 
-```mermaid
-flowchart LR
-    A["Bracket family<br/>[K_i, K_j] = -kappa epsilon_ijk J_k"] --> B["Killing form pivot<br/>B = diag(-4 I_3, 4 kappa I_3)<br/>compute invariant first"]
-    B --> C["rotation block<br/>-4 I_3<br/>fixed across all branches"]
-    B --> D["boost block<br/>4 kappa I_3<br/>changes sign and vanishes at kappa = 0"]
-```
+The paper's move is to stop asking experiment to choose the branch and instead ask whether the algebra can examine itself. That is where the Killing form becomes decisive.
 
-## Paper <-> Lean <-> Notebook
+## From one postulate to three possible universes
 
-```mermaid
-flowchart TB
-    subgraph S1["Bracket setup"]
-        direction LR
-        P1["Paper<br/>The postulate / What the postulate determines"]
-        L1["Lean<br/>SpacetimeMatrices + KinematicAlgebra<br/>matrix_bracket_* / kinematic_bracket_table"]
-        N1["Notebook<br/>Transformation law, Galilean limit, adopted algebra"]
-        P1 --> L1 --> N1
-    end
-    subgraph S2["Killing form"]
-        direction LR
-        P2["Paper<br/>Can the rules examine themselves?"]
-        L2["Lean<br/>KillingForm + VelocitySpace<br/>killing_form_diag / boost_killing_form_eq / killing_restricts_to_metric"]
-        N2["Notebook<br/>Adjoint action, Killing form, kappa = 0 collapse"]
-        P2 --> L2 --> N2
-    end
-    subgraph S3["Branch classification"]
-        direction LR
-        P3["Paper<br/>Three verdicts / Structure and scale"]
-        L3["Lean<br/>SpacetimeRepresentation + Selection + ClassificationDerivation<br/>phase1_selection_summary / classification_derivation_complete_full"]
-        N3["Notebook<br/>Regime table and branch comparison"]
-        P3 --> L3 --> N3
-    end
-    S1 --> S2 --> S3
-```
+Once `kappa` appears, three broad possibilities open up:
 
-| Paper idea | Lean proof surface | Computational companion |
+| Branch | What the transformations describe | What kind of spacetime it gives |
 | --- | --- | --- |
-| `The postulate` / `What the postulate determines` | [`OnePostulate/SpacetimeMatrices.lean`](OnePostulate/SpacetimeMatrices.lean), [`OnePostulate/KinematicAlgebra.lean`](OnePostulate/KinematicAlgebra.lean), `matrix_bracket_*`, `kinematic_bracket_table` | [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb) opening sections on the transformation law, Galilean limit, and adopted algebra; [docs/notebooks.md](docs/notebooks.md) explains the workflow; [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) remains secondary |
-| `Can the rules examine themselves?` | [`OnePostulate/KillingForm.lean`](OnePostulate/KillingForm.lean), [`OnePostulate/VelocitySpace.lean`](OnePostulate/VelocitySpace.lean), `killing_form_diag`, `boost_killing_form_eq`, `killing_restricts_to_metric` | Wolfram workbook middle sections on adjoint action, the Killing form, and the `κ = 0` collapse, with the exact build path in [`wolfram/build_one_postulate_notebook.wl`](wolfram/build_one_postulate_notebook.wl) |
-| `Three verdicts` / `Structure and scale` | [`OnePostulate/SpacetimeRepresentation.lean`](OnePostulate/SpacetimeRepresentation.lean), [`OnePostulate/Selection.lean`](OnePostulate/Selection.lean), [`OnePostulate/ClassificationDerivation.lean`](OnePostulate/ClassificationDerivation.lean) | Wolfram workbook regime table and branch comparison cells, with a secondary crosswalk visual at [`wolfram/assets/notebook_preview_crosswalk.svg`](wolfram/assets/notebook_preview_crosswalk.svg) |
+| `kappa < 0` | Boosts behave like rotations in a compact geometry | Euclidean four-geometry with no lightcones and no causal distinction between past and future |
+| `kappa = 0` | The mixing of space into time disappears | Galilean kinematics with absolute time, no invariant speed, and no unified spacetime metric |
+| `kappa > 0` | Space and time mix with a finite limiting speed | Lorentzian spacetime with lightcones, causality, and a real invariant speed |
 
-### What Is Computed Here vs Proved in Lean
+The standard historical conclusion is that the first postulate alone reaches this three-way fork but cannot decide among the branches. The paper's claim is stronger: once the algebra is allowed to test its own internal structure, only one branch remains compatible with the symmetry principle as a foundational statement.
 
-The Wolfram workbook is a computational companion, not a proof-assistant notebook. It evaluates exact formulas and visualizes the branch split; Lean remains the proof authority.
+## Can the rules examine themselves?
 
-| Narrative stage | Computed / visualized here | Lean anchors | Source of authority |
+The homogeneous kinematics algebra has six generators: three rotations `J_i` and three boosts `K_i`. The paper studies how those generators reshuffle one another under the adjoint action and then applies the algebra's canonical invariant:
+
+$$
+B(X,Y) = \mathrm{tr}(\mathrm{ad}_X \circ \mathrm{ad}_Y).
+$$
+
+For the `kappa`-family, the result is
+
+$$
+B = \mathrm{diag}(-4 I_3,\; 4 \kappa I_3).
+$$
+
+That single matrix is the pivot of the argument.
+
+- The rotation block is always nonzero.
+- The boost block is controlled entirely by `kappa`.
+- When the boost block vanishes, the algebra is blind to exactly the operations that relate one inertial frame to another.
+
+<p align="center">
+  <img src="wolfram/assets/notebook_preview_killing_form.svg" alt="Preview of the Killing-form view from the Wolfram notebook" width="900" />
+</p>
+<p align="center">
+  <sub>The repository's computational companion makes the same pivot visible: compute the invariant first, then read geometry from it.</sub>
+</p>
+
+This is why the Killing form is not an ornamental calculation in the paper. It is the mechanism that tells us whether the symmetry rules can generate their own geometry or whether some part of spacetime has been left as unexplained background structure.
+
+## Three verdicts
+
+**`kappa < 0`: no causal structure**
+
+When `kappa` is negative, the Killing form is nondegenerate everywhere, but the resulting group is compact. There is no lightcone structure, no intrinsic distinction between temporal and spatial directions, and no causal ordering of events. The branch is geometrically coherent and physically wrong for a universe with cause and effect.
+
+**`kappa = 0`: the algebra goes blind**
+
+When `kappa = 0`, the Killing form vanishes on every boost. The boost sector still has shape, but it has no intrinsic ruler. Velocity space has symmetry without a preferred scale, there is no invariant speed, and time survives as fixed background structure rather than being generated by the symmetry. This is why the paper treats Galilean mechanics not as a rival foundation but as a singular limit of the Lorentzian case.
+
+**`kappa > 0`: everything is determined**
+
+When `kappa` is positive, every generator remains visible to the algebra's self-test. The boost sector acquires a definite scale, the invariant speed is finite and real, and spacetime carries a Lorentzian metric rather than separate external notions of space and time. This is the only branch that both preserves causal structure and eliminates background scaffolding.
+
+The paper's comparison table can be read directly from that split:
+
+| Question | `kappa < 0` | `kappa = 0` | `kappa > 0` |
 | --- | --- | --- | --- |
-| Transformation law and `κ -> 0` limit | exact Wolfram limits and the one-parameter law | [`matrix_bracket_JJ`](OnePostulate/SpacetimeMatrices.lean), [`matrix_bracket_JK`](OnePostulate/SpacetimeMatrices.lean), [`matrix_bracket_KK`](OnePostulate/SpacetimeMatrices.lean) | paper + Lean |
-| Kinematic bracket family | bracket table and matrix-form inspection | [`kinematic_bracket_table`](OnePostulate/KinematicAlgebra.lean), [`kinematic_bracket_jacobi`](OnePostulate/KinematicAlgebra.lean), [`boostCommutator_scales_with_kappa`](OnePostulate/KinematicAlgebra.lean) | Lean |
-| Killing form pivot | exact block-matrix computation | [`killing_form_diag`](OnePostulate/KillingForm.lean), [`boost_killing_form_eq`](OnePostulate/KillingForm.lean), [`boost_killing_nondegenerate_iff_kappa_ne_zero`](OnePostulate/KillingForm.lean) | Lean |
-| Branch consequences | regime table and summary panels | [`killing_restricts_to_metric`](OnePostulate/VelocitySpace.lean), [`zero_kappa_velocity_metric_only_conformal`](OnePostulate/VelocitySpace.lean), [`spacetime_metric_eq_diagonal`](OnePostulate/SpacetimeRepresentation.lean), [`phase1_selection_summary`](OnePostulate/Selection.lean), [`classification_derivation_complete`](OnePostulate/ClassificationDerivation.lean), [`classification_derivation_complete_full`](OnePostulate/ClassificationDerivation.lean) | paper + Lean |
+| Killing form on boosts | Negative | Zero | Positive |
+| Invariant speed | Imaginary | Undefined | Finite and real |
+| Spacetime metric | Euclidean | `dt^2` only | Lorentzian |
+| Causal structure | None | None | Lightcones |
+| Space-time unification | All four directions alike | Impossible | Complete |
+| Background structure needed | None | Yes | None |
 
-```mermaid
-flowchart LR
-    A["g = diag(1, -kappa, -kappa, -kappa)<br/>spacetime consequence read from the algebra"] --> B["kappa = 0<br/>Galilean branch<br/>boost sector collapses<br/>absolute time survives"]
-    A --> C["kappa &gt; 0<br/>Lorentzian branch<br/>nondegenerate invariant metric<br/>finite invariant speed"]
-```
+## Structure and scale
 
-For the deeper walkthrough, see [docs/proof-visuals.md](docs/proof-visuals.md), the notebook guide in [docs/notebooks.md](docs/notebooks.md), the Wolfram workbook at [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), and the secondary SymPy notebook at [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1QicnUoHA3gSGQjb5NJxH09PDSXWZb8tr?usp=sharing).
+The argument does **not** determine the numerical value of the invariant speed. It determines that such a speed must exist.
 
-## Formalization and Validation Story
+That is the paper's distinction between structure and calibration:
 
-This repository is not only a Lean formalization of the paper. It is also set up to be checked by external autoformalization and theorem-proving tooling. The core proof remains the local Lean code, but the surrounding validation story is now part of the public record.
+- The symmetry analysis fixes the architecture.
+- Experiment fixes the conversion factor between space and time.
+- Measuring `c` tells us that `kappa = 1 / c^2`.
 
-- Lean formalization:
-  the repository formalizes the matrix-first spine of the paper, from the bracket table and Killing form through the `κ < 0`, `κ = 0`, and `κ > 0` branch split.
-- Aristotle by Harmonic:
-  the external prover is documented in the repository as a second prover and checker, and Harmonic describes Aristotle as a system that combines formal verification with informal reasoning in Lean ([arXiv](https://arxiv.org/abs/2510.01346), [Harmonic PDF](https://harmonic.fun/pdf/Aristotle_IMO_Level_Automated_Theorem_Proving.pdf)).
-- OpenGauss / Gauss by Math, Inc.:
-  the repository includes project-scoped Gauss configuration in [`.gauss/project.yaml`](.gauss/project.yaml), and Math, Inc. describes OpenGauss as an open-source, state-of-the-art autoformalization harness for Lean and Gauss as its frontier autoformalization agent ([OpenGauss](https://www.math.inc/opengauss), [Gauss](https://www.math.inc/gauss)).
+This is why the paper's closing claim is so sharp: the speed's value is empirical; its existence is not.
 
-### What The Formalization Covers
+## Formal verification
 
-- Main imported surface:
-  explicit generators, `matrix_bracket_*`, `kinematic_bracket_table`, the explicit Killing form, the boost-sector metric, the invariant spacetime form, and the phase-1 branch split.
-- Full-paper surface:
-  the deferred classification bridge in [`OnePostulate/ClassificationDerivation.lean`](OnePostulate/ClassificationDerivation.lean), kept separate from the guarded root [`OnePostulate.lean`](OnePostulate.lean).
-- Public branch summary:
-  `κ < 0` gives the Euclidean branch, `κ = 0` the Galilean branch, and `κ > 0` the Lorentzian branch with a finite real invariant speed.
+The repository formalizes the paper's exact algebraic spine in Lean 4 with Mathlib. The proof development is matrix-first: it writes down explicit generators, proves the bracket table, computes the Killing form, and only then reads off the spacetime consequences.
 
-### What The Verification Summaries Say
+| Surface | Role | Authority |
+| --- | --- | --- |
+| [`paper/one-postulate.tex`](paper/one-postulate.tex) and [`paper/one-postulate.pdf`](paper/one-postulate.pdf) | Narrative arc, claim ordering, physical interpretation | Paper |
+| [`OnePostulate.lean`](OnePostulate.lean) | Guarded exact proof surface | Lean proof authority |
+| [`OnePostulateFull.lean`](OnePostulateFull.lean) | Full-paper root including the deferred classification bridge | Lean proof authority |
+| [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb) and [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) | Symbolic checks, diagrams, and interactive explanation | Computed here, not proof authority |
 
-- Main-surface Aristotle validation:
-  the archived run in [docs/aristotle/runs/483c60fc-d712-4426-b086-30bf99699fa2/ARISTOTLE_SUMMARY_483c60fc-d712-4426-b086-30bf99699fa2.md](docs/aristotle/runs/483c60fc-d712-4426-b086-30bf99699fa2/ARISTOTLE_SUMMARY_483c60fc-d712-4426-b086-30bf99699fa2.md) reports a clean main-surface build, no `sorry`s, standard axioms only, and no mismatches against [`paper/one-postulate.tex`](paper/one-postulate.tex).
-- Full-paper Aristotle validation:
-  the archived run in [docs/aristotle/runs/e6639ca2-b91a-4b73-aa99-780e921628ab/ARISTOTLE_SUMMARY_e6639ca2-b91a-4b73-aa99-780e921628ab.md](docs/aristotle/runs/e6639ca2-b91a-4b73-aa99-780e921628ab/ARISTOTLE_SUMMARY_e6639ca2-b91a-4b73-aa99-780e921628ab.md) reports no mismatches for [`OnePostulateFull.lean`](OnePostulateFull.lean) and [`OnePostulate/ClassificationDerivation.lean`](OnePostulate/ClassificationDerivation.lean), with the main import boundary preserved.
-- OpenGauss status in this repository:
-  the repository is configured for project-scoped OpenGauss use and interactive autoformalization workflows, but the tracked validation archive in this checkout is Aristotle-centered rather than a committed OpenGauss run report.
+The main Lean modules line up with the paper's stages:
 
-## How to Read This Repo
+| Lean surface | What it covers |
+| --- | --- |
+| [`OnePostulate/SpacetimeMatrices.lean`](OnePostulate/SpacetimeMatrices.lean) and [`OnePostulate/KinematicAlgebra.lean`](OnePostulate/KinematicAlgebra.lean) | Explicit generators, bracket table, Jacobi identity |
+| [`OnePostulate/KillingForm.lean`](OnePostulate/KillingForm.lean) | `B = diag(-4 I_3, 4 kappa I_3)` and the boost-sector split |
+| [`OnePostulate/VelocitySpace.lean`](OnePostulate/VelocitySpace.lean) and [`OnePostulate/SpacetimeRepresentation.lean`](OnePostulate/SpacetimeRepresentation.lean) | Velocity-space metric behavior, spacetime metric invariance, Galilean reducibility, Lorentzian congruence |
+| [`OnePostulate/Selection.lean`](OnePostulate/Selection.lean) and [`OnePostulate/ClassificationDerivation.lean`](OnePostulate/ClassificationDerivation.lean) | The branch verdicts and the deferred full-paper classification bridge |
 
-- General audience:
-  start with [`paper/one-postulate.pdf`](paper/one-postulate.pdf), skim the diagrams and preview assets above, then open [docs/notebooks.md](docs/notebooks.md) and the Wolfram workbook at [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb).
-- Math reader:
-  read [`paper/one-postulate.tex`](paper/one-postulate.tex), then [docs/proof-visuals.md](docs/proof-visuals.md), then the dependency ledger in [`blueprint/src/content.tex`](blueprint/src/content.tex).
-- Lean reader:
-  begin at [`OnePostulate.lean`](OnePostulate.lean), follow the module order shown in the proof map, and use [`OnePostulateFull.lean`](OnePostulateFull.lean) only when you want the deferred classification bridge.
+For a deeper walkthrough of the proof spine, see [docs/proof-visuals.md](docs/proof-visuals.md). For notebook workflow, assets, and presentation guidance, see [docs/notebooks.md](docs/notebooks.md). Repository-specific external validation workflows live under [docs/aristotle/README.md](docs/aristotle/README.md), and project-scoped Gauss/OpenGauss setup is documented in [documentation.md](documentation.md).
 
-## Build and Validation
+## Explore the mathematics
+
+The repository includes two computational companions:
+
+- Primary public-facing notebook: [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), generated from [`wolfram/build_one_postulate_notebook.wl`](wolfram/build_one_postulate_notebook.wl)
+- Secondary notebook: [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Intelligent-Internet/ii-research-one-postulate/blob/main/one_postulate_sympy_colab.ipynb)
+
+<p align="center">
+  <img src="wolfram/assets/notebook_preview_crosswalk.svg" alt="Paper to notebook to Lean crosswalk" width="900" />
+</p>
+<p align="center">
+  <sub>The notebook surfaces mirror the paper's rhetorical order while keeping Lean as the proof boundary.</sub>
+</p>
+
+Suggested reading order:
+
+1. Start with the paper: [`paper/one-postulate.pdf`](paper/one-postulate.pdf)
+2. Use the proof guide: [docs/proof-visuals.md](docs/proof-visuals.md)
+3. Open the notebook guide: [docs/notebooks.md](docs/notebooks.md)
+4. Explore the Wolfram or SymPy companion
+5. Drop into [`OnePostulate.lean`](OnePostulate.lean) if you want the exact proof surface
+
+## How this relates to prior work
+
+The README follows the paper's claim, but the paper itself sits inside a long "relativity without light" conversation:
+
+| Year | Reference | Role in this repository's story |
+| --- | --- | --- |
+| 1888 | Wilhelm Killing, *Die Zusammensetzung der stetigen endlichen Transformationsgruppen* | Introduces the Killing form that becomes the paper's decisive self-test |
+| 1905 | [Albert Einstein, *On the Electrodynamics of Moving Bodies*](https://en.wikisource.org/wiki/On_the_Electrodynamics_of_Moving_Bodies_%281920_edition%29) | States the two-postulate presentation of special relativity |
+| 1910 | W. von Ignatowski, *Einige allgemeine Bemerkungen uber das Relativitatsprinzip* | Shows that the relativity principle already leads to a one-parameter kinematic family |
+| 1968 | [H. Bacry and J.-M. Levy-Leblond, *Possible Kinematics*](https://www.osti.gov/biblio/4838778) | Classifies the possible kinematic groups and sharpens the one-parameter picture |
+| 2003 | [P. B. Pal, *Nothing but Relativity*](https://arxiv.org/abs/physics/0302045) | Modern derivation of Lorentz transformations without assuming light at the start |
+| 2015 | [A. Drory, *The necessity of the second postulate in special relativity*](https://arxiv.org/abs/1412.4018) | Frames the modern debate over how much the second postulate contributes physically |
+| 2020 | [J.-P. Anker and F. Ziegler, *Relativity without light: A new proof of Ignatowski's theorem*](https://arxiv.org/abs/2007.09301) | Shows the one-postulate route remains mathematically active and technically fertile |
+
+This repository's contribution is not another derivation of the `kappa` family. Its claim is that the family's internal invariant already chooses the physically acceptable branch.
+
+## Build and repository map
+
+Build the local proof and notebook surfaces from the repository root:
 
 ```bash
 lake build
@@ -177,40 +184,28 @@ rg -n 'sorry|admit' OnePostulateFull.lean OnePostulate.lean OnePostulate/*.lean
 wolframscript -file wolfram/build_one_postulate_notebook.wl
 ```
 
-For repository-specific workflow notes and archived review runs, see [docs/aristotle/README.md](docs/aristotle/README.md). For project-scoped Gauss/OpenGauss setup, see [documentation.md](documentation.md). For the Wolfram notebook workflow, preview assets, and share/present notes, see [docs/notebooks.md](docs/notebooks.md).
+Key repository surfaces:
 
-## Repo Status
+```text
+paper/                    Paper source and PDF
+OnePostulate/             Lean proof modules
+OnePostulate.lean         Guarded exact root
+OnePostulateFull.lean     Full-paper root
+docs/proof-visuals.md     Proof-map and theorem spine
+docs/notebooks.md         Notebook workflow and asset guide
+docs/aristotle/           External validation workflows and archived runs
+wolfram/                  Notebook builder, generated notebook, SVG previews
+one_postulate_sympy_colab.ipynb   Secondary SymPy companion
+documentation.md          Retrieval-oriented repo context
+```
 
-- Proof authority lives in the local paper and Lean files, not in the README or notebooks.
-- The guarded import boundary is preserved:
-  [`OnePostulate.lean`](OnePostulate.lean) does not import `OnePostulate.ClassificationDerivation`.
-- The full-paper bridge remains separate in [`OnePostulateFull.lean`](OnePostulateFull.lean).
-- Public-facing Wolfram notebooks and SVG previews now live under the canonical [`wolfram/`](wolfram/) paths.
-- Public-facing visuals and notebooks are intended to make the argument easier to read, not to widen the formal surface.
-- External validation story:
-  Aristotle run summaries are archived in-tree; OpenGauss is configured in-tree, but this checkout does not currently archive a dedicated OpenGauss validation report.
+## References
 
-## TODO Checklist
-
-- [ ] Add D3 and SVG animations.
-- [x] Expand Wolfram/Mathematica simulations and Observable D3.
-- [ ] Map to interactive website experience.
-- [ ] Add license and attribution.
-- [ ] Add backlinks to II website + blogs.
-- [ ] Add social buttons to README.
-- [ ] Human factors and editorial on README content.
-- [x] 2026-03-31 `6b6fa14`: Upgrade the Wolfram notebook workflow, canonical `wolfram/` asset paths, and public docs. Present on `mathematica-sympy-one-postulate`.
-- [x] 2026-03-30 `91880ef`: Fix Mermaid labels so GitHub renders the proof diagrams correctly. Current branch only.
-- [x] 2026-03-30 `fae4848`: Refresh the public docs and notebook surfaces, including the landing-page README, proof visuals, notebook guide, Wolfram companion notebook, and preview assets. Current branch only.
-- [x] 2026-03-29 `46309e7`: Archive Aristotle validation bundles as tracked tarballs. Present only on `origin/aristotle-one-postulate`.
-- [x] 2026-03-29 `04b2de7` / `9b8d8b8`: Add a paper-aligned narrative to the SymPy notebook. Shared across the SymPy, Aristotle, and current branch lines.
-- [x] 2026-03-28 `3d819f2`: Rewrite the README as a narrative overview. Shared across the docs-oriented branch lines.
-- [x] 2026-03-28 `11d7901`: Update the paper and archive the current Aristotle validation runs.
-- [x] 2026-03-28 `ca63e19`: Archive the Aristotle main-surface validation run.
-- [x] 2026-03-27 `33b22f1`: Archive the Aristotle full-paper validation run.
-- [x] 2026-03-27 `a872df5`: Improve the README documentation.
-- [x] 2026-03-27 `7e604b9`: Add repository-specific Aristotle documentation.
-- [x] 2026-03-27 `176dd3e`: Add the full-paper `OnePostulateFull` surface and the deferred classification bridge.
-- [x] 2026-03-27 `7c22460`: Close out the phase-1 branch guards and validation hardening docs.
-- [x] 2026-03-26 `b67c260`: Complete the phase-1 formal fixes.
-- [x] 2026-03-26 `5c83dca`: Repair the phase-1 Lean surface baseline.
+- Emad Mostaque (2026), [*One Postulate*](paper/one-postulate.pdf)
+- [Albert Einstein (1905/1920 translation), *On the Electrodynamics of Moving Bodies*](https://en.wikisource.org/wiki/On_the_Electrodynamics_of_Moving_Bodies_%281920_edition%29)
+- Wilhelm Killing (1888), *Die Zusammensetzung der stetigen endlichen Transformationsgruppen*
+- W. von Ignatowski (1910), *Einige allgemeine Bemerkungen uber das Relativitatsprinzip*
+- [H. Bacry and J.-M. Levy-Leblond (1968), *Possible Kinematics*](https://www.osti.gov/biblio/4838778)
+- [P. B. Pal (2003), *Nothing but Relativity*](https://arxiv.org/abs/physics/0302045)
+- [A. Drory (2015), *The necessity of the second postulate in special relativity*](https://arxiv.org/abs/1412.4018)
+- [J.-P. Anker and F. Ziegler (2020), *Relativity without light: A new proof of Ignatowski's theorem*](https://arxiv.org/abs/2007.09301)
