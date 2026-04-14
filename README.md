@@ -3,6 +3,12 @@
 Here is the claim in plain language: Einstein used one postulate too many. The relativity principle alone yields a one-parameter family of kinematic universes indexed by `kappa`; the algebra's own built-in measuring tool, the Killing form, rules out the Euclidean and Galilean branches as fundamental; and experiment calibrates the invariant speed instead of positing it. This repository is the formal verification companion to the paper [*One Postulate*](paper/one-postulate.pdf): the paper states the argument, [Lean 4](https://lean-lang.org/) supplies proof authority for the exact algebraic claims, and the Wolfram and SymPy notebooks make the story explorable.
 
 <p align="center">
+  <a href="https://colab.research.google.com/github/Intelligent-Internet/ii-research-one-postulate/blob/main/one_postulate_sympy_colab.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+  </a>
+</p>
+
+<p align="center">
   <img src="wolfram/assets/notebook_preview_branches.svg" alt="The three kinematic universes allowed by the relativity principle" width="900" />
 </p>
 <p align="center">
@@ -11,6 +17,18 @@ Here is the claim in plain language: Einstein used one postulate too many. The r
 <p align="center">
   <sub><strong>Observation tells us the value of the speed. The mathematics tells us that the speed must exist.</strong></sub>
 </p>
+
+## Einstein Needed One, Not Two
+
+- `The extra postulate was never the foundation.` Einstein's second postulate was not false; on this paper's reading, it was the measured consequence of a deeper symmetry argument that had not yet been finished.
+- `A single number opens three possible universes.` `kappa` labels the available kinematics, and its sign decides whether you get Newton's world, Einstein's, or no causal order at all.
+- `Only one universe carries its own speed limit.` In the surviving `kappa > 0` branch, the transformations come with an invariant speed `V = 1 / sqrt(kappa)`, which experiment then measures in nature.
+
+## Begin Reading Here
+
+- `If you want the shortest version:` Read [Why this matters](#why-this-matters), [Which Universe Survives?](#which-universe-survives), and [What the Algebra Gives, What Experiment Gives](#what-the-algebra-gives-what-experiment-gives).
+- `If you want to play with the argument:` Use the Colab notebook above or open [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), then see [docs/notebooks.md](docs/notebooks.md) for the workflow details.
+- `If you want the exact proof path:` Start with [`paper/one-postulate.pdf`](paper/one-postulate.pdf), then [docs/proof-visuals.md](docs/proof-visuals.md), then [`OnePostulate.lean`](OnePostulate.lean) and [`OnePostulateFull.lean`](OnePostulateFull.lean).
 
 ## Why this matters
 
@@ -21,11 +39,13 @@ Special relativity is usually taught as beginning with two principles:
 
 The first is a symmetry statement. The second is an empirical statement about one physical phenomenon. The paper asks whether that second statement really had to sit in the foundations.
 
-Einstein's whole career was a campaign against things put in by hand. Special relativity removed absolute simultaneity. General relativity removed privileged coordinate systems. But the invariant speed of light still entered as a physical fact attached to one phenomenon. If the foundational principle is really frame-independence, then the symmetry rules ought to be able to diagnose their own geometry.
+In the late nineteenth century, that second postulate looked unavoidable. Sound travels relative to air. Water waves travel relative to water. Light was expected to travel relative to an aether, and the Michelson-Morley null result made that picture unstable without yet explaining what should replace it. Einstein's 1905 move was to elevate that empirical crisis into a principle: light itself would supply the invariant speed.
 
-This repository's central claim is that they can. If the paper is right, special relativity is more self-contained than Einstein himself could show in 1905: the relativity principle already determines what kind of spacetime is possible, and experiment is only needed to read off the number.
+Einstein's whole career was a campaign against things put in by hand. Special relativity removed absolute simultaneity. General relativity removed privileged coordinate systems. But the invariant speed of light still entered as a physical fact attached to one phenomenon, and in 1905 that looked like the price of getting the transformations at all. If the foundational principle is really frame-independence, then the symmetry rules ought to be able to diagnose their own geometry.
 
-## What this paper does differently
+This repository's central claim is that they can. If the paper is right, special relativity is more self-contained than Einstein himself could show in 1905: the relativity principle already determines what kind of spacetime is possible, and experiment is only needed to read off the number. The second postulate was not false. It was redundant: a measured fact promoted to an axiom before the symmetry argument had been completed.
+
+## The Assumption That Wasn't Needed
 
 Rather than start with light and derive Lorentzian kinematics from it, the paper starts with the relativity principle together with the standard assumptions of homogeneity, isotropy, and group composition. Those assumptions lead to the familiar one-parameter family
 
@@ -35,11 +55,13 @@ x' = \gamma (x - vt), \qquad
 \gamma = \frac{1}{\sqrt{1 - \kappa v^2}}.
 $$
 
+The paper also changes the level of attack. Coordinate-transformation derivations treat a frame change as a general map and then recover linearity, reciprocity, continuity, and isotropy one condition at a time. The Lie algebra route starts closer to the symmetry itself: write down the generators, compute their brackets, and let the algebra package the regularity structure from the start.
+
 This is the family found in the one-postulate derivations going back to Ignatowski (1910), sharpened later by [Bacry and Levy-Leblond (1968)](https://www.osti.gov/biblio/4838778), Levy-Leblond (1976), Mermin (1984), [Pal (2003)](https://arxiv.org/abs/physics/0302045), and [Anker and Ziegler (2020)](https://arxiv.org/abs/2007.09301). What those derivations leave open is the sign and physical meaning of `kappa`.
 
 The paper's move is to stop where that literature stopped and then go one step further. First classify the possible universes. Then ask whether the algebra can examine itself and select among them. That is where the Killing form becomes decisive.
 
-## From one postulate to three possible universes
+## Three Possible Universes
 
 Once `kappa` appears, three broad possibilities open up. `kappa` is best read as a single dial controlling what kind of universe you get. Turn it one way and you get Einstein's universe. Leave it at zero and you get Newton's. Turn it the other way and you get a world with no causal order at all.
 
@@ -51,7 +73,7 @@ Once `kappa` appears, three broad possibilities open up. `kappa` is best read as
 
 The standard historical conclusion is that the first postulate alone reaches this three-way fork but cannot decide among the branches. The paper's claim is stronger: once the algebra is allowed to test its own internal structure, only one branch remains compatible with the symmetry principle as a foundational statement.
 
-## Can the rules examine themselves?
+## The Algebra Examines Itself
 
 The homogeneous kinematics algebra has six generators: three rotations `J_i` and three boosts `K_i`. The paper studies how those generators reshuffle one another under the adjoint action and then applies the algebra's canonical invariant:
 
@@ -73,7 +95,7 @@ In plain language, the Killing form is the algebra's built-in measuring device. 
 - The boost block is controlled entirely by `kappa`.
 - When the boost block vanishes, the algebra is blind to exactly the operations that relate one inertial frame to another.
 
-That last point is why `degenerate` matters here. It does not mean "messy" or "bad" in a vague sense. It means the built-in measuring device fails exactly where the physics lives. In the Galilean case, the blind spot lands on the boosts, which are the generators of changes of velocity. The symmetry can still talk about inertial frames, but it can no longer fully measure the geometry relating them.
+That last point is why `degenerate` matters here. It does not mean "messy" or "bad" in a vague sense. It means the built-in measuring device fails on a specific sector of generators the theory is supposed to compare. In the Galilean case, the blind spot lands on the boosts, which are the generators of changes of velocity. The symmetry can still talk about inertial frames, but it can no longer fully measure the geometry relating them.
 
 <p align="center">
   <img src="wolfram/assets/notebook_preview_killing_form.svg" alt="Preview of the Killing-form view from the Wolfram notebook" width="900" />
@@ -84,17 +106,17 @@ That last point is why `degenerate` matters here. It does not mean "messy" or "b
 
 This is why the Killing form is not an ornamental calculation in the paper. It is the mechanism that tells us whether the symmetry rules can generate their own geometry or whether some part of spacetime has been left as unexplained background structure.
 
-## Three verdicts
+## Which Universe Survives?
 
 **Option 1: `kappa < 0` — the Euclidean universe**
 
-When `kappa` is negative, the Killing form is nondegenerate everywhere, but the resulting group is compact. There is no lightcone structure, no intrinsic distinction between temporal and spatial directions, and no causal ordering of events. The branch is geometrically coherent and physically wrong for a universe with cause and effect.
+When `kappa` is negative, the Killing form is nondegenerate everywhere, but its signature no longer separates boosts from rotations in the way a causal spacetime requires. The resulting group is compact. There is no lightcone structure, no intrinsic distinction between temporal and spatial directions, and no causal ordering of events. The branch is internally coherent, but it does not generate a spacetime in which cause and effect can be defined.
 
 Verdict: rejected. A universe without causality is not a universe with physics in the ordinary sense.
 
 **Option 2: `kappa = 0` — the Galilean universe**
 
-When `kappa = 0`, the Killing form vanishes on every boost. The boost sector still has shape, but it has no intrinsic ruler. Velocity space has symmetry without a preferred scale, there is no invariant speed, and time survives as fixed background structure rather than being generated by the symmetry. This is why the paper treats Galilean mechanics not as a rival foundation but as a singular limit of the Lorentzian case.
+When `kappa = 0`, the Killing form vanishes on every boost. The boost sector still has shape, but it has no intrinsic ruler. Velocity space has symmetry without a preferred scale, there is no invariant speed, and time survives as fixed background structure rather than being generated by the symmetry. On the paper's reading, this is the difference between the same form of equations and the same laws in full content: the equations can still look symmetric, but the algebra no longer fixes the ruler needed to make frame-to-frame comparisons fully determinate. This is why the paper treats Galilean mechanics not as a rival foundation but as a singular limit of the Lorentzian case.
 
 Verdict: rejected. The relativity principle was supposed to make the framework self-contained, but here the algebra cannot finish the job without outside help.
 
@@ -124,25 +146,29 @@ The paper's comparison table can be read directly from that split:
 5. At `kappa > 0`, the self-test remains fully functional: it produces a Lorentzian metric, unifies space and time, and guarantees a finite invariant speed.
 6. Therefore a finite, real, universal speed limit is not an empirical bolt-on. Observation determines the value. The algebra determines the existence.
 
-## Structure and scale
+## What the Algebra Gives, What Experiment Gives
 
 The argument does **not** determine the numerical value of the invariant speed. It determines that such a speed must exist.
 
 That is the paper's distinction between structure and calibration:
 
-- The symmetry analysis fixes the architecture.
-- Experiment fixes the conversion factor between space and time.
+- `What the algebra gives:` `kappa > 0`, a finite invariant speed, and Lorentzian spacetime with lightcones.
+- `What experiment gives:` the numerical value `c ≈ 299,792,458 m/s` and the empirical fact that light in vacuum travels at that speed.
 - Measuring `c` tells us that `kappa = 1 / c^2`.
 
-One useful board-game analogy is this: if you demand a self-contained game, the correct board is the one with the ruler already printed on it. You do not postulate the ruler separately. You postulate fairness, and the ruler comes with the winning design. That is the README version of the paper's distinction between structure and calibration.
+If relativity is really a ban on background structure, then the framework has to generate its own ruler. That is the force of the paper's distinction between structure and calibration: a self-contained theory should not need to import the existence of the ruler from one special phenomenon and only then announce that every observer must respect it.
 
 This is why the paper's closing claim is so sharp: the speed's value is empirical; its existence is not.
 
 Nothing in the physics changes if this argument is right. The Lorentz transformations stay the same. The predictions stay the same. What changes is the logical architecture: special relativity becomes leaner, more self-contained, and closer to Einstein's own instinct that deep theories should not rely on background structure smuggled in by hand.
 
+The broader explainer connected to this repository pushes that architectural point further into familiar special-relativistic language: once the Lorentzian branch is fixed, later structures such as four-vector organization and covariant field formulations look less like extra decoration and more like downstream consequences of the same symmetry logic. In this repository, that broader payoff is context rather than proof surface: the formalized claim stops at branch selection and the existence of a finite invariant speed.
+
 ## Formal verification
 
 The repository formalizes the paper's exact algebraic spine in Lean 4 with Mathlib. The proof development is matrix-first: it writes down explicit generators, proves the bracket table, computes the Killing form, and only then reads off the spacetime consequences.
+
+The boundary matters. The current proof surface is the six-generator homogeneous special-relativity argument: rotations, boosts, the `kappa`-family, the Killing-form split, and the Lorentzian branch-selection result. The notebooks are explanatory and computational companions. Broader guide material is useful context, but it is not this repository's proof authority.
 
 | Surface | Role | Authority |
 | --- | --- | --- |
@@ -162,9 +188,9 @@ The main Lean modules line up with the paper's stages:
 
 For a deeper walkthrough of the proof spine, see [docs/proof-visuals.md](docs/proof-visuals.md). For notebook workflow, assets, and presentation guidance, see [docs/notebooks.md](docs/notebooks.md). Repository-specific external validation workflows live under [docs/aristotle/README.md](docs/aristotle/README.md), and project-scoped Gauss/OpenGauss setup is documented in [documentation.md](documentation.md).
 
-## Explore the mathematics
+## Explore It for Yourself
 
-The repository includes two computational companions:
+The repository includes two computational companions. If you do not want to start with Lean, these notebook surfaces are the easiest way in.
 
 - Primary public-facing notebook: [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), generated from [`wolfram/build_one_postulate_notebook.wl`](wolfram/build_one_postulate_notebook.wl)
 - Secondary notebook: [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Intelligent-Internet/ii-research-one-postulate/blob/main/one_postulate_sympy_colab.ipynb)
@@ -176,7 +202,7 @@ The repository includes two computational companions:
   <sub>The notebook surfaces mirror the paper's rhetorical order while keeping Lean as the proof boundary.</sub>
 </p>
 
-Suggested reading order:
+If you want the full proof path, use this order:
 
 1. Start with the paper: [`paper/one-postulate.pdf`](paper/one-postulate.pdf)
 2. Use the proof guide: [docs/proof-visuals.md](docs/proof-visuals.md)
@@ -184,13 +210,15 @@ Suggested reading order:
 4. Explore the Wolfram or SymPy companion
 5. Drop into [`OnePostulate.lean`](OnePostulate.lean) if you want the exact proof surface
 
-## How this relates to prior work
+## The Long Road to One Postulate
 
-The README follows the paper's claim, but the paper itself sits inside a long "relativity without light" conversation:
+The README follows the paper's claim, but the background story is the long road to the missing sign of `kappa`: first the transformation equations, then the one-postulate family, and then a century-long stall over which branch actually survives.
 
 | Year | Reference | Role in this repository's story |
 | --- | --- | --- |
 | 1888 | Wilhelm Killing, *Die Zusammensetzung der stetigen endlichen Transformationsgruppen* | Introduces the Killing form that becomes the paper's decisive self-test |
+| 1895 | Hendrik Lorentz, transformation equations | Gets the transformation equations in pre-relativistic form, still tied to the ether picture |
+| 1904 | Henri Poincare, Lorentz group structure | Recognizes the group structure that later algebraic derivations make central |
 | 1905 | [Albert Einstein, *On the Electrodynamics of Moving Bodies*](https://en.wikisource.org/wiki/On_the_Electrodynamics_of_Moving_Bodies_%281920_edition%29) | States the two-postulate presentation of special relativity |
 | 1910 | W. von Ignatowski, *Einige allgemeine Bemerkungen uber das Relativitatsprinzip* | Shows that the relativity principle already leads to a one-parameter kinematic family |
 | 1921 | Wolfgang Pauli, *Theory of Relativity* | Canonical early statement that `kappa` cannot be fixed without experiment |
@@ -202,6 +230,8 @@ The README follows the paper's claim, but the paper itself sits inside a long "r
 | 2020 | [J.-P. Anker and F. Ziegler, *Relativity without light: A new proof of Ignatowski's theorem*](https://arxiv.org/abs/2007.09301) | Shows the one-postulate route remains mathematically active and technically fertile |
 
 This repository's contribution is not another derivation of the `kappa` family. Its claim is that the family's internal invariant already chooses the physically acceptable branch.
+
+Separate follow-on work explores extending the same method beyond the six-generator homogeneous algebra to translation-extended kinematics. That is adjacent to this repository, not inside it: no GR-style, cosmological-constant, or translation-sector claims are part of the current Lean proof surface here. Within the broader four-paper program, this repository is the part that asks whether even the invariant speed can be removed from the axioms.
 
 ## Build and repository map
 
