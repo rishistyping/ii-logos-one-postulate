@@ -13,6 +13,36 @@ If[! DirectoryQ[assetsDir],
   CreateDirectory[assetsDir, CreateIntermediateDirectories -> True]
 ];
 
+svgPostprocessor = FileNameJoin[{wolframDir, "flatten_svg_uses.py"}];
+
+pythonExecutable[] := Module[
+  {candidate = Quiet @ Check[FindExecutable["python3"], $Failed]},
+  Which[
+    StringQ[candidate] && candidate =!= "", candidate,
+    FileExistsQ["/opt/homebrew/Caskroom/miniconda/base/bin/python3"], "/opt/homebrew/Caskroom/miniconda/base/bin/python3",
+    FileExistsQ["/usr/bin/python3"], "/usr/bin/python3",
+    True, $Failed
+  ]
+];
+
+postprocessSvg[path_String] := Module[
+  {python = pythonExecutable[], result},
+  If[! StringQ[python] || ! FileExistsQ[svgPostprocessor],
+    Return[path]
+  ];
+  result = RunProcess[{python, svgPostprocessor, path}];
+  If[result["ExitCode"] =!= 0,
+    Print["SVG postprocess failed for ", path, ": ", StringTrim[result["StandardError"]]]
+  ];
+  path
+];
+
+exportSvgAsset[name_String, expr_] := Module[
+  {path = FileNameJoin[{assetsDir, name}]},
+  Export[path, expr, "SVG"];
+  postprocessSvg[path]
+];
+
 ClearAll[kappa, v, t, x, s];
 $Assumptions = Element[{v, t, x, s}, Reals];
 
@@ -33,9 +63,13 @@ colors = <|
 titleStyle = Directive[colors["Text"], FontFamily -> "Georgia", FontSize -> 26, Bold];
 sectionStyle = Directive[colors["Text"], FontFamily -> "Georgia", FontSize -> 22, Bold];
 cardTitleStyle[color_] := Directive[color, FontFamily -> "Georgia", FontSize -> 18, Bold];
+previewTitleStyle = Directive[colors["Text"], FontFamily -> "Georgia", FontSize -> 24, Bold];
+previewCardTitleStyle[color_] := Directive[color, FontFamily -> "Georgia", FontSize -> 16, Bold];
 bodyStyle = Directive[colors["Text"], FontFamily -> "Helvetica", FontSize -> 13];
 smallBodyStyle = Directive[colors["Text"], FontFamily -> "Helvetica", FontSize -> 11];
 captionStyle = Directive[colors["Slate"], FontFamily -> "Helvetica", FontSize -> 11];
+previewBodyStyle = Directive[colors["Text"], FontFamily -> "Helvetica", FontSize -> 12];
+previewCaptionStyle = Directive[colors["Slate"], FontFamily -> "Helvetica", FontSize -> 12];
 
 makeTextCell[text_] := Cell[text, "Text"];
 makeSectionCell[text_] := Cell[text, "Section"];
@@ -359,7 +393,7 @@ transformationTab[k_Symbol, vel_Symbol, event_Symbol] := Grid[
   Spacings -> {1.25, 0.8}
 ];
 
-killingMatrixPlot[k_?NumericQ] := MatrixPlot[
+killingMatrixPlot[k_?NumericQ, size_:310] := MatrixPlot[
   N[killingFormMatrixExpr[k]],
   ColorFunction -> (Blend[{colors["Euclidean"], White, colors["Lorentz"]}, Rescale[#, {-4, 4}]] &),
   ColorFunctionScaling -> False,
@@ -371,10 +405,11 @@ killingMatrixPlot[k_?NumericQ] := MatrixPlot[
   },
   LabelStyle -> smallBodyStyle,
   Background -> colors["Card"],
-  ImageSize -> 310
+  ImagePadding -> {{42, 18}, {18, 30}},
+  ImageSize -> size
 ];
 
-killingEigenPlot[k_?NumericQ] := Show[
+killingEigenPlot[k_?NumericQ, size_:360] := Show[
   Plot[
     {-4, 4 s},
     {s, -1, 1},
@@ -388,7 +423,8 @@ killingEigenPlot[k_?NumericQ] := Show[
     GridLinesStyle -> Directive[Opacity[0.25], colors["Slate"]],
     LabelStyle -> smallBodyStyle,
     PlotRange -> {{-1, 1}, {-4.6, 4.6}},
-    ImageSize -> 360
+    ImagePadding -> {{52, 18}, {32, 12}},
+    ImageSize -> size
   ],
   Graphics[
     {
@@ -397,7 +433,9 @@ killingEigenPlot[k_?NumericQ] := Show[
       Inset[Style["rotation x3", smallBodyStyle], {-0.72, -3.2}],
       Inset[Style["boost x3", smallBodyStyle], {0.62, 2.75}]
     }
-  ]
+  ],
+  ImagePadding -> {{52, 18}, {32, 12}},
+  ImageSize -> size
 ];
 
 killingStatus[k_?NumericQ] := Which[
@@ -443,6 +481,119 @@ killingFormPanel[k_?NumericQ] := Framed[
   RoundingRadius -> 12,
   FrameMargins -> {{14, 14}, {12, 12}},
   ImageSize -> 1080
+];
+
+previewInfoCard[title_, lines_, color_] := Framed[
+  Column[
+    {
+      Style[title, previewCardTitleStyle[color]],
+      lines
+    },
+    Spacings -> 0.45
+  ],
+  Background -> colors["Card"],
+  FrameStyle -> Directive[color, AbsoluteThickness[1.6]],
+  RoundingRadius -> 12,
+  FrameMargins -> {{14, 14}, {12, 12}},
+  ImageSize -> {336, Automatic}
+];
+
+killingPreviewGraphic = Framed[
+  Column[
+    {
+      Column[
+        {
+          Style["Killing form self-test", previewTitleStyle],
+          Style[
+            "At positive kappa, the rotation block stays fixed while the boost block remains visible. That is the algebraic pivot that selects the Lorentzian branch.",
+            previewCaptionStyle
+          ]
+        },
+        Spacings -> 0.3
+      ],
+      Grid[
+        {{
+          Framed[
+            Column[
+              {
+                Style["Matrix view", previewCardTitleStyle[colors["Text"]]],
+                killingMatrixPlot[0.6, 400],
+                Style["B = diag(-4 I3, 4 kappa I3)", captionStyle]
+              },
+              Spacings -> 0.55
+            ],
+            Background -> colors["Card"],
+            FrameStyle -> Directive[colors["Slate"], AbsoluteThickness[1.6]],
+            RoundingRadius -> 12,
+            FrameMargins -> {{14, 14}, {12, 12}},
+            ImageSize -> {520, Automatic}
+          ],
+          Framed[
+            Column[
+              {
+                Style["Eigenvalue split", previewCardTitleStyle[colors["Lorentz"]]],
+                killingEigenPlot[0.6, 440],
+                Style["The boost track crosses zero at kappa = 0; the rotation track never does.", captionStyle]
+              },
+              Spacings -> 0.55
+            ],
+            Background -> colors["Card"],
+            FrameStyle -> Directive[colors["Lorentz"], AbsoluteThickness[1.6]],
+            RoundingRadius -> 12,
+            FrameMargins -> {{14, 14}, {12, 12}},
+            ImageSize -> {560, Automatic}
+          ]
+        }},
+        Alignment -> {Left, Top},
+        Spacings -> {1.0, 0.8}
+      ],
+      Grid[
+        {{
+          previewInfoCard[
+            "Boost block",
+            Column[
+              {
+                Style["Boost block = 4 kappa I3", previewBodyStyle],
+                Style["At kappa = 0.6 this becomes 2.4 I3.", previewCaptionStyle]
+              },
+              Spacings -> 0.32
+            ],
+            colors["Lorentz"]
+          ],
+          previewInfoCard[
+            "Determinant and split",
+            Column[
+              {
+                Style["det(B) = (-4)^3 (4 kappa)^3", previewBodyStyle],
+                Style["rotation: -4 x3; boost: 4 kappa x3", previewCaptionStyle]
+              },
+              Spacings -> 0.32
+            ],
+            colors["Slate"]
+          ],
+          previewInfoCard[
+            "Interpretive verdict",
+            Column[
+              {
+                Style["At kappa > 0, the boost sector is visible.", previewBodyStyle],
+                Style["That is why the Lorentzian branch survives.", previewCaptionStyle]
+              },
+              Spacings -> 0.32
+            ],
+            colors["Galilean"]
+          ]
+        }},
+        Alignment -> {Left, Top},
+        Spacings -> {0.9, 0.8}
+      ]
+    },
+    Spacings -> 0.95
+  ],
+  Background -> colors["Background"],
+  FrameStyle -> Directive[colors["Lorentz"], AbsoluteThickness[2.0]],
+  RoundingRadius -> 14,
+  FrameMargins -> {{20, 20}, {18, 18}},
+  ImageSize -> {1180, 640}
 ];
 
 velocitySpaceGraphic[k_?NumericQ, vel_?NumericQ] := Module[
@@ -772,7 +923,6 @@ branchPreviewGraphic = Framed[
   ImageSize -> 1220
 ];
 
-killingPreviewGraphic = killingFormPanel[0.6];
 spacetimePreviewGraphic = transformationGraphic[0.6, 0.55, {1.05, 1.45}];
 
 crosswalkRows = {
@@ -1010,11 +1160,11 @@ nb = Notebook[
 notebookPath = FileNameJoin[{notebooksDir, "one_postulate_explainer.nb"}];
 
 Export[notebookPath, nb, "NB"];
-Export[FileNameJoin[{assetsDir, "notebook_hero_overview.svg"}], heroOverviewGraphic, "SVG"];
-Export[FileNameJoin[{assetsDir, "notebook_preview_branches.svg"}], branchPreviewGraphic, "SVG"];
-Export[FileNameJoin[{assetsDir, "notebook_preview_killing_form.svg"}], killingPreviewGraphic, "SVG"];
-Export[FileNameJoin[{assetsDir, "notebook_preview_spacetime.svg"}], spacetimePreviewGraphic, "SVG"];
-Export[FileNameJoin[{assetsDir, "notebook_preview_crosswalk.svg"}], crosswalkGraphic, "SVG"];
+exportSvgAsset["notebook_hero_overview.svg", heroOverviewGraphic];
+exportSvgAsset["notebook_preview_branches.svg", branchPreviewGraphic];
+exportSvgAsset["notebook_preview_killing_form.svg", killingPreviewGraphic];
+exportSvgAsset["notebook_preview_spacetime.svg", spacetimePreviewGraphic];
+exportSvgAsset["notebook_preview_crosswalk.svg", crosswalkGraphic];
 
 Print["Wrote ", notebookPath];
 Print["Wrote SVG assets to ", assetsDir];
