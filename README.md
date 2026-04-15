@@ -3,9 +3,13 @@
 Here is the claim in plain language: Einstein used one postulate too many. The relativity principle alone yields a one-parameter family of kinematic universes indexed by `kappa`; the algebra's own built-in measuring tool, the Killing form, rules out the Euclidean and Galilean branches as fundamental; and experiment calibrates the invariant speed instead of positing it. This repository is the formal verification companion to the paper [*One Postulate*](paper/one-postulate.pdf): the paper states the argument, [Lean 4](https://lean-lang.org/) supplies proof authority for the exact algebraic claims, and the Wolfram and SymPy notebooks make the story explorable.
 
 <p align="center">
-  <a href="https://colab.research.google.com/github/Intelligent-Internet/ii-research-one-postulate/blob/main/one_postulate_sympy_colab.ipynb">
+  <a href="https://github.com/Intelligent-Internet/ii-logos-one-postulate/actions/workflows/lean-ci.yml"><img src="https://github.com/Intelligent-Internet/ii-logos-one-postulate/actions/workflows/lean-ci.yml/badge.svg" alt="Lean CI" /></a>
+  <a href="paper/one-postulate.pdf"><img src="https://img.shields.io/badge/paper-PDF-334155" alt="Paper PDF" /></a>
+  <a href="https://colab.research.google.com/github/Intelligent-Internet/ii-logos-one-postulate/blob/main/one_postulate_sympy_colab.ipynb">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
   </a>
+  <a href="docs/notebooks.md"><img src="https://img.shields.io/badge/notebook-guide-0f766e" alt="Notebook guide" /></a>
+  <img src="https://img.shields.io/badge/license-pending-b45309" alt="License pending" />
 </p>
 
 <p align="center">
@@ -24,11 +28,18 @@ Here is the claim in plain language: Einstein used one postulate too many. The r
 - `A single number opens three possible universes.` `kappa` labels the available kinematics, and its sign decides whether you get Newton's world, Einstein's, or no causal order at all.
 - `Only one universe carries its own speed limit.` In the surviving `kappa > 0` branch, the transformations come with an invariant speed `V = 1 / sqrt(kappa)`, which experiment then measures in nature.
 
-## Begin Reading Here
+## Release Status
 
-- `If you want the shortest version:` Read [Why this matters](#why-this-matters), [Which Universe Survives?](#which-universe-survives), and [What the Algebra Gives, What Experiment Gives](#what-the-algebra-gives-what-experiment-gives).
-- `If you want to play with the argument:` Use the Colab notebook above or open [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), then see [docs/notebooks.md](docs/notebooks.md) for the workflow details.
-- `If you want the exact proof path:` Start with [`paper/one-postulate.pdf`](paper/one-postulate.pdf), then [docs/proof-visuals.md](docs/proof-visuals.md), then [`OnePostulate.lean`](OnePostulate.lean) and [`OnePostulateFull.lean`](OnePostulateFull.lean).
+This is a formal verification companion to the paper, not a standalone physics package. Lean 4 is the proof authority for the six-generator special-relativity branch-selection argument. Wolfram and SymPy are explanatory, symbolic, and presentation companions; they are useful for exploration, but they do not replace the Lean proof surface.
+
+Cloud publishing is supported by [`wolfram/cloud_export_notebook.wl`](wolfram/cloud_export_notebook.wl), but it is a publishing action: it requires a local Wolfram runtime and an authenticated Wolfram Cloud account. It is not part of the default local verification path. Repository citation metadata now exists, but license selection is still pending, so broad redistribution should wait until a root license decision is made.
+
+## Choose Your Path
+
+- `General reader:` Read [Why this matters](#why-this-matters), [Which Universe Survives?](#which-universe-survives), and [What the Algebra Gives, What Experiment Gives](#what-the-algebra-gives-what-experiment-gives).
+- `Formal verifier:` Start with [`paper/one-postulate.pdf`](paper/one-postulate.pdf), then [docs/proof-visuals.md](docs/proof-visuals.md), then [`OnePostulate.lean`](OnePostulate.lean) and [`OnePostulateFull.lean`](OnePostulateFull.lean).
+- `Notebook explorer:` Use the Colab notebook above or open [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), then see [docs/notebooks.md](docs/notebooks.md) for workflow details.
+- `Maintainer or publisher:` Use [Build and repository map](#build-and-repository-map), [License, Citation, and Contributions](#license-citation-and-contributions), and [docs/notebooks.md](docs/notebooks.md) before cutting a public release.
 
 ## Why this matters
 
@@ -193,7 +204,7 @@ For a deeper walkthrough of the proof spine, see [docs/proof-visuals.md](docs/pr
 The repository includes two computational companions. If you do not want to start with Lean, these notebook surfaces are the easiest way in.
 
 - Primary public-facing notebook: [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), generated from [`wolfram/build_one_postulate_notebook.wl`](wolfram/build_one_postulate_notebook.wl)
-- Secondary notebook: [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Intelligent-Internet/ii-research-one-postulate/blob/main/one_postulate_sympy_colab.ipynb)
+- Secondary notebook: [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Intelligent-Internet/ii-logos-one-postulate/blob/main/one_postulate_sympy_colab.ipynb)
 
 <p align="center">
   <img src="wolfram/assets/notebook_preview_crosswalk.svg" alt="Paper to notebook to Lean crosswalk" width="900" />
@@ -235,14 +246,28 @@ Separate follow-on work explores extending the same method beyond the six-genera
 
 ## Build and repository map
 
-Build the local proof and notebook surfaces from the repository root:
+Run commands from the repository root. Lean verification is the default reproducibility path. Wolfram commands require a local Wolfram runtime; Cloud publishing additionally requires an authenticated Wolfram Cloud account.
+
+### Verify the Lean proof
 
 ```bash
 lake build
 lake env lean OnePostulate/ClassificationDerivation.lean
 lake env lean OnePostulateFull.lean
 rg -n 'sorry|admit' OnePostulateFull.lean OnePostulate.lean OnePostulate/*.lean
+```
+
+### Regenerate notebook assets
+
+```bash
 wolframscript -file wolfram/build_one_postulate_notebook.wl
+```
+
+### Publish Wolfram notebook to Cloud
+
+This is a release/publishing action, not a default local build step.
+
+```bash
 wolframscript -file wolfram/cloud_export_notebook.wl
 ```
 
@@ -260,6 +285,14 @@ wolfram/                  Notebook builder, generated notebook, SVG previews, Cl
 one_postulate_sympy_colab.ipynb   Secondary SymPy companion
 documentation.md          Retrieval-oriented repo context
 ```
+
+## License, Citation, and Contributions
+
+License: pending. There is no root `LICENSE` file yet, so do not assume public reuse terms beyond normal GitHub viewing until the project owner chooses one.
+
+Citation: repository-level citation metadata is provided in [`CITATION.cff`](CITATION.cff). For scientific use, cite the paper first and this repository as the formal verification companion.
+
+Contributions: see [`CONTRIBUTING.md`](CONTRIBUTING.md). This repository is not yet treating issues and pull requests as the primary scientific review surface; focused fixes to links, documentation clarity, rendering, or reproducibility are the safest contribution shape.
 
 ## References
 

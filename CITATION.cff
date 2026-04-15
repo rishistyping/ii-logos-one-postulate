@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this repository, cite the paper first and this repository as the formal verification companion."
+title: "One Postulate"
+authors:
+  - family-names: "Mostaque"
+    given-names: "Emad"
+    affiliation: "Intelligent Internet"
+repository-code: "https://github.com/Intelligent-Internet/ii-logos-one-postulate"
+url: "https://github.com/Intelligent-Internet/ii-logos-one-postulate/blob/main/paper/one-postulate.pdf"
+abstract: "Formal verification companion to the paper One Postulate: a Lean 4 formalization of the six-generator special-relativity branch-selection argument, with Wolfram and SymPy explanatory notebooks."
+keywords:
+  - "special relativity"
+  - "relativity principle"
+  - "Lean"
+  - "formal verification"
+  - "Lie algebra"
+  - "Killing form"
+  - "kinematics"
+preferred-citation:
+  type: report
+  title: "One Postulate"
+  authors:
+    - family-names: "Mostaque"
+      given-names: "Emad"
+      affiliation: "Intelligent Internet"
+  year: 2026
+  month: 3
+  url: "https://github.com/Intelligent-Internet/ii-logos-one-postulate/blob/main/paper/one-postulate.pdf"
