@@ -99,6 +99,39 @@ If your Wolfram setup supports notebook sharing or cloud publishing, use the
 generated notebook as the source artifact and keep the exported SVGs as the
 GitHub-safe preview layer.
 
+### Publish the Wolfram notebook with `CloudExport`
+
+The repository also includes a publish-only script that uses the notebook file
+already checked into the repository. It does not rebuild the notebook first.
+
+```bash
+wolframscript -file wolfram/cloud_export_notebook.wl
+```
+
+By default, this exports
+[`wolfram/notebooks/one_postulate_explainer.nb`](../wolfram/notebooks/one_postulate_explainer.nb)
+to the public cloud object `one-postulate/one_postulate_explainer.nb`.
+
+Use command-line arguments to choose a different cloud object path or
+permission setting:
+
+```bash
+wolframscript -file wolfram/cloud_export_notebook.wl one-postulate/one_postulate_explainer.nb Public
+```
+
+The same values can be supplied with environment variables:
+
+```bash
+ONE_POSTULATE_CLOUD_OBJECT=one-postulate/one_postulate_explainer.nb \
+ONE_POSTULATE_CLOUD_PERMISSIONS=Public \
+wolframscript -file wolfram/cloud_export_notebook.wl
+```
+
+The script calls `CloudConnect[]` if the local Wolfram session is not already
+connected. A Wolfram Cloud account and working Wolfram runtime are required.
+The exported cloud notebook is the web-hosted Wolfram surface; the SVG previews
+remain the GitHub-safe fallback.
+
 ## Preview Assets
 
 The generated preview graphics are suitable for GitHub Markdown:

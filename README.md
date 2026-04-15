@@ -243,6 +243,7 @@ lake env lean OnePostulate/ClassificationDerivation.lean
 lake env lean OnePostulateFull.lean
 rg -n 'sorry|admit' OnePostulateFull.lean OnePostulate.lean OnePostulate/*.lean
 wolframscript -file wolfram/build_one_postulate_notebook.wl
+wolframscript -file wolfram/cloud_export_notebook.wl
 ```
 
 Key repository surfaces:
@@ -255,7 +256,7 @@ OnePostulateFull.lean     Full-paper root
 docs/proof-visuals.md     Proof-map and theorem spine
 docs/notebooks.md         Notebook workflow and asset guide
 docs/aristotle/           External validation workflows and archived runs
-wolfram/                  Notebook builder, generated notebook, SVG previews
+wolfram/                  Notebook builder, generated notebook, SVG previews, CloudExport script
 one_postulate_sympy_colab.ipynb   Secondary SymPy companion
 documentation.md          Retrieval-oriented repo context
 ```
