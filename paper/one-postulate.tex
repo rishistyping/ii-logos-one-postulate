@@ -16,7 +16,7 @@
 
 \title{\vspace{-1.5em}\textbf{One Postulate}}
 \author{Emad Mostaque\\[2pt]{\normalsize Intelligent Internet}}
-\date{March 2026}
+\date{April 2026}
 
 \begin{document}
 \maketitle
@@ -37,6 +37,8 @@ Einstein built special relativity on two principles \cite{Einstein1905}. The fir
 \smallskip
 An inertial frame is any laboratory moving at constant velocity: a sealed room drifting through space. The postulate says that no experiment performed inside such a room can reveal how fast it is moving, or whether it is moving at all.
 
+Algebraically: the postulate defines a Lie group $G$ acting transitively on the space of inertial frames. The Lie algebra $\mathfrak{g}$ carries a characteristic bilinear form $B(X,Y) = \mathrm{Tr}(\mathrm{ad}_X \circ \mathrm{ad}_Y)$, the Killing form, computed from its own structure constants. ``The same laws'' --- not just ``the same form'' --- requires $B$ to be nondegenerate on every sector that enters the comparison of frames. If $B$ vanishes on a sector, the algebra cannot measure that sector, and any structure assigned to it must come from outside. Equivalently: the unique $G$-invariant bilinear form on the translation module must have full rank. These are not aesthetic preferences. They are the content of the postulate: the algebra must determine the theory.
+
 For Einstein this was more than a statement about experiments. It was a design principle: the mathematical framework of physics should contain no structure put in by hand. Everything should emerge from the rules themselves. Special relativity came from removing the assumption that all observers agree on which events are simultaneous. General relativity came from removing the assumption that there is a single natural way to label points in spacetime, the four-dimensional union of space and time. Each advance stripped away a background assumption that the previous framework had smuggled in.
 
 The second postulate is different in character. It says that light travels at a finite speed~$c$ that is the same in all inertial frames. This is not a principle of symmetry. It is an observation about a particular physical phenomenon, imported into the foundations. For Einstein, who held that the laws of physics should be self-contained, this was a concession: an empirical fact doing the work of a structural argument.
@@ -50,7 +52,7 @@ The relativity principle, together with three natural requirements (the same phy
 \[
 t' = \gamma\,(t - \kappa\, v\, x), \qquad x' = \gamma\,(x - v\, t), \qquad \gamma = \frac{1}{\sqrt{1-\kappa\, v^2}}.
 \]
-These deserve a moment's reading. The second equation is intuitive: the platform sees your position shifted by the train's motion. The first is where the physics lives. The term~$\kappa\, v\, x$ mixes space into time. It means that what counts as ``now'' depends on where you are, and~$\kappa$ controls the strength of this mixing. As $v$ approaches $1/\sqrt{\kappa}$, the factor~$\gamma$ grows without bound, which acts as a speed limit, a velocity that can be approached but never reached. When~$\kappa = 0$, the mixing vanishes: $\gamma = 1$, $t' = t$, $x' = x - vt$. We recover Newtonian mechanics.
+These deserve a moment's reading. The second equation is intuitive: the platform sees your position shifted by the train's motion. The first is where the physics lives. The term~$\kappa\, v\, x$ mixes space into time. It means that what counts as ``now'' depends on where you are, and~$\kappa$ controls the strength of this mixing. As $v$ approaches $1/\sqrt{\kappa}$ (when $\kappa > 0$), the factor~$\gamma$ grows without bound, which acts as a speed limit, a velocity that can be approached but never reached. When~$\kappa = 0$, the mixing vanishes: $t' = t$, time is absolute, and we recover Newton.
 
 Three kinds of universe arise, depending on the sign of~$\kappa$:
 
@@ -97,9 +99,6 @@ Three kinds of universe arise, depending on the sign of~$\kappa$:
     \node[below] at (0,-2.45) {\small $\mathfrak{so}(4)$};
   \end{scope}
 \end{tikzpicture}
-\smallskip
-
-{\small\textbf{Figure 1}: The three kinematic universes allowed by the relativity postulate. \textbf{Left}: the Lorentzian case ($\kappa > 0$); the shaded blue region is the set of events accessible within the finite maximum speed, bounded by lightcone lines ($dx/dt = \pm 1/\!\sqrt{\kappa}$). \textbf{Centre}: the Galilean case ($\kappa = 0$); horizontal slices of simultaneity fill all of space. \textbf{Right}: the Euclidean case ($\kappa < 0$); boosts act as rotations, cycling through all directions.}
 \end{center}
 
 \smallskip
@@ -125,17 +124,39 @@ It can. Wilhelm Killing found a way to do this in 1888 \cite{Killing1888}, seven
 
 Every set of symmetry rules is built from elementary operations called generators. For the symmetry of motion, there are six: three rotations ($J_1, J_2, J_3$, one for each spatial axis) and three boosts ($K_1, K_2, K_3$, one for each direction of motion). A rotation relates your laboratory to one pointing a different way. A boost relates it to one moving past you, the operation of changing velocity. The relativity postulate is, at bottom, a statement about the boosts.
 
-The rules of the algebra (technically, a Lie algebra, the algebraic structure that encodes continuous symmetries) specify what happens when you perform these operations in sequence, and in particular, when the order matters. Rotations don't commute. Rotate an aeroplane nose-up and then roll it right, and you get a different orientation than if you roll first and pitch second. This sensitivity to ordering is what gives three-dimensional space its rigid geometric structure. Whether the \emph{boosts} share this property depends on~$\kappa$.
+The rules of the algebra (a Lie algebra, the structure that encodes continuous symmetries) specify what happens when you perform these operations in sequence, and in particular, when the order matters. Rotations don't commute. Rotate an aeroplane nose-up and then roll it right, and you get a different orientation than if you roll first and pitch second. This sensitivity to ordering is what gives three-dimensional space its rigid geometric structure. Whether the \emph{boosts} share this property depends on~$\kappa$.
 
-Each generator acts as a machine that reshuffles the others. (Mathematicians call this the adjoint action.) When two generators are combined in sequence, the result may mix rotations into boosts and boosts into rotations. The Killing form measures the total reshuffling that each pair produces, formally $B(X,Y) = \mathrm{tr}(\mathrm{ad}_X \circ \mathrm{ad}_Y)$, the trace of the combined reshuffling. It produces a single number, computed entirely from the combination rules. No choices are involved and no external input is needed. Every set of symmetry rules has exactly one Killing form, just as every object has exactly one centre of mass. You compute it; you don't choose it.
+The combination rules for the six generators are fixed by the cited derivations. Rotations combine as $[J_i, J_j] = \epsilon_{ijk}\,J_k$ (the familiar angular momentum algebra). The boosts transform as vectors under rotation: $[J_i, K_j] = \epsilon_{ijk}\,K_k$. And the boosts combine with each other as $[K_i, K_j] = -\kappa\,\epsilon_{ijk}\,J_k$: a boost followed by a boost in a different direction produces a rotation, with strength proportional to~$\kappa$. When $\kappa = 0$, boosts commute and this link to rotation is severed.
 
-For the symmetry rules labelled by~$\kappa$, the result is:
+Each generator acts as a machine that reshuffles the others (the adjoint action). When two generators are combined in sequence, the result may mix rotations into boosts and boosts into rotations. The Killing form measures the total reshuffling that each pair produces: $B(X,Y) = \mathrm{tr}(\mathrm{ad}_X \circ \mathrm{ad}_Y)$, the trace of the combined reshuffling. It produces a single number, computed entirely from the combination rules. It is the algebra's characteristic bilinear form: not introduced from outside, not a choice, but the algebra examining itself. Every set of symmetry rules has exactly one Killing form, just as every object has exactly one centre of mass.
+
+For the symmetry rules labelled by~$\kappa$, the computation amounts to tracking how each generator reshuffles the other five and summing the result. Consider the boost~$K_1$. From the brackets, $\mathrm{ad}_{K_1}$ sends:
 \[
-B \;=\; \mathrm{diag}(-4I_3,\;\; 4\kappa\, I_3).
+\begin{array}{rcll}
+J_1 &\to& 0 \\
+J_2 &\to& K_3 &\quad ([K_1, J_2] = K_3) \\
+J_3 &\to& -K_2 &\quad ([K_1, J_3] = -K_2) \\
+K_1 &\to& 0 \\
+K_2 &\to& -\kappa\,J_3 &\quad ([K_1, K_2] = -\kappa\,J_3) \\
+K_3 &\to& \kappa\,J_2 &\quad ([K_1, K_3] = \kappa\,J_2) \\
+\end{array}
 \]
-In words: the Killing form registers $-4$ on every rotation and $4\kappa$ on every boost. Rotations always produce a robust, non-zero value, while the boosts produce a value that depends entirely on~$\kappa$.
+Four generators are reshuffled; two map to zero. Now apply $\mathrm{ad}_{K_1}$ a second time:
+\[
+J_2 \to K_3 \to \kappa\,J_2, \qquad
+J_3 \to -K_2 \to \kappa\,J_3, \qquad
+K_2 \to -\kappa\,J_3 \to \kappa\,K_2, \qquad
+K_3 \to \kappa\,J_2 \to \kappa\,K_3.
+\]
+Each of the four returns to $\kappa$ times itself. The result is diagonal: $\mathrm{ad}_{K_1}^2 = \kappa$ on the active sector. The trace is $B(K_1, K_1) = 4\kappa$. The same computation for a rotation gives $B(J_1, J_1) = -4$ (the four active generators each return to $-1$ times themselves). The complete Killing form is:
+\[
+B \;=\; \mathrm{diag}(\underbrace{-4,\,-4,\,-4}_{\text{rotations}},\;\; \underbrace{4\kappa,\;4\kappa,\;4\kappa}_{\text{boosts}}).
+\]
+The rotations always register $-4$. The boosts register $4\kappa$: their value depends entirely on~$\kappa$.
 
-So we have the self-test. When the Killing form returns a non-zero value for a generator, the algebra ``sees'' that generator and can build geometry from it (the form is non-degenerate on that subspace). When it returns zero, the algebra is blind in that direction and the form degenerates. The value on the boosts now sorts the three universes.
+So we have the self-test. When the Killing form returns a non-zero value for a generator, the algebra ``sees'' that generator and can build geometry from it (the form is non-degenerate on that subspace). When it returns zero, the algebra is blind in that direction and the form degenerates.
+
+The sign carries further information. Rotations, whose Killing form value is negative ($-4$), generate periodic transformations: rotate $360°$ and return to the start. They are compact. The sign of the Killing form classifies each generator as periodic (negative, compact) or non-periodic (positive, non-compact). This is not a convention; it is a property of the exponential map from the algebra to the group. The value on the boosts ($4\kappa$) now sorts the three universes.
 
 
 \subsection*{Three verdicts}
@@ -143,9 +164,7 @@ So we have the self-test. When the Killing form returns a non-zero value for a g
 \textbf{$\kappa < 0$: No causal structure.}
 
 \smallskip
-When $\kappa$ is negative, the Killing form is negative definite: the algebra sees all of its own generators and has no blind spots. But this means the group is compact ($\mathrm{SO}(4)$) and there is no algebraic distinction between spatial and temporal directions. As the diagram above illustrates, the geometry treats all four dimensions of spacetime equivalently. No lightcone, no causal ordering, no way to distinguish past from future. The boosts are periodic: apply enough of them and you return to your starting velocity.
-
-A universe with~$\kappa < 0$ has no notion of cause and effect. Physics, as we understand it, requires one.
+When $\kappa$ is negative, the Killing form is non-zero on both rotations and boosts, so the algebra sees all of its own generators and has no blind spots. But the sign on the boosts is now negative ($4\kappa < 0$), the same sign as on the rotations ($-4 < 0$). Both are periodic. Both generate closed orbits. The algebra cannot distinguish which generators are rotations and which are boosts. Without that distinction, it cannot define velocity (displacement per unit time requires a non-periodic direction distinct from the periodic spatial rotations), and the boosts have no physical interpretation as changes of velocity.
 
 \bigskip
 \textbf{$\kappa = 0$: The algebra goes blind.}
@@ -153,7 +172,9 @@ A universe with~$\kappa < 0$ has no notion of cause and effect. Physics, as we u
 \smallskip
 When $\kappa = 0$, the Killing form returns $4 \times 0 = 0$ on every boost generator. The self-test comes back blank for exactly the operations that the relativity postulate demands: the boosts that connect one inertial frame to another. The rotations still register their full~$-4$. But the boosts are invisible to the algebra's own diagnostic.
 
-The blindness has a concrete consequence. Consider the space of all possible velocities (the coset space $H_\kappa/\mathrm{SO}(3)$, where transformations that differ only by a rotation are treated as the same point, and whose tangent space is spanned by the boosts). Rotational symmetry forces this space to look the same in every direction, so its shape is fixed. (By Schur's lemma, the unique $\mathrm{SO}(3)$-invariant form on the boost subspace is $\delta_{ij}$, up to a positive constant.) But its \emph{scale} is not. How large is a unit of velocity? Is there a natural ruler? That amounts to asking whether there is a special speed built into the geometry, a speed that is the same in all frames and would play the role of~$c$. The Killing form is what should provide the answer: $V = 1/\sqrt{\kappa}$. At $\kappa = 0$, it can't. The shape of the room is known, but the ruler is missing.
+This matters because ``the same laws in all frames'' can be read in two ways. The first: the equations have the same \emph{form}. $F = ma$ in every frame. The template is preserved. The second: the equations have the same \emph{content}, the same numerical predictions. These are different statements. At $\kappa = 0$, two observers can adopt different ratios of space units to time units and both satisfy every bracket relation. They agree that $F = ma$. They agree on the form of every equation. They disagree on what a second is worth relative to a metre. They make different predictions for the same experiment. That is not ``the same laws.'' It is the same template filled in differently. A framework whose predictions vary between observers is not a physical theory. The relativity postulate demands identical content, not just identical form. That requires a non-degenerate Killing form on the boost sector.
+
+The blindness has a concrete consequence. Consider the space of all possible velocities. The boost generators span a three-dimensional subspace, and rotational symmetry forces this space to look the same in every direction, so its shape is fixed. (By Schur's lemma, the unique $\mathrm{SO}(3)$-invariant form on the boost subspace is $\delta_{ij}$, up to a positive constant.) But its \emph{scale} is not. How large is a unit of velocity? Is there a natural ruler? The transformation equations already showed that $\gamma$ diverges at $v = 1/\sqrt{\kappa}$: this is the invariant speed, the maximum velocity built into the geometry. The Killing form is what determines whether that speed is real: $B(K_i, K_j) = 4\kappa\,\delta_{ij}$, which is positive only when $\kappa > 0$. At $\kappa = 0$, the Killing form returns zero, the invariant speed is undefined, and no natural ruler exists. The shape of the room is known, but the ruler is missing.
 
 \begin{center}
 \begin{tikzpicture}[scale=0.82]
@@ -180,20 +201,19 @@ The blindness has a concrete consequence. Consider the space of all possible vel
     \node[below, font=\small, text width=4.5cm, align=center] at (0,-2.45) {\textbf{$\kappa = 0$}: shape fixed, scale lost};
   \end{scope}
 \end{tikzpicture}
-\smallskip
-
-{\small\textbf{Figure 2}: Velocity space in the two non-trivial cases. \textbf{Left}: when $\kappa > 0$, the Killing form fixes the radius at $V = 1/\!\sqrt{\kappa}$, giving a definite invariant speed. \textbf{Right}: when $\kappa = 0$, rotational symmetry fixes the shape but no circle is preferred; the scale is undetermined and no invariant speed exists.}
 \end{center}
 
 \noindent At $\kappa > 0$ (left), the Killing form fixes the radius of velocity space: there is a definite invariant speed. At $\kappa = 0$ (right), the shape is spherically symmetric (rotational symmetry guarantees that) but every circle is equally valid. The algebra can't choose among them. No invariant speed is determined.
 
 The same failure shows up in spacetime. When $\kappa = 0$, the time equation becomes simply $t' = t$. Time is untouched by the boosts. Every observer in every inertial frame agrees on what time it is. This is Newton's absolute time, a universal clock that ticks the same for everyone. The algebra preserves this structure but doesn't \emph{generate} it. Absolute time is not an approximation, not what relativistic time looks like when things move slowly. It is a fixed point of the Galilean symmetry, something the symmetry leaves entirely alone, hardwired into the $\kappa = 0$ algebra. (The covector $dt$ is invariant under the full homogeneous algebra.) It is a background structure, assumed rather than derived. The spatial geometry must also be supplied from outside.
 
-This is what the relativity postulate was meant to forbid: no preferred frame, no structure put in by hand. But the Galilean algebra, evaluated on its own terms, can't produce the geometry of the universe it describes.
+This can be made algebraically precise. Add time translation~$H$ and spatial translations~$P_i$ to the algebra. The Jacobi identity forces $[K_i, H] = P_i$ and $[K_i, P_j] = \kappa\,\delta_{ij}\,H$. Now look for the unique $G$-invariant bilinear form~$q$ on the translation module $V = \mathrm{span}\{H, P_i\}$. Rotational symmetry requires $q(H,H) = A$, $q(H, P_i) = 0$, $q(P_i, P_j) = B\,\delta_{ij}$. Boost invariance forces $B = -A\kappa$. When $\kappa > 0$: $q = \mathrm{diag}(A, -A\kappa, -A\kappa, -A\kappa)$. Full rank. The Minkowski metric, determined by the algebra. When $\kappa = 0$: $B = 0$. The form is $q = \mathrm{diag}(A, 0, 0, 0)$. Rank one. The algebra provides a time metric and nothing else. The spatial Euclidean metric that Galilean physics requires is not supplied by the algebra. It must be added from outside.
+
+Newton's framework requires absolute time and absolute space, supplied from outside, to produce definite answers. That external structure is what converts the template into a theory. It is also what the relativity postulate forbids: if ``the same'' requires supplementary definitions, the laws are not the same, only their form is.
 
 Why does this happen? Because at $\kappa = 0$, the boosts commute ($[K_i, K_j] = 0$): performing boost~$A$ followed by boost~$B$ gives the same result as~$B$ followed by~$A$. Non-commutativity is what gives rotations their geometric rigidity. When the boosts commute, they lose that same rigidity. They can't knit space and time together. The mixing of space and time in Einstein's theory is a direct consequence of the fact that, at $\kappa > 0$, the order of boosts matters ($[K_i, K_j] = -\kappa\,\epsilon_{ijk}\,J_k$, linking boosts back to rotations).
 
-All of these failures trace to this single root: $[K_i, K_j] = 0$. The degenerate Killing form, the missing velocity-space ruler, the decomposition of spacetime into separate time and space sectors, the spacetime metric collapsing to $dt^2$ alone. Galilean mechanics is the low-velocity limit of Lorentzian kinematics, not evidence for an independent framework. And the passage between the two isn't a smooth limit; it is a structural break. The Galilean algebra is a different kind of object from the Lorentzian one.
+All of these failures trace to this single root: $[K_i, K_j] = 0$. The degenerate Killing form, the missing velocity-space ruler, the decomposition of spacetime into separate time and space sectors, the spacetime metric collapsing to $dt^2$ alone. Galilean mechanics is the low-velocity limit of Lorentzian kinematics, not evidence for an independent framework. And the passage between the two isn't a smooth limit; it is a structural break (an In\"on\"u-Wigner contraction: the algebraic structure changes discontinuously). The Galilean algebra is a different kind of object from the Lorentzian one.
 
 \bigskip
 \textbf{$\kappa > 0$: Everything is determined.}
@@ -201,9 +221,9 @@ All of these failures trace to this single root: $[K_i, K_j] = 0$. The degenerat
 \smallskip
 When $\kappa$ is positive, the Killing form returns $-4$ on the rotations and $4\kappa$ on the boosts. Every generator is visible. No direction is blind.
 
-Velocity space now has a definite geometry, and the ruler is fixed: the Killing form gives $B(K_i, K_j) = 4\kappa\,\delta_{ij}$, which sets the invariant speed at $V = 1/\sqrt{\kappa}$, finite, real, and the same in all frames. Unlike the Galilean case, the scale isn't left dangling. The symmetry rules set it.
+Velocity space now has a definite geometry, and the ruler is fixed: the Killing form gives $B(K_i, K_j) = 4\kappa\,\delta_{ij}$, positive and non-degenerate, confirming that the boost sector is non-compact. The invariant speed $V = 1/\sqrt{\kappa}$ (at which $\gamma$ diverges in the transformation equations) is finite, real, and the same in all frames. Unlike the Galilean case, the scale isn't left dangling. The symmetry rules set it.
 
-Spacetime also acquires a definite geometry, and here the contrast with $\kappa = 0$ is sharpest. At $\kappa = 0$, every observer agrees on time intervals; duration is frame-independent. But at $\kappa > 0$, no observer's time is privileged. Neither time intervals nor spatial distances are frame-independent on their own. The only quantity all observers agree on is the spacetime interval, a single number built from both spatial and temporal separations that combines space and time inseparably. (The invariant metric is $g \propto \mathrm{diag}(1,\, -\kappa,\, -\kappa,\, -\kappa)$, or equivalently $ds^2 = \kappa^{-1}\,dt^2 - dx^2 - dy^2 - dz^2$; the algebra determines this quadratic form uniquely, by Schur's lemma on the irreducible four-dimensional representation.) That is what unification means: the only invariant quantity mixes both.
+Spacetime also acquires a definite geometry, and here the contrast with $\kappa = 0$ is sharpest. At $\kappa = 0$, every observer agrees on time intervals; duration is frame-independent. But at $\kappa > 0$, no observer's time is privileged. Neither time intervals nor spatial distances are frame-independent on their own. The only quantity all observers agree on is the spacetime interval, a single number built from both spatial and temporal separations that combines space and time inseparably. (The invariant metric is $g \propto \mathrm{diag}(1,\, -\kappa,\, -\kappa,\, -\kappa)$; with $\kappa = 1/c^2$, this is $ds^2 = c^2\,dt^2 - dx^2 - dy^2 - dz^2$. The algebra determines this quadratic form uniquely, by Schur's lemma on the irreducible four-dimensional representation.) That is what unification means: the only invariant quantity mixes both.
 
 This geometry has lightcones. Past and future are distinguished. Causal structure exists.
 
@@ -234,7 +254,7 @@ A finite invariant speed must exist, and spacetime must be Lorentzian. What the 
 
 Why does this matter? Because Einstein's second postulate was calibration dressed up as foundation. The symmetry rules themselves demand a finite invariant speed. Experiment tells us \emph{how fast}. The algebra tells us \emph{that}.
 
-Einstein was right that the relativity principle was the deeper of his two postulates, and right that background structure should be eliminated. The tools to finish the job existed in his time. The computation requires nothing beyond the symmetry rules and some straightforward algebra. But the conclusion is the one he reached: there is a finite invariant speed, spacetime is Lorentzian, and space and time are unified.
+Einstein was right that the relativity principle was the deeper of his two postulates, and right that background structure should be eliminated. The tools to finish the job existed in his time. The computation requires nothing beyond the symmetry rules and some algebra. But the conclusion is the one he reached: there is a finite invariant speed, spacetime is Lorentzian, and space and time are unified.
 
 The speed's value is empirical. Its existence is not.
 
