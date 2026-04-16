@@ -8,10 +8,6 @@ target/
 venv/
 .vscode/
 
-.gauss/runtime/
-.gauss/cache/
-.gauss/workflows/
-
 *.aux
 *.fdb_latexmk
 *.fls
@@ -19,4 +15,3 @@ venv/
 *.out
 *.synctex.gz
 *.toc
-

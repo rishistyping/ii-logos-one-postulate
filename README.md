@@ -197,7 +197,7 @@ The main Lean modules line up with the paper's stages:
 | [`OnePostulate/VelocitySpace.lean`](OnePostulate/VelocitySpace.lean) and [`OnePostulate/SpacetimeRepresentation.lean`](OnePostulate/SpacetimeRepresentation.lean) | Velocity-space metric behavior, spacetime metric invariance, Galilean reducibility, Lorentzian congruence |
 | [`OnePostulate/Selection.lean`](OnePostulate/Selection.lean) and [`OnePostulate/ClassificationDerivation.lean`](OnePostulate/ClassificationDerivation.lean) | The branch verdicts and the deferred full-paper classification bridge |
 
-For a deeper walkthrough of the proof spine, see [docs/proof-visuals.md](docs/proof-visuals.md). For notebook workflow, assets, and presentation guidance, see [docs/notebooks.md](docs/notebooks.md). Repository-specific external validation workflows live under [docs/aristotle/README.md](docs/aristotle/README.md), and project-scoped Gauss/OpenGauss setup is documented in [documentation.md](documentation.md).
+For a deeper walkthrough of the proof spine, see [docs/proof-visuals.md](docs/proof-visuals.md). For notebook workflow, assets, and presentation guidance, see [docs/notebooks.md](docs/notebooks.md).
 
 ## Explore It for Yourself
 
@@ -280,10 +280,8 @@ OnePostulate.lean         Guarded exact root
 OnePostulateFull.lean     Full-paper root
 docs/proof-visuals.md     Proof-map and theorem spine
 docs/notebooks.md         Notebook workflow and asset guide
-docs/aristotle/           External validation workflows and archived runs
 wolfram/                  Notebook builder, generated notebook, SVG previews, CloudExport script
 one_postulate_sympy_colab.ipynb   Secondary SymPy companion
-documentation.md          Retrieval-oriented repo context
 ```
 
 ## License, Citation, and Contributions
