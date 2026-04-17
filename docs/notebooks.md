@@ -43,6 +43,10 @@ and follows the frozen structure in
 [`one_postulate_sympy_colab.ipynb`](../one_postulate_sympy_colab.ipynb) remains
 available as a secondary companion.
 
+The public Colab link for that notebook is intentionally pinned to a stable
+published revision rather than `main`. Once the repository has a public
+release tag, that pinned revision should be updated to the tag.
+
 - It starts from the already-derived `1+1` transformation law.
 - It checks the Galilean limit `kappa -> 0` directly.
 - It adopts the homogeneous kinematics algebra used later in the paper.
@@ -50,6 +54,7 @@ available as a secondary companion.
   `kappa > 0` regimes symbolically.
 - It separates direct symbolic checks from the paper's higher-level physical
   reading.
+- It is smoke-tested in GitHub Actions with `python -m nbconvert --execute`.
 
 ## Lean Crosswalk
 

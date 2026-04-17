@@ -5,8 +5,8 @@ Einstein used one postulate too many. The relativity principle alone yields a on
 <p align="center">
   <a href="https://github.com/Intelligent-Internet/ii-logos-one-postulate/actions/workflows/lean-ci.yml"><img src="https://github.com/Intelligent-Internet/ii-logos-one-postulate/actions/workflows/lean-ci.yml/badge.svg" alt="Lean CI" /></a>
   <a href="paper/one-postulate.pdf"><img src="https://img.shields.io/badge/paper-PDF-334155" alt="Paper PDF" /></a>
-  <a href="https://colab.research.google.com/github/Intelligent-Internet/ii-logos-one-postulate/blob/main/one_postulate_sympy_colab.ipynb">
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
+  <a href="https://colab.research.google.com/github/Intelligent-Internet/ii-logos-one-postulate/blob/20d1c36ae43bdf8d0dcbb80b498ae188157383eb/one_postulate_sympy_colab.ipynb">
+    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open stable Colab notebook" />
   </a>
   <a href="docs/notebooks.md"><img src="https://img.shields.io/badge/notebook-guide-0f766e" alt="Notebook guide" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0%20%2B%20CC--BY--4.0-15803d" alt="Dual licensed under Apache 2.0 and CC BY 4.0" /></a>
@@ -33,6 +33,8 @@ Einstein used one postulate too many. The relativity principle alone yields a on
 This is a formal verification companion to the paper, not a standalone physics package. Lean 4 is the proof authority for the six-generator special-relativity branch-selection argument. Wolfram and SymPy are explanatory, symbolic, and presentation companions; they are useful for exploration, but they do not replace the Lean proof surface.
 
 Cloud publishing is supported by [`wolfram/cloud_export_notebook.wl`](wolfram/cloud_export_notebook.wl), but it is a publishing action: it requires a local Wolfram runtime and an authenticated Wolfram Cloud account. It is not part of the default local verification path. The repository now uses a split public license: code surfaces are under Apache 2.0, and paper/documentation surfaces are under CC BY 4.0.
+
+The public SymPy notebook is smoke-tested in GitHub Actions with `python -m nbconvert --execute`. The Colab links are pinned to a stable published revision rather than `main`; once the repository has a public release tag, those links should move from the pinned commit to that tag.
 
 ## Choose Your Path
 
@@ -204,7 +206,7 @@ For a deeper walkthrough of the proof spine, see [docs/proof-visuals.md](docs/pr
 The repository includes two computational companions. If you do not want to start with Lean, these notebook surfaces are the easiest way in.
 
 - Primary public-facing notebook: [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), generated from [`wolfram/build_one_postulate_notebook.wl`](wolfram/build_one_postulate_notebook.wl)
-- Secondary notebook: [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Intelligent-Internet/ii-logos-one-postulate/blob/main/one_postulate_sympy_colab.ipynb)
+- Secondary notebook: [`one_postulate_sympy_colab.ipynb`](one_postulate_sympy_colab.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Intelligent-Internet/ii-logos-one-postulate/blob/20d1c36ae43bdf8d0dcbb80b498ae188157383eb/one_postulate_sympy_colab.ipynb)
 
 <p align="center">
   <img src="wolfram/assets/notebook_preview_crosswalk.svg" alt="Paper to notebook to Lean crosswalk" width="900" />
