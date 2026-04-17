@@ -9,7 +9,7 @@ Einstein used one postulate too many. The relativity principle alone yields a on
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" />
   </a>
   <a href="docs/notebooks.md"><img src="https://img.shields.io/badge/notebook-guide-0f766e" alt="Notebook guide" /></a>
-  <img src="https://img.shields.io/badge/license-pending-b45309" alt="License pending" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0%20%2B%20CC--BY--4.0-15803d" alt="Dual licensed under Apache 2.0 and CC BY 4.0" /></a>
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@ Einstein used one postulate too many. The relativity principle alone yields a on
 
 This is a formal verification companion to the paper, not a standalone physics package. Lean 4 is the proof authority for the six-generator special-relativity branch-selection argument. Wolfram and SymPy are explanatory, symbolic, and presentation companions; they are useful for exploration, but they do not replace the Lean proof surface.
 
-Cloud publishing is supported by [`wolfram/cloud_export_notebook.wl`](wolfram/cloud_export_notebook.wl), but it is a publishing action: it requires a local Wolfram runtime and an authenticated Wolfram Cloud account. It is not part of the default local verification path. Repository citation metadata now exists, but license selection is still pending, so broad redistribution should wait until a root license decision is made.
+Cloud publishing is supported by [`wolfram/cloud_export_notebook.wl`](wolfram/cloud_export_notebook.wl), but it is a publishing action: it requires a local Wolfram runtime and an authenticated Wolfram Cloud account. It is not part of the default local verification path. The repository now uses a split public license: code surfaces are under Apache 2.0, and paper/documentation surfaces are under CC BY 4.0.
 
 ## Choose Your Path
 
@@ -286,7 +286,10 @@ one_postulate_sympy_colab.ipynb   Secondary SymPy companion
 
 ## License, Citation, and Contributions
 
-License: pending. There is no root `LICENSE` file yet, so do not assume public reuse terms beyond normal GitHub viewing until the project owner chooses one.
+License: this repository uses a split license described in [`LICENSE`](LICENSE).
+Code surfaces such as Lean proofs, Wolfram scripts, Python notebooks, and build infrastructure are licensed under [`LICENSES/LICENSE-CODE`](LICENSES/LICENSE-CODE) (Apache 2.0). Paper and documentation surfaces such as [`paper/`](paper), [`docs/`](docs), [`README.md`](README.md), [`blueprint/`](blueprint), and the SVG assets are licensed under [`LICENSES/LICENSE-DOCS`](LICENSES/LICENSE-DOCS) (CC BY 4.0).
+
+Repository SPDX expression: `Apache-2.0 AND CC-BY-4.0`.
 
 Citation: repository-level citation metadata is provided in [`CITATION.cff`](CITATION.cff). For scientific use, cite the paper first and this repository as the formal verification companion.
 

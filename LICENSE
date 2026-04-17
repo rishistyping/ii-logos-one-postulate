@@ -1,0 +1,11 @@
+One Postulate — Licensing
+
+SPDX-License-Identifier: Apache-2.0 AND CC-BY-4.0
+
+Code (Lean proofs, Wolfram scripts, Python notebooks, build infrastructure):
+Licensed under the Apache License, Version 2.0.
+See LICENSES/LICENSE-CODE or https://www.apache.org/licenses/LICENSE-2.0
+
+Paper and documentation (paper/, docs/, README.md, blueprint/, SVG assets):
+Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+See LICENSES/LICENSE-DOCS or https://creativecommons.org/licenses/by/4.0/

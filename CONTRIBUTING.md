@@ -34,6 +34,11 @@ wolframscript -file wolfram/build_one_postulate_notebook.wl
 
 Do not run `wolframscript -file wolfram/cloud_export_notebook.wl` as part of ordinary contribution work. That command publishes to Wolfram Cloud and requires maintainer credentials.
 
-## License Status
+## License
 
-No root license has been selected yet. Until a `LICENSE` file is added, do not assume reuse terms for this repository beyond normal GitHub viewing. If you contribute before the license is chosen, keep changes small and be prepared for maintainers to ask for explicit confirmation that the contribution can be included under the eventual project license.
+This repository now uses a split public license described in [`LICENSE`](LICENSE):
+
+- Code surfaces such as Lean proofs, Wolfram scripts, Python notebooks, and build infrastructure are licensed under [`LICENSES/LICENSE-CODE`](LICENSES/LICENSE-CODE) (Apache 2.0).
+- Paper and documentation surfaces such as `paper/`, `docs/`, `README.md`, `blueprint/`, and the SVG assets are licensed under [`LICENSES/LICENSE-DOCS`](LICENSES/LICENSE-DOCS) (CC BY 4.0).
+
+If you contribute across both surfaces, expect the code portion of your change to be distributed under Apache 2.0 and the paper/documentation portion to be distributed under CC BY 4.0.
