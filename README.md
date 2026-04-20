@@ -317,3 +317,8 @@ Contributions: see [`CONTRIBUTING.md`](CONTRIBUTING.md). This repository is not 
 - [P. B. Pal (2003), *Nothing but Relativity*](https://arxiv.org/abs/physics/0302045)
 - [A. Drory (2015), *The necessity of the second postulate in special relativity*](https://arxiv.org/abs/1412.4018)
 - [J.-P. Anker and F. Ziegler (2020), *Relativity without light: A new proof of Ignatowski's theorem*](https://arxiv.org/abs/2007.09301)
+
+## How to Cite
+
+- Paper: Mostaque, Emad. 2026. [*One Postulate*](paper/one-postulate.pdf).
+- Repository: Mostaque, Emad. 2026. [*One Postulate*](https://github.com/Intelligent-Internet/ii-logos-one-postulate). Formal verification companion repository. See [`CITATION.cff`](CITATION.cff).
