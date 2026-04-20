@@ -1,0 +1,42 @@
+name: Lean CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Guard phase-1 OnePostulate surface
+        run: |
+          if grep -nE 'sorry|admit' OnePostulateFull.lean OnePostulate.lean OnePostulate/*.lean; then
+            echo 'Found sorry/admit in phase-1 OnePostulate files'
+            exit 1
+          fi
+
+          if grep -nE '^[[:space:]]*import[[:space:]]+OnePostulate\.ClassificationDerivation([[:space:]]|$)' OnePostulate.lean; then
+            echo 'OnePostulate.lean must not import OnePostulate.ClassificationDerivation during phase 1'
+            exit 1
+          fi
+
+      - name: Build Lean project
+        uses: leanprover/lean-action@v1
+        with:
+          build: true
+
+      - name: Check deferred classification module
+        run: lake env lean OnePostulate/ClassificationDerivation.lean
+
+      - name: Check full-paper root
+        run: lake env lean OnePostulateFull.lean

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="640" viewBox="0 0 1180 640" role="img" aria-labelledby="title desc">
+  <title id="title">Killing form self-test preview</title>
+  <desc id="desc">A static preview showing the Killing form matrix, the eigenvalue split as kappa varies, and three short interpretive readout cards for the positive-kappa branch.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #F7F4EE; }
+      .card { fill: #FFFDF9; }
+      .border { fill: none; stroke: #2457A6; stroke-width: 2; }
+      .card-border { fill: none; stroke: #6B7584; stroke-width: 1.6; }
+      .lorentz-border { fill: none; stroke: #2457A6; stroke-width: 1.6; }
+      .galilean-border { fill: none; stroke: #2E7D6D; stroke-width: 1.6; }
+      .slate-border { fill: none; stroke: #6B7584; stroke-width: 1.6; }
+      .headline { fill: #22252B; font-family: Georgia, "Times New Roman", serif; font-size: 29px; font-weight: 700; }
+      .card-title { fill: #22252B; font-family: Georgia, "Times New Roman", serif; font-size: 20px; font-weight: 700; }
+      .card-title-blue { fill: #2457A6; font-family: Georgia, "Times New Roman", serif; font-size: 20px; font-weight: 700; }
+      .mini-title-blue { fill: #2457A6; font-family: Georgia, "Times New Roman", serif; font-size: 17px; font-weight: 700; }
+      .mini-title-slate { fill: #6B7584; font-family: Georgia, "Times New Roman", serif; font-size: 17px; font-weight: 700; }
+      .mini-title-green { fill: #2E7D6D; font-family: Georgia, "Times New Roman", serif; font-size: 17px; font-weight: 700; }
+      .body { fill: #22252B; font-family: Helvetica, Arial, sans-serif; font-size: 14px; }
+      .small { fill: #6B7584; font-family: Helvetica, Arial, sans-serif; font-size: 12px; }
+      .tick { fill: #6B7584; font-family: Helvetica, Arial, sans-serif; font-size: 11px; }
+      .label { fill: #22252B; font-family: Helvetica, Arial, sans-serif; font-size: 12px; }
+      .note { fill: #2457A6; font-family: Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; }
+      .grid-stroke { stroke: #6B7584; stroke-width: 1; opacity: 0.85; }
+      .plot-grid { stroke: #D7DEE8; stroke-width: 1; }
+      .axis { stroke: #6B7584; stroke-width: 1.6; }
+      .rotation-line { stroke: #6B7584; stroke-width: 3; }
+      .boost-line { stroke: #2457A6; stroke-width: 3.2; }
+      .guide-line { stroke: #2457A6; stroke-width: 1.2; stroke-dasharray: 5 5; opacity: 0.7; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1180" height="640" rx="18"/>
+  <rect class="border" x="1.5" y="1.5" width="1177" height="637" rx="16"/>
+
+  <text class="headline" x="54" y="70">Killing form self-test</text>
+  <text class="small" x="54" y="98">At positive kappa, the rotation block stays fixed while the boost block remains visible. That is the algebraic pivot that selects the Lorentzian branch.</text>
+  <line x1="54" y1="118" x2="1126" y2="118" stroke="#D7DEE8" stroke-width="2"/>
+
+  <rect class="card" x="46" y="138" width="494" height="278" rx="14"/>
+  <rect class="card-border" x="46" y="138" width="494" height="278" rx="14"/>
+  <text class="card-title" x="72" y="171">Matrix view</text>
+  <text class="small" x="72" y="191">B = diag(-4 I3, 4 kappa I3)</text>
+
+  <rect x="86" y="206" width="248" height="248" fill="#FFFFFF" stroke="#D7DEE8" stroke-width="1"/>
+  <text class="tick" x="115" y="198" text-anchor="middle">J1</text>
+  <text class="tick" x="153" y="198" text-anchor="middle">J2</text>
+  <text class="tick" x="191" y="198" text-anchor="middle">J3</text>
+  <text class="tick" x="229" y="198" text-anchor="middle">K1</text>
+  <text class="tick" x="267" y="198" text-anchor="middle">K2</text>
+  <text class="tick" x="305" y="198" text-anchor="middle">K3</text>
+  <text class="tick" x="74" y="230" text-anchor="end">J1</text>
+  <text class="tick" x="74" y="268" text-anchor="end">J2</text>
+  <text class="tick" x="74" y="306" text-anchor="end">J3</text>
+  <text class="tick" x="74" y="344" text-anchor="end">K1</text>
+  <text class="tick" x="74" y="382" text-anchor="end">K2</text>
+  <text class="tick" x="74" y="420" text-anchor="end">K3</text>
+
+  <g class="grid-stroke">
+    <line x1="124" y1="206" x2="124" y2="454"/>
+    <line x1="162" y1="206" x2="162" y2="454"/>
+    <line x1="200" y1="206" x2="200" y2="454"/>
+    <line x1="238" y1="206" x2="238" y2="454"/>
+    <line x1="276" y1="206" x2="276" y2="454"/>
+    <line x1="314" y1="206" x2="314" y2="454"/>
+    <line x1="86" y1="244" x2="334" y2="244"/>
+    <line x1="86" y1="282" x2="334" y2="282"/>
+    <line x1="86" y1="320" x2="334" y2="320"/>
+    <line x1="86" y1="358" x2="334" y2="358"/>
+    <line x1="86" y1="396" x2="334" y2="396"/>
+    <line x1="86" y1="434" x2="334" y2="434"/>
+  </g>
+
+  <rect x="86" y="206" width="38" height="38" fill="#B86A2E" opacity="0.95"/>
+  <rect x="124" y="244" width="38" height="38" fill="#B86A2E" opacity="0.95"/>
+  <rect x="162" y="282" width="38" height="38" fill="#B86A2E" opacity="0.95"/>
+  <rect x="200" y="320" width="38" height="38" fill="#2457A6" opacity="0.60"/>
+  <rect x="238" y="358" width="38" height="38" fill="#2457A6" opacity="0.60"/>
+  <rect x="276" y="396" width="38" height="38" fill="#2457A6" opacity="0.60"/>
+
+  <text class="body" x="352" y="235">Preview state: kappa = 0.6</text>
+  <text class="small" x="352" y="265">Rotation block fixed at -4.</text>
+  <text class="small" x="352" y="287">Boost block positive: 4 kappa = 2.4.</text>
+  <text class="small" x="352" y="321">No blind spot appears in boosts.</text>
+  <text class="note" x="352" y="357">The self-test already says</text>
+  <text class="note" x="352" y="378">the boost sector stays visible.</text>
+  <text class="small" x="352" y="406">Negative on J, positive on K,</text>
+  <text class="small" x="352" y="427">with no degeneracy in boosts.</text>
+
+  <rect class="card" x="566" y="138" width="568" height="278" rx="14"/>
+  <rect class="lorentz-border" x="566" y="138" width="568" height="278" rx="14"/>
+  <text class="card-title-blue" x="592" y="171">Eigenvalue split</text>
+  <text class="small" x="592" y="191">The boost track crosses zero at kappa = 0; the rotation track never does.</text>
+
+  <rect x="620" y="206" width="454" height="212" fill="#FFFFFF" stroke="#D7DEE8" stroke-width="1"/>
+  <g class="plot-grid">
+    <line x1="620" y1="312" x2="1074" y2="312"/>
+    <line x1="620" y1="206" x2="1074" y2="206"/>
+    <line x1="620" y1="418" x2="1074" y2="418"/>
+    <line x1="733.5" y1="206" x2="733.5" y2="418"/>
+    <line x1="847" y1="206" x2="847" y2="418"/>
+    <line x1="960.5" y1="206" x2="960.5" y2="418"/>
+  </g>
+  <line class="axis" x1="620" y1="312" x2="1074" y2="312"/>
+  <line class="axis" x1="847" y1="206" x2="847" y2="418"/>
+
+  <line class="rotation-line" x1="620" y1="404" x2="1074" y2="404"/>
+  <line class="boost-line" x1="620" y1="404" x2="1074" y2="220"/>
+  <line class="guide-line" x1="983" y1="206" x2="983" y2="418"/>
+  <circle cx="983" cy="257" r="5.5" fill="#2457A6"/>
+  <circle cx="983" cy="404" r="4.5" fill="#6B7584"/>
+
+  <text class="tick" x="620" y="438" text-anchor="middle">-1</text>
+  <text class="tick" x="847" y="438" text-anchor="middle">0</text>
+  <text class="tick" x="983" y="438" text-anchor="middle">0.6</text>
+  <text class="tick" x="1074" y="438" text-anchor="middle">1</text>
+  <text class="tick" x="608" y="408" text-anchor="end">-4</text>
+  <text class="tick" x="608" y="316" text-anchor="end">0</text>
+  <text class="tick" x="608" y="262" text-anchor="end">2.4</text>
+  <text class="tick" x="608" y="224" text-anchor="end">4</text>
+  <text class="tick" x="1078" y="316">kappa</text>
+  <text class="tick" x="600" y="325" transform="rotate(-90 600 325)">eigenvalue</text>
+
+  <text class="small" x="642" y="392">rotation x3</text>
+  <text class="small" x="994" y="246">boost x3</text>
+  <text class="note" x="878" y="236">kappa = 0.6 gives a positive boost eigenvalue.</text>
+
+  <rect class="card" x="46" y="450" width="346" height="144" rx="14"/>
+  <rect class="lorentz-border" x="46" y="450" width="346" height="144" rx="14"/>
+  <text class="mini-title-blue" x="72" y="482">Boost block</text>
+  <text class="body" x="72" y="514">Boost block = 4 kappa I3</text>
+  <text class="small" x="72" y="539">At kappa = 0.6 this becomes 2.4 I3.</text>
+  <text class="small" x="72" y="564">The boost sector is present, not invisible.</text>
+
+  <rect class="card" x="416" y="450" width="346" height="144" rx="14"/>
+  <rect class="slate-border" x="416" y="450" width="346" height="144" rx="14"/>
+  <text class="mini-title-slate" x="442" y="482">Determinant and split</text>
+  <text class="body" x="442" y="514">det(B) = (-4)^3 (4 kappa)^3</text>
+  <text class="small" x="442" y="539">rotation: -4 x3; boost: 4 kappa x3</text>
+  <text class="small" x="442" y="564">The sign change happens only in the boost sector.</text>
+
+  <rect class="card" x="786" y="450" width="348" height="144" rx="14"/>
+  <rect class="galilean-border" x="786" y="450" width="348" height="144" rx="14"/>
+  <text class="mini-title-green" x="812" y="482">Interpretive verdict</text>
+  <text class="body" x="812" y="514">At kappa &gt; 0, the boost sector is visible.</text>
+  <text class="small" x="812" y="539">That is why the Lorentzian branch survives.</text>
+  <text class="small" x="812" y="564">Experiment measures the value of c after this structural verdict.</text>
+</svg>
