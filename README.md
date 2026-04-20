@@ -322,3 +322,5 @@ Contributions: see [`CONTRIBUTING.md`](CONTRIBUTING.md). This repository is not 
 
 - Paper: Mostaque, Emad. 2026. [*One Postulate*](paper/one-postulate.pdf).
 - Repository: Mostaque, Emad. 2026. [*One Postulate*](https://github.com/Intelligent-Internet/ii-logos-one-postulate). Formal verification companion repository. See [`CITATION.cff`](CITATION.cff).
+
+For any questions, please reach out to [rishabh@ii.inc](mailto:rishabh@ii.inc).
