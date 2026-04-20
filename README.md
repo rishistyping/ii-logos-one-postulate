@@ -9,6 +9,8 @@ Einstein used one postulate too many. The relativity principle alone yields a on
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open stable Colab notebook" />
   </a>
   <a href="docs/notebooks.md"><img src="https://img.shields.io/badge/notebook-guide-0f766e" alt="Notebook guide" /></a>
+  <a href="documentation.md#using-external-opengauss"><img src="https://img.shields.io/badge/OpenGauss-passed-15803d" alt="OpenGauss passed" /></a>
+  <a href="https://aristotle.harmonic.fun/"><img src="https://img.shields.io/badge/Verified%20by-Harmonic%2FAristotle-0f766e" alt="Verified by Harmonic Aristotle" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0%20%2B%20CC--BY--4.0-15803d" alt="Dual licensed under Apache 2.0 and CC BY 4.0" /></a>
 </p>
 
