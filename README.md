@@ -20,10 +20,10 @@ Einstein used one postulate too many. The relativity principle alone yields a on
 </p>
 
 <p align="center">
-  <img src="wolfram/assets/notebook_preview_branches.svg" alt="The three kinematic universes allowed by the relativity principle" width="900" />
+  <img src="docs/assets/logos-hero.png" alt="LOGOS hero image for One Postulate" width="900" />
 </p>
 <p align="center">
-  <sub>The relativity principle permits a one-parameter family of universes. The paper's claim is that the symmetry rules themselves eliminate two of the three branches.</sub>
+  <sub>LOGOS is the public-facing presentation surface for the One Postulate project.</sub>
 </p>
 <p align="center">
   <sub><strong>Observation tells us the value of the speed. The mathematics tells us that the speed must exist.</strong></sub>
