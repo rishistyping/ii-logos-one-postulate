@@ -312,3 +312,19 @@ Contributions: see [`CONTRIBUTING.md`](CONTRIBUTING.md). This repository is not 
 - [P. B. Pal (2003), *Nothing but Relativity*](https://arxiv.org/abs/physics/0302045)
 - [A. Drory (2015), *The necessity of the second postulate in special relativity*](https://arxiv.org/abs/1412.4018)
 - [J.-P. Anker and F. Ziegler (2020), *Relativity without light: A new proof of Ignatowski's theorem*](https://arxiv.org/abs/2007.09301)
+
+## Intelligent Internet
+
+<p align="left">
+  <a href="https://ii.inc"><img src="https://img.shields.io/badge/Homepage-II.inc-blue" alt="Intelligent Internet Homepage" /></a>
+  <a href="https://ii.inc/web/blog/post/logos"><img src="https://img.shields.io/badge/Blog-II--LOGOS-blue" alt="II-LOGOS Blog" /></a>
+  <a href="https://op.ii.inc/"><img src="https://img.shields.io/badge/Site-One%20Postulate-15803d" alt="II-Logos One Postulate" /></a>
+  <a href="https://agent.ii.inc"><img src="https://img.shields.io/badge/II--Agent-agent.ii.inc-blue" alt="II-Agent" /></a>
+  <a href="https://discord.gg/yDWPsshPHB"><img src="https://dcbadge.limes.pink/api/server/yDWPsshPHB?style=flat" alt="Discord Follow" /></a>
+</p>
+
+- [Intelligent Internet Homepage](https://ii.inc)
+- [II-LOGOS Blog](https://ii.inc/web/blog/post/logos)
+- [II-Logos One Postulate](https://op.ii.inc/)
+- [II-Agent](https://agent.ii.inc)
+- [Discord](https://discord.gg/yDWPsshPHB)
