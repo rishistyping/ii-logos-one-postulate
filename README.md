@@ -38,9 +38,6 @@ Einstein used one postulate too many. The relativity principle alone yields a on
 
 This is a formal verification companion to the paper, not a standalone physics package. Lean 4 is the proof authority for the six-generator special-relativity branch-selection argument. Wolfram and SymPy are explanatory, symbolic, and presentation companions; they are useful for exploration, but they do not replace the Lean proof surface.
 
-Cloud publishing is supported by [`wolfram/cloud_export_notebook.wl`](wolfram/cloud_export_notebook.wl), but it is a publishing action: it requires a local Wolfram runtime and an authenticated Wolfram Cloud account. It is not part of the default local verification path. The repository now uses a split public license: code surfaces are under Apache 2.0, and paper/documentation surfaces are under CC BY 4.0.
-
-The public SymPy notebook is smoke-tested in GitHub Actions with `python -m nbconvert --execute`. The Colab links are pinned to a stable published revision rather than `main`; once the repository has a public release tag, those links should move from the pinned commit to that tag.
 
 ## Choose Your Path
 
