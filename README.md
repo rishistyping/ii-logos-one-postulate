@@ -46,6 +46,59 @@ This is a formal verification companion to the paper, not a standalone physics p
 - `Notebook explorer:` Use the Colab notebook above or open [`wolfram/notebooks/one_postulate_explainer.nb`](wolfram/notebooks/one_postulate_explainer.nb), then see [docs/notebooks.md](docs/notebooks.md) for workflow details.
 - `Maintainer or publisher:` Use [Build and repository map](#build-and-repository-map), [License, Citation, and Contributions](#license-citation-and-contributions), and [docs/notebooks.md](docs/notebooks.md) before cutting a public release.
 
+## Explainable Visual Map
+
+The repository now includes a design-system visual layer that matches the broader Intelligent Internet presentation grammar: parchment surfaces, navy rules, restrained accents, and proof-first diagrams. These images are explanatory surfaces; the Lean files remain the proof authority and the notebooks remain computational companions.
+
+<p align="center">
+  <img src="docs/assets/verification-story.png" alt="Verification story for One Postulate" width="900" />
+</p>
+<p align="center">
+  <sub>Paper source, Lean proof authority, notebook companions, proof visuals, and reproducibility lanes are committed alongside the claim.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/assets/branch-selection-funnel.png" alt="Branch selection funnel for the Lorentzian kappa result" width="900" />
+</p>
+<p align="center">
+  <sub>The branch-selection funnel: the relativity principle, the kappa family, the Killing-form self-test, and the Lorentzian branch.</sub>
+</p>
+
+```mermaid
+flowchart LR
+    P["Paper source"] --> L["Lean proof authority"]
+    L --> N["Wolfram and SymPy notebooks"]
+    N --> V["Proof visuals"]
+    V --> R["Rerunnable checks"]
+    R --> I["Inspectable Lorentzian result"]
+    classDef default fill:#E8EDE5,stroke:#0F233F,stroke-width:1.5px,color:#0F233F;
+    linkStyle default stroke:#5D6572,stroke-width:2px;
+```
+
+```mermaid
+flowchart LR
+    A["Relativity principle"] --> B["One-parameter kappa family"]
+    B --> C["Killing-form self-test"]
+    C --> D["kappa < 0: Euclidean branch"]
+    C --> E["kappa = 0: Galilean branch"]
+    C --> F["kappa > 0: Lorentzian branch"]
+    F --> G["Finite invariant speed"]
+    classDef default fill:#E8EDE5,stroke:#0F233F,stroke-width:1.5px,color:#0F233F;
+    linkStyle default stroke:#5D6572,stroke-width:2px;
+```
+
+```mermaid
+flowchart LR
+    K["B = diag(-4 I3, 4 kappa I3)"] --> E["kappa < 0: compact/Euclidean behavior"]
+    K --> G["kappa = 0: boost-sector blind spot"]
+    K --> L["kappa > 0: Lorentzian metric and finite speed"]
+    L --> S["Observation gives the value; algebra gives existence"]
+    classDef default fill:#E8EDE5,stroke:#0F233F,stroke-width:1.5px,color:#0F233F;
+    linkStyle default stroke:#5D6572,stroke-width:2px;
+```
+
+For the deeper proof map, use [docs/proof-visuals.md](docs/proof-visuals.md). For notebook workflow and presentation assets, use [docs/notebooks.md](docs/notebooks.md).
+
 ## Why this matters
 
 Special relativity is usually taught as beginning with two principles:

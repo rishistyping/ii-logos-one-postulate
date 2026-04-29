@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">One Postulate Verification Story</title>
+  <desc id="desc">A design-system visual showing the paper source, Lean proof authority, companion notebooks, proof visuals, reproducibility lane, and independently inspectable Lorentzian branch result.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F2EEE2"/>
+      <stop offset="0.55" stop-color="#E8EDE5"/>
+      <stop offset="1" stop-color="#F2EEE2"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="70%">
+      <stop offset="0" stop-color="#2F95A6" stop-opacity="0.16"/>
+      <stop offset="0.5" stop-color="#F2EEE2" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#F2EEE2" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0F233F" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: url(#paper); }
+      .glow { fill: url(#glow); }
+      .ink { fill: #0F233F; }
+      .muted { fill: #516071; }
+      .teal { fill: #2F95A6; }
+      .gold { fill: #C9A96E; }
+      .card { fill: #E8EDE5; stroke: #5D6572; stroke-width: 1.5; filter: url(#softShadow); }
+      .result { fill: #0F233F; stroke: #C9A96E; stroke-width: 2; }
+      .rule { stroke: #0F233F; stroke-width: 2; fill: none; }
+      .softRule { stroke: #5D6572; stroke-width: 1.5; fill: none; opacity: 0.72; }
+      .accentRule { stroke: #2F95A6; stroke-width: 3; fill: none; }
+      .headline { font-family: "Cormorant Garamond", Georgia, serif; font-size: 78px; font-weight: 400; letter-spacing: -1.5px; }
+      .subtitle { font-family: "Source Serif 4", Georgia, serif; font-size: 27px; }
+      .label { font-family: "Source Serif 4", Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: 2.2px; }
+      .body { font-family: "Source Serif 4", Georgia, serif; font-size: 23px; }
+      .small { font-family: "Geist Sans", Arial, sans-serif; font-size: 17px; font-weight: 600; letter-spacing: 1px; }
+      .mono { font-family: "Geist Sans", Arial, sans-serif; font-size: 20px; font-weight: 600; }
+    </style>
+    <marker id="arrow" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto">
+      <path d="M1,1 L12,6.5 L1,12" fill="none" stroke="#0F233F" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+  <rect class="glow" width="1600" height="900"/>
+
+  <rect x="48" y="42" width="1504" height="816" rx="18" class="rule"/>
+  <path d="M116 42 C116 92 91 117 48 117 M1484 42 C1484 92 1509 117 1552 117 M116 858 C116 808 91 783 48 783 M1484 858 C1484 808 1509 783 1552 783" class="rule"/>
+  <path d="M82 76 H1518 M82 824 H1518 M82 76 V824 M1518 76 V824" class="softRule"/>
+
+  <text x="800" y="137" text-anchor="middle" class="headline ink">Verification Story</text>
+  <text x="800" y="181" text-anchor="middle" class="subtitle muted">One Postulate</text>
+  <text x="800" y="222" text-anchor="middle" class="small teal">PAPER SOURCE · LEAN PROOF AUTHORITY · NOTEBOOK COMPANIONS · VISUAL LEDGER · RERUNNABLE CHECKS</text>
+
+  <g transform="translate(142 304)">
+    <rect width="208" height="178" rx="12" class="card"/>
+    <text x="104" y="48" text-anchor="middle" class="label ink">PAPER</text>
+    <text x="104" y="88" text-anchor="middle" class="body muted">claim order</text>
+    <text x="104" y="124" text-anchor="middle" class="mono ink">paper/*.tex</text>
+    <text x="104" y="150" text-anchor="middle" class="mono ink">paper/*.pdf</text>
+  </g>
+
+  <g transform="translate(394 304)">
+    <rect width="208" height="178" rx="12" class="card"/>
+    <text x="104" y="48" text-anchor="middle" class="label ink">LEAN</text>
+    <text x="104" y="88" text-anchor="middle" class="body muted">proof authority</text>
+    <text x="104" y="124" text-anchor="middle" class="mono ink">brackets</text>
+    <text x="104" y="150" text-anchor="middle" class="mono ink">Killing form</text>
+  </g>
+
+  <g transform="translate(646 304)">
+    <rect width="208" height="178" rx="12" class="card"/>
+    <text x="104" y="48" text-anchor="middle" class="label ink">NOTEBOOKS</text>
+    <text x="104" y="88" text-anchor="middle" class="body muted">computed companions</text>
+    <text x="104" y="124" text-anchor="middle" class="mono ink">Wolfram</text>
+    <text x="104" y="150" text-anchor="middle" class="mono ink">SymPy</text>
+  </g>
+
+  <g transform="translate(898 304)">
+    <rect width="208" height="178" rx="12" class="card"/>
+    <text x="104" y="48" text-anchor="middle" class="label ink">MAPS</text>
+    <text x="104" y="88" text-anchor="middle" class="body muted">reader path</text>
+    <text x="104" y="124" text-anchor="middle" class="mono ink">docs/*.md</text>
+    <text x="104" y="150" text-anchor="middle" class="mono ink">assets/*.svg</text>
+  </g>
+
+  <g transform="translate(1150 304)">
+    <rect width="208" height="178" rx="12" class="card"/>
+    <text x="104" y="48" text-anchor="middle" class="label ink">CHECKS</text>
+    <text x="104" y="88" text-anchor="middle" class="body muted">rerunnable proof</text>
+    <text x="104" y="124" text-anchor="middle" class="mono ink">lake build</text>
+    <text x="104" y="150" text-anchor="middle" class="mono ink">CI</text>
+  </g>
+
+  <path d="M350 393 H392" class="rule" marker-end="url(#arrow)"/>
+  <path d="M602 393 H644" class="rule" marker-end="url(#arrow)"/>
+  <path d="M854 393 H896" class="rule" marker-end="url(#arrow)"/>
+  <path d="M1106 393 H1148" class="rule" marker-end="url(#arrow)"/>
+
+  <rect x="312" y="590" width="976" height="124" rx="16" class="result"/>
+  <text x="800" y="641" text-anchor="middle" class="label" fill="#F2EEE2">INDEPENDENTLY INSPECTABLE RESULT</text>
+  <text x="800" y="684" text-anchor="middle" class="subtitle" fill="#F2EEE2">The Lorentzian kappa branch is selected by the Lean proof spine and its companion artifacts.</text>
+
+  <path d="M800 482 V590" class="accentRule" marker-end="url(#arrow)"/>
+  <text x="800" y="774" text-anchor="middle" class="small muted">The same story is visible as paper, theorem files, diagrams, notebooks, and reproducibility commands.</text>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">One Postulate Branch Selection Funnel</title>
+  <desc id="desc">A design-system visual showing the relativity principle, kappa family, Killing form self-test, and Lorentzian branch selection.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F2EEE2"/>
+      <stop offset="0.52" stop-color="#E8EDE5"/>
+      <stop offset="1" stop-color="#F2EEE2"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#0F233F" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: url(#paper); }
+      .ink { fill: #0F233F; }
+      .muted { fill: #516071; }
+      .teal { fill: #2F95A6; }
+      .gold { fill: #C9A96E; }
+      .rule { stroke: #0F233F; stroke-width: 2; fill: none; }
+      .softRule { stroke: #5D6572; stroke-width: 1.5; fill: none; opacity: 0.72; }
+      .stage { fill: #E8EDE5; stroke: #5D6572; stroke-width: 1.5; filter: url(#softShadow); }
+      .branch { fill: #F2EEE2; stroke: #5D6572; stroke-width: 1.5; }
+      .winner { fill: #0F233F; stroke: #C9A96E; stroke-width: 3; filter: url(#softShadow); }
+      .headline { font-family: "Cormorant Garamond", Georgia, serif; font-size: 76px; font-weight: 400; letter-spacing: -1.3px; }
+      .subtitle { font-family: "Source Serif 4", Georgia, serif; font-size: 27px; }
+      .label { font-family: "Source Serif 4", Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: 2px; }
+      .body { font-family: "Source Serif 4", Georgia, serif; font-size: 23px; }
+      .small { font-family: "Geist Sans", Arial, sans-serif; font-size: 17px; font-weight: 600; letter-spacing: 1px; }
+      .formula { font-family: "Cormorant Garamond", Georgia, serif; font-size: 42px; font-weight: 400; }
+    </style>
+    <marker id="arrow" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto">
+      <path d="M1,1 L12,6.5 L1,12" fill="none" stroke="#0F233F" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+  <rect x="48" y="42" width="1504" height="816" rx="18" class="rule"/>
+  <path d="M116 42 C116 92 91 117 48 117 M1484 42 C1484 92 1509 117 1552 117 M116 858 C116 808 91 783 48 783 M1484 858 C1484 808 1509 783 1552 783" class="rule"/>
+  <path d="M82 76 H1518 M82 824 H1518 M82 76 V824 M1518 76 V824" class="softRule"/>
+
+  <text x="800" y="134" text-anchor="middle" class="headline ink">Branch Selection Funnel</text>
+  <text x="800" y="178" text-anchor="middle" class="subtitle muted">The relativity principle opens a kappa family; the algebra's invariant selects the Lorentzian branch.</text>
+
+  <g transform="translate(180 270)">
+    <rect width="292" height="126" rx="12" class="stage"/>
+    <text x="146" y="47" text-anchor="middle" class="label ink">START</text>
+    <text x="146" y="84" text-anchor="middle" class="body muted">relativity principle</text>
+  </g>
+  <path d="M472 333 H552" class="rule" marker-end="url(#arrow)"/>
+
+  <g transform="translate(552 270)">
+    <rect width="292" height="126" rx="12" class="stage"/>
+    <text x="146" y="45" text-anchor="middle" class="label ink">FAMILY</text>
+    <text x="146" y="88" text-anchor="middle" class="formula ink">kappa branches</text>
+  </g>
+  <path d="M844 333 H924" class="rule" marker-end="url(#arrow)"/>
+
+  <g transform="translate(924 270)">
+    <rect width="292" height="126" rx="12" class="stage"/>
+    <text x="146" y="47" text-anchor="middle" class="label ink">SELF-TEST</text>
+    <text x="146" y="84" text-anchor="middle" class="body muted">Killing form split</text>
+  </g>
+
+  <path d="M800 422 V500" class="rule" marker-end="url(#arrow)"/>
+  <text x="800" y="466" text-anchor="middle" class="small teal">BRANCH SPLIT</text>
+
+  <g transform="translate(185 540)">
+    <rect width="330" height="150" rx="12" class="branch"/>
+    <text x="165" y="49" text-anchor="middle" class="label muted">kappa &lt; 0</text>
+    <text x="165" y="89" text-anchor="middle" class="body ink">Euclidean branch</text>
+    <text x="165" y="120" text-anchor="middle" class="small muted">no causal lightcone structure</text>
+  </g>
+
+  <g transform="translate(635 540)">
+    <rect width="330" height="150" rx="12" class="branch"/>
+    <text x="165" y="49" text-anchor="middle" class="label muted">kappa = 0</text>
+    <text x="165" y="89" text-anchor="middle" class="body ink">Galilean branch</text>
+    <text x="165" y="120" text-anchor="middle" class="small muted">boost sector goes blind</text>
+  </g>
+
+  <g transform="translate(1085 540)">
+    <rect width="330" height="150" rx="12" class="winner"/>
+    <text x="165" y="49" text-anchor="middle" class="label" fill="#F2EEE2">kappa &gt; 0</text>
+    <text x="165" y="89" text-anchor="middle" class="body" fill="#F2EEE2">Lorentzian branch</text>
+    <text x="165" y="120" text-anchor="middle" class="small" fill="#C9A96E">finite invariant speed</text>
+  </g>
+
+  <path d="M800 500 C350 500 350 540 350 540" class="softRule"/>
+  <path d="M800 500 C800 520 800 540 800 540" class="softRule"/>
+  <path d="M800 500 C1250 500 1250 540 1250 540" class="softRule"/>
+
+  <text x="800" y="768" text-anchor="middle" class="small muted">The visual summarizes the committed Lean and notebook surfaces; it does not add a new proof claim.</text>
+</svg>

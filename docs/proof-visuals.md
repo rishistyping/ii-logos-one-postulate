@@ -2,6 +2,51 @@
 
 This page expands the proof map from the root README. It is meant for readers who want the public story of the repository without dropping directly into Lean source.
 
+## Explainable Visual Maps
+
+These overview maps follow the Intelligent Internet design system: cream surfaces, navy structure, restrained accents, and proof-first editorial hierarchy. They are presentation assets for the existing proof spine, not new proof objects.
+
+<p align="center">
+  <img src="assets/verification-story.png" alt="Verification story for One Postulate" width="900" />
+</p>
+
+<p align="center">
+  <img src="assets/branch-selection-funnel.png" alt="Branch selection funnel for the Lorentzian kappa result" width="900" />
+</p>
+
+```mermaid
+flowchart LR
+    P["Paper source"] --> L["Lean proof authority"]
+    L --> N["Wolfram and SymPy notebooks"]
+    N --> V["Proof visuals"]
+    V --> R["Rerunnable checks"]
+    R --> I["Inspectable Lorentzian result"]
+    classDef default fill:#E8EDE5,stroke:#0F233F,stroke-width:1.5px,color:#0F233F;
+    linkStyle default stroke:#5D6572,stroke-width:2px;
+```
+
+```mermaid
+flowchart LR
+    A["Relativity principle"] --> B["One-parameter kappa family"]
+    B --> C["Killing-form self-test"]
+    C --> D["kappa < 0: Euclidean branch"]
+    C --> E["kappa = 0: Galilean branch"]
+    C --> F["kappa > 0: Lorentzian branch"]
+    F --> G["Finite invariant speed"]
+    classDef default fill:#E8EDE5,stroke:#0F233F,stroke-width:1.5px,color:#0F233F;
+    linkStyle default stroke:#5D6572,stroke-width:2px;
+```
+
+```mermaid
+flowchart LR
+    K["B = diag(-4 I3, 4 kappa I3)"] --> E["kappa < 0: compact/Euclidean behavior"]
+    K --> G["kappa = 0: boost-sector blind spot"]
+    K --> L["kappa > 0: Lorentzian metric and finite speed"]
+    L --> S["Observation gives the value; algebra gives existence"]
+    classDef default fill:#E8EDE5,stroke:#0F233F,stroke-width:1.5px,color:#0F233F;
+    linkStyle default stroke:#5D6572,stroke-width:2px;
+```
+
 ## The Matrix-First Route
 
 The formalization is intentionally concrete.
